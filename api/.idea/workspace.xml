@@ -2,36 +2,131 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6d29c99-2b4b-4096-b254-ea7b64178a75" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/JavaApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/SpringTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/user/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/user/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/user/UserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/user/UserDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/user/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/app/user/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/banner.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/io/app/JavaApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/conf/QuerydslConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/UserRepositorySuport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/impl/UserRepositorySuportImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/api/statics/user/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/app/api/ApiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/app/api/ApiApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/api/ApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/api/ApiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="0fb86e96-fa44-4ed9-bdb3-f38c738ee662" value="Blue" />
+    </colors>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="spring_dev@ec2-15-164-165-7.ap-northeast-2.compute.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="spring_dev@ec2-15-164-165-7.ap-northeast-2.compute.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="spring_dev@ec2-15-164-165-7.ap-northeast-2.compute.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spring_dev: database" type="162271b6:PgImplModel$Database" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="spring_dev@ec2-15-164-165-7.ap-northeast-2.compute.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spring_dev: database" type="162271b6:PgImplModel$Database" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="spring_dev@ec2-15-164-165-7.ap-northeast-2.compute.amazonaws.com" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="spring_dev: database" type="162271b6:PgImplModel$Database" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="api" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="api" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="api" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -43,6 +138,7 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -50,12 +146,43 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.app.api.statics.user" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.api [compileQuerydsl]">
+    <configuration name="api [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileQuerydsl" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="api.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.app.api.ApiApplication" />
@@ -63,13 +190,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.api [compileQuerydsl]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:spring_dev@ec2-15-164-165-7.ap-northeast-2.compute.amazonaws.com" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -87,73 +224,109 @@
       <option name="presentableId" value="Default" />
       <updated>1579333148903</updated>
       <workItem from="1579333151293" duration="76000" />
-      <workItem from="1579333244930" duration="104000" />
+      <workItem from="1579333244930" duration="3488000" />
     </task>
+    <task id="LOCAL-00001" summary="spring boot setting #1">
+      <created>1579333606784</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579333606784</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="spring boot setting #1" />
+    <option name="LAST_COMMIT_MESSAGE" value="spring boot setting #1" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="363" key="GridCell.Tab.0.bottom" timestamp="1579333347246">
+    <state x="440" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579333883928">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347246" />
-    <state width="1638" height="363" key="GridCell.Tab.0.center" timestamp="1579333347245">
+    <state x="440" y="190" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1579333883928" />
+    <state x="653" y="241" key="#com.intellij.ide.util.MemberChooser" timestamp="1579336762521">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347245" />
-    <state width="1638" height="363" key="GridCell.Tab.0.left" timestamp="1579333347244">
+    <state x="653" y="241" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1579336762521" />
+    <state x="606" y="391" width="467" height="276" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1579335903871">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347244" />
-    <state width="1638" height="363" key="GridCell.Tab.0.right" timestamp="1579333347245">
+    <state x="606" y="391" width="467" height="276" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1680.1050@0.0.1680.1050" timestamp="1579335903871" />
+    <state x="364" y="127" key="CommitChangelistDialog2" timestamp="1579333606507">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347245" />
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1579333347062">
+    <state x="364" y="127" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1579333606507" />
+    <state width="1638" height="484" key="GridCell.Tab.0.bottom" timestamp="1579336027586">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347062" />
-    <state width="1638" height="363" key="GridCell.Tab.1.center" timestamp="1579333347061">
+    <state width="1638" height="484" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027586" />
+    <state width="1638" height="484" key="GridCell.Tab.0.center" timestamp="1579336027583">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347061" />
-    <state width="1638" height="363" key="GridCell.Tab.1.left" timestamp="1579333347061">
+    <state width="1638" height="484" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027583" />
+    <state width="1638" height="484" key="GridCell.Tab.0.left" timestamp="1579336027582">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347061" />
-    <state width="1638" height="363" key="GridCell.Tab.1.right" timestamp="1579333347062">
+    <state width="1638" height="484" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027582" />
+    <state width="1638" height="484" key="GridCell.Tab.0.right" timestamp="1579336027585">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347062" />
-    <state width="1638" height="363" key="GridCell.Tab.2.bottom" timestamp="1579333347064">
+    <state width="1638" height="484" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027585" />
+    <state width="1638" height="484" key="GridCell.Tab.1.bottom" timestamp="1579336027477">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347064" />
-    <state width="1638" height="363" key="GridCell.Tab.2.center" timestamp="1579333347063">
+    <state width="1638" height="484" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027477" />
+    <state width="1638" height="484" key="GridCell.Tab.1.center" timestamp="1579336027475">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347063" />
-    <state width="1638" height="363" key="GridCell.Tab.2.left" timestamp="1579333347063">
+    <state width="1638" height="484" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027475" />
+    <state width="1638" height="484" key="GridCell.Tab.1.left" timestamp="1579336027474">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347063" />
-    <state width="1638" height="363" key="GridCell.Tab.2.right" timestamp="1579333347063">
+    <state width="1638" height="484" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027474" />
+    <state width="1638" height="484" key="GridCell.Tab.1.right" timestamp="1579336027476">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579333347063" />
-    <state x="341" y="164" key="SettingsEditor" timestamp="1579333269146">
+    <state width="1638" height="484" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027476" />
+    <state width="1638" height="484" key="GridCell.Tab.2.bottom" timestamp="1579336027417">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1579333269146" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1579333543461">
+    <state width="1638" height="484" key="GridCell.Tab.2.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027417" />
+    <state width="1638" height="484" key="GridCell.Tab.2.center" timestamp="1579336027416">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1579333543461" />
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1579333380502">
+    <state width="1638" height="484" key="GridCell.Tab.2.center/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027416" />
+    <state width="1638" height="484" key="GridCell.Tab.2.left" timestamp="1579336027415">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1579333380502" />
+    <state width="1638" height="484" key="GridCell.Tab.2.left/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027415" />
+    <state width="1638" height="484" key="GridCell.Tab.2.right" timestamp="1579336027416">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="484" key="GridCell.Tab.2.right/0.0.1680.1050@0.0.1680.1050" timestamp="1579336027416" />
+    <state x="341" y="164" key="SettingsEditor" timestamp="1579336494433">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1579336494433" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1579333608795">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1579333608795" />
+    <state x="741" y="427" width="350" height="220" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1579334048693">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="741" y="427" width="350" height="220" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1680.1050@0.0.1680.1050" timestamp="1579334048693" />
+    <state width="656" height="424" key="javadoc.popup" timestamp="1579334888633">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="656" height="424" key="javadoc.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1579334888633" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1579334975310">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1579334975310" />
   </component>
 </project>

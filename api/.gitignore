@@ -5,6 +5,9 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### 자동생성 되니거니 추가해주자
+generated
+
 ### STS ###
 .apt_generated
 .classpath
