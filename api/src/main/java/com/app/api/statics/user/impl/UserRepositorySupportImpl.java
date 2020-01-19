@@ -2,7 +2,7 @@ package com.app.api.statics.user.impl;
 
 import com.app.api.statics.user.QUser;
 import com.app.api.statics.user.User;
-import com.app.api.statics.user.UserRepositorySuport;
+import com.app.api.statics.user.UserRepositorySupport;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -10,18 +10,24 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
 @Repository
-public class UserRepositorySuportImpl extends QuerydslRepositorySupport implements UserRepositorySuport {
+public class UserRepositorySupportImpl extends QuerydslRepositorySupport implements UserRepositorySupport {
 
     private final EntityManager entityManager;
     private final JPAQueryFactory jpaQueryFactory;
 
 
-    public UserRepositorySuportImpl(EntityManager entityManager, JPAQueryFactory jpaQueryFactory) {
+    public UserRepositorySupportImpl(EntityManager entityManager, JPAQueryFactory jpaQueryFactory) {
         super(User.class);
         this.entityManager = entityManager;
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
+    /**
+     * find by title
+     *
+     * @param title
+     * @return User
+     */
     @Override
     public User findByTitle(String title) {
         QUser user = QUser.user;

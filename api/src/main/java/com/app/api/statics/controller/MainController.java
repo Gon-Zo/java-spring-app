@@ -1,6 +1,7 @@
 package com.app.api.statics.controller;
 
 import com.app.api.statics.user.User;
+import com.app.api.statics.user.UserService;
 import com.app.api.statics.user.impl.UserServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 public class MainController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     public MainController(UserServiceImpl userService) {
         this.userService = userService;
