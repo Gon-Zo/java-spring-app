@@ -20,6 +20,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -37,6 +38,7 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
+    // spring test
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -53,22 +55,17 @@ test {
 }
 
 
-
 // Qclass src
-def querydslSrcDir = 'src/main/generated'
+def querydslSrcDir = 'src/main/java/generated'
 
 querydsl {
-    library = "com.querydsl:querydsl-apt"
+    library = "com.querydsl:querydsl-apt:4.2.1"
     jpa = true
     querydslSourcesDir = querydslSrcDir
 }
 
-compileQuerydsl{
+compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
-}
-
-configurations {
-    querydsl.extendsFrom compileClasspath
 }
 
 sourceSets {
@@ -77,4 +74,8 @@ sourceSets {
             srcDirs = ['src/main/java', querydslSrcDir]
         }
     }
+}
+
+clean {
+    delete file(querydslSrcDir)
 }
