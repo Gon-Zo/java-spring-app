@@ -18,7 +18,6 @@ import java.util.List;
 public class MainController {
 
     private final UserService userService;
-
     private final GroupService groupService;
 
     public MainController(UserServiceImpl userService, GroupService groupService) {
@@ -33,14 +32,18 @@ public class MainController {
 
 
     @GetMapping("/{title}")
-    public User getTest(@PathVariable String title){
+    public User getTest(@PathVariable String title) {
         return userService.getUser(title);
     }
 
-    @PostMapping("/group")
-    public void createGroup(Group group){
-        groupService.saveOf(group);
+    @GetMapping("/group")
+    public List<Group> showGroupListByAll() {
+        return groupService.getList();
     }
 
+    @PostMapping("/group")
+    public void createGroup(Group group) {
+        groupService.saveOf(group);
+    }
 
 }

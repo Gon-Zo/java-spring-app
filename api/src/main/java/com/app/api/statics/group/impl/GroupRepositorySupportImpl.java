@@ -14,23 +14,22 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.Transient;
 
-import static com.app.api.statics.group.QGroup.group;
 import static com.app.api.statics.comm.XAppUtil.isNotEmpty;
 import static com.app.api.statics.comm.XAppUtil.isNotInitialVal;
+import static com.app.api.statics.group.QGroup.group;
 
 @Repository
 public class GroupRepositorySupportImpl extends QuerydslRepositorySupport implements GroupRepositorySupport {
 
-
-    private final EntityManager entityManager;
     private final JPAQueryFactory jpaQueryFactory;
 
-    public GroupRepositorySupportImpl(EntityManager entityManager, JPAQueryFactory jpaQueryFactory) {
-        super(Group.class);
-        this.entityManager = entityManager;
-        this.jpaQueryFactory = jpaQueryFactory;
-    }
+    private final EntityManager entityManager;
 
+    public GroupRepositorySupportImpl(JPAQueryFactory jpaQueryFactory, EntityManager entityManager) {
+        super(Group.class);
+        this.jpaQueryFactory = jpaQueryFactory;
+        this.entityManager = entityManager;
+    }
 
     /**
      * find by one group
