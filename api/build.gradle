@@ -45,6 +45,8 @@ dependencies {
 
     implementation "com.querydsl:querydsl-jpa"
     implementation "com.querydsl:querydsl-apt"
+    implementation 'org.jetbrains:annotations:15.0'
+    implementation 'org.jetbrains:annotations:15.0'
 
 //    compile("com.querydsl:querydsl-jpa") // querydsl
 //    compile("com.querydsl:querydsl-apt") // querydsl
