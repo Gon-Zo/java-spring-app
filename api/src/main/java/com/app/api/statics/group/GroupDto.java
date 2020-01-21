@@ -5,17 +5,15 @@ import lombok.*;
 public class GroupDto {
 
 
-    @Setter
     @Getter
+    @Setter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Param{
+    public static class Param {
         private long seq;
         private String title;
         private String info;
     }
-
-
 
 }
