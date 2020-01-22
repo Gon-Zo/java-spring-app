@@ -1,14 +1,14 @@
 package com.app.api.statics.group;
 
+import com.app.api.statics.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,6 +19,7 @@ import javax.persistence.Table;
 public class Group {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long seq;
 
     @Column(name = "title")
@@ -26,5 +27,13 @@ public class Group {
 
     @Column(name = "info")
     private String info;
+
+    @ManyToMany
+    @JoinTable(name = "test_user_group",
+            // 상대 컬럼
+            joinColumns = @JoinColumn(name = "user_seq"),
+            // 본인 컬럼
+            inverseJoinColumns = @JoinColumn(name = "group_seq"))
+    private List<User> Users = new ArrayList<User>();
 
 }
