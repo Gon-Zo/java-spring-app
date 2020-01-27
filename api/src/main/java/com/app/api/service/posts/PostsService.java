@@ -1,4 +1,4 @@
-package com.app.api.domain.posts.support.service.posts;
+package com.app.api.service.posts;
 
 import com.app.api.web.dto.PostsResponseDto;
 

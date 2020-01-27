@@ -1,6 +1,6 @@
 package com.app.api.web;
 
-import com.app.api.domain.posts.support.service.posts.PostsService;
+import com.app.api.service.posts.PostsService;
 import com.app.api.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
