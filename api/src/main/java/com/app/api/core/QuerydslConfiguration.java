@@ -1,4 +1,4 @@
-package com.app.api.conf;
+package com.app.api.core;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

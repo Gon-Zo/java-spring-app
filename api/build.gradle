@@ -60,6 +60,7 @@ test {
     useJUnitPlatform()
 }
 
+//ext['tomcat.version'] = '8.5.34'
 
 // Qclass src
 def querydslSrcDir = 'src/main/java/generated'
