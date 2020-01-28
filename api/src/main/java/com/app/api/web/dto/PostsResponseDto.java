@@ -1,23 +1,22 @@
 package com.app.api.web.dto;
 
 import com.app.api.domain.posts.Posts;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Getter
-@RequiredArgsConstructor
+@Setter
+@NoArgsConstructor
 public class PostsResponseDto {
 
-    private long id;
-    private final String title;
-    private final String content;
-    private final String author;
+    private String title;
+    private String content;
+    private String author;
 
-    public PostsResponseDto(Posts posts) {
-        this.author = posts.getAuthor();
-        this.content = posts.getContent();
-        this.title = posts.getTitle();
-        this.id = posts.getId();
+    @Builder
+    public PostsResponseDto(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
     }
 
     public Posts toEntity() {
