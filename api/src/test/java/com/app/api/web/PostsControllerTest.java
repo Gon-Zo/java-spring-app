@@ -57,11 +57,27 @@ public class PostsControllerTest {
 
         List<Posts> all = postsRepository.findAll();
 
-//        assertThat(all.get(0).getTitle()).isEqualTo(title);
-//        assertThat(all.get(0).getContent()).isEqualTo(content);
-//        assertThat(all.get(0).getAuthor()).isEqualTo(author);
-
+        assertThat(all.get(0).getTitle()).isEqualTo(title);
 
     }
 
+    
+    @Test
+    public void 포스트_업데이트_테스트() throws Exception {
+        String title = "업데이트";
+        String content = "업데이트";
+        String author = "업데이트";
+        
+        포스트_저장_테스트();
+        
+        PostsResponseDto dto = PostsResponseDto.builder().title(title).content(content).author(author).build();
+
+        String url = "http://localhost:" + port + "/posts/1";
+
+        testRestTemplate.put(url, dto, Long.class);
+
+//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+    }
 }
