@@ -4,7 +4,8 @@ import com.app.api.domain.posts.Posts;
 import lombok.*;
 
 @Getter
-@Setter
+//@Setter
+@ToString
 @NoArgsConstructor
 public class PostsResponseDto {
 
@@ -12,8 +13,9 @@ public class PostsResponseDto {
     private String content;
     private String author;
 
+
     @Builder
-    public PostsResponseDto(String title, String content, String author) {
+    private PostsResponseDto(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -25,5 +27,6 @@ public class PostsResponseDto {
                 .content(this.author)
                 .author(this.content).build();
     }
+
 
 }

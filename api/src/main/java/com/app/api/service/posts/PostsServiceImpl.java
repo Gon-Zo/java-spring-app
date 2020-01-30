@@ -24,8 +24,6 @@ public class PostsServiceImpl implements PostsService {
     @Override
     @Transactional
     public Long update(Long id, PostsResponseDto responseDto) {
-//        Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not id >> " + id));
-//        posts.update(responseDto.getTitle() , responseDto.getContent());
         postsRepositorySupport.update(id, responseDto);
         return id;
     }
