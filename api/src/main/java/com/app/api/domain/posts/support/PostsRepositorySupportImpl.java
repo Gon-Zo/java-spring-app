@@ -37,8 +37,7 @@ public class PostsRepositorySupportImpl extends QuerydslRepositorySupport implem
     public long update(Long id, PostsResponseDto dto) {
         JPAUpdateClause obj = jpaQueryFactory.update(posts);
         supportUpdate(obj, dto).where(posts.id.eq(id)).execute();
-        // todo 바꾸기
-        return 0L;
+        return id;
     }
 
     /**

@@ -22,8 +22,9 @@ public class PostsController {
     }
 
     @PutMapping("/posts/{id}")
-    public Long updatePosts(@PathVariable long id, PostsResponseDto dto) {
+    public Long updatePosts(@PathVariable long id, @RequestBody PostsResponseDto dto) {
         return postsService.update(id, dto);
     }
+
 
 }
