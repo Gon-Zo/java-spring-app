@@ -8,31 +8,20 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostsController {
 
     private final PostsService postsService;
 
-
-//    @PostMapping("/test")
-//    public PostsResponseDto test(PostsResponseDto dto) {
-//        return PostsResponseDto.builder()
-//                .title(dto.getTitle())
-//                .content(dto.getContent())
-//                .author(dto.getAuthor())
-//                .build();
-//    }
-
-    @PostMapping("/1")
-    public Long save(PostsResponseDto dto) {
+    @PostMapping("/posts")
+    public Long save(@RequestBody PostsResponseDto dto) {
         log.info("DTO TITLE >>" + dto.getTitle());
         log.info("DTO CONTENT >>" + dto.getContent());
         log.info("DTO Author >>" + dto.getAuthor());
         return postsService.save(dto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/posts/{id}")
     public Long updatePosts(@PathVariable long id, PostsResponseDto dto) {
         return postsService.update(id, dto);
     }
