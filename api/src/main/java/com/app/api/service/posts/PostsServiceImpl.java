@@ -15,6 +15,8 @@ public class PostsServiceImpl implements PostsService {
     private final PostsRepository postsRepository;
     private final PostsRepositorySupport postsRepositorySupport;
 
+
+
     @Override
     @Transactional
     public Long save(PostsResponseDto postsResponseDto) {
@@ -27,5 +29,13 @@ public class PostsServiceImpl implements PostsService {
         postsRepositorySupport.update(id, responseDto);
         return id;
     }
+
+    @Override
+    @Transactional
+    public Long deleteBy(Long id) {
+        postsRepository.deleteById(id);
+        return id;
+    }
+
 
 }
