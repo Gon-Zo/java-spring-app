@@ -22,6 +22,8 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+//@SpringBootTest(classes = PostsController.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+//@SpringBootTest(classes = PostsController.class)
 public class PostsControllerTest {
 
     @LocalServerPort
@@ -105,10 +107,6 @@ public class PostsControllerTest {
         assertThat(result.getBody());
 
     }
-
-
-
-
 
 
 }
