@@ -17,6 +17,12 @@ public class PostsController {
 
     private final PostsService postsService;
 
+    @GetMapping("/")
+    public PostsResponseDto test(PostsResponseDto dto) {
+        log.info("log test >> ", dto.getTitle());
+        return dto;
+    }
+
     @GetMapping("/{id}")
     public Optional<Posts> showDetail(@PathVariable long id) {
         return postsService.findBy(id);
