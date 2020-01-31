@@ -16,9 +16,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import java.util.List;
-//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -61,23 +60,35 @@ public class PostsControllerTest {
 
     }
 
-    
+
     @Test
     public void 포스트_업데이트_테스트() throws Exception {
         String title = "업데이트";
         String content = "업데이트";
         String author = "업데이트";
-        
+
         포스트_저장_테스트();
-        
+
         PostsResponseDto dto = PostsResponseDto.builder().title(title).content(content).author(author).build();
 
         String url = "http://localhost:" + port + "/posts/1";
-
         testRestTemplate.put(url, dto, Long.class);
-
-//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//        assertThat(responseEntity.getBody()).isGreaterThan(0L);
-
     }
+
+
+    @Test
+    public void 포스트_삭제() throws Exception {
+        long id = 1;
+
+        String url = "http://localhost:" + port + "/posts/" + id;
+
+        포스트_저장_테스트();
+
+        testRestTemplate.delete(url);
+    }
+
+
+
+
+
 }

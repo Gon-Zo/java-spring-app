@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class PostsController {
 
     private final PostsService postsService;
 
-    @PostMapping("/posts")
+    @PostMapping("")
     public Long save(@RequestBody PostsResponseDto dto) {
         log.info("DTO TITLE >>" + dto.getTitle());
         log.info("DTO CONTENT >>" + dto.getContent());
@@ -21,10 +22,17 @@ public class PostsController {
         return postsService.save(dto);
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/{id}")
     public Long updatePosts(@PathVariable long id, @RequestBody PostsResponseDto dto) {
         return postsService.update(id, dto);
     }
+
+
+    @DeleteMapping("/{id}")
+    public Long deletePosts(@PathVariable long id) {
+        return postsService.deleteBy(id);
+    }
+
 
 
 }
