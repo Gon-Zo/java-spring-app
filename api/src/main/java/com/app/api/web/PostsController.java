@@ -1,10 +1,13 @@
 package com.app.api.web;
 
+import com.app.api.domain.posts.Posts;
 import com.app.api.service.posts.PostsService;
 import com.app.api.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -13,6 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class PostsController {
 
     private final PostsService postsService;
+
+    @GetMapping("/{id}")
+    public Optional<Posts> showDetail(@PathVariable long id) {
+        return postsService.findBy(id);
+    }
 
     @PostMapping("")
     public Long save(@RequestBody PostsResponseDto dto) {
@@ -32,7 +40,6 @@ public class PostsController {
     public Long deletePosts(@PathVariable long id) {
         return postsService.deleteBy(id);
     }
-
 
 
 }

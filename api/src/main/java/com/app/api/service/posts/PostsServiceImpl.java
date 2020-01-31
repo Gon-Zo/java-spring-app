@@ -1,5 +1,6 @@
 package com.app.api.service.posts;
 
+import com.app.api.domain.posts.Posts;
 import com.app.api.domain.posts.PostsRepository;
 import com.app.api.domain.posts.support.PostsRepositorySupport;
 import com.app.api.web.dto.PostsResponseDto;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +17,10 @@ public class PostsServiceImpl implements PostsService {
     private final PostsRepository postsRepository;
     private final PostsRepositorySupport postsRepositorySupport;
 
-
+    @Override
+    public Optional<Posts> findBy(long id) {
+        return postsRepository.findById(id);
+    }
 
     @Override
     @Transactional
