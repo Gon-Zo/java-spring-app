@@ -16,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -86,6 +87,25 @@ public class PostsControllerTest {
 
         testRestTemplate.delete(url);
     }
+
+
+    @Test
+    public void 포스트_디테일_테스트() throws Exception {
+
+        long id = 1;
+
+        String url = "http://localhost:" + port + "/posts/" + id;
+
+        포스트_저장_테스트();
+
+        ResponseEntity<Optional> result = testRestTemplate.getForEntity(url, Optional.class);
+
+        assertThat(result.getStatusCode());
+
+        assertThat(result.getBody());
+
+    }
+
 
 
 
