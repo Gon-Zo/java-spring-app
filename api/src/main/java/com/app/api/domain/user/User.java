@@ -1,16 +1,15 @@
 package com.app.api.domain.user;
 
-import com.app.api.core.BaseEntity;
-import lombok.Data;
+import com.app.api.util.BaseEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
+@Getter
+@NoArgsConstructor
 @Entity
-@Data
-// todo : table name change - jkpark
-@Table(name = "app_user")
 public class User extends BaseEntity {
 
     @Column(name = "email")

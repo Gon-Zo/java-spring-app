@@ -1,4 +1,4 @@
-package com.app.api.core;
+package com.app.api.util;
 
 import lombok.Getter;
 
