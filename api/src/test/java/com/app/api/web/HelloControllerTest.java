@@ -1,33 +1,31 @@
 package com.app.api.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.is;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes=HelloController.class)
-@WebMvcTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
 public class HelloControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Test
     public void Hello_출력() throws Exception {
         String hello = "hello";
-        // url
+
         mvc.perform(get("/hello"))
                 // 위의 결과 검증
                 .andExpect(status().isOk())
@@ -36,14 +34,14 @@ public class HelloControllerTest {
     }
 
     @Test
-    public void Hello_Dto_테스트() throws Exception {
+    public void Hello_DTO_출력() throws Exception {
         String name = "test";
-        int amount = 100;
+        String amount = "10000";
 
-        mvc.perform(get("/hello/dto").param("name", name).param("amount", String.valueOf(amount)))
+        mvc.perform(get("/hello/dto").param("name", name).param("amount", amount))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(name)))
-                .andExpect(jsonPath("$.amount", is(amount)));
-
+                .andExpect(jsonPath("$.amount" , is(Integer.valueOf(amount))));
     }
+
 }

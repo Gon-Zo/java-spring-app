@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "app_user")
 public class User extends BaseEntity {
 
     @Column(name = "email")
@@ -18,4 +20,5 @@ public class User extends BaseEntity {
     @Column(name = "passworad")
     private String password;
 
+    
 }
