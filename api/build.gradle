@@ -1,4 +1,4 @@
-//springVserion = '2.2.3.RELEASE'
+// springVserion = '2.2.3.RELEASE'
 
 plugins {
     id 'org.springframework.boot' version '2.2.3.RELEASE'
@@ -61,9 +61,6 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-test.ignoreFailures = true
-
 
 // Qclass src
 def querydslSrcDir = 'src/main/java/generated'
