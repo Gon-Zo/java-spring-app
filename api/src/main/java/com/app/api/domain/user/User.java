@@ -1,6 +1,7 @@
 package com.app.api.domain.user;
 
 import com.app.api.util.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,5 +21,10 @@ public class User extends BaseEntity {
     @Column(name = "passworad")
     private String password;
 
-    
+    @Builder
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
 }
