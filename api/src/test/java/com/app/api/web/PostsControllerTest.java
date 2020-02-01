@@ -54,6 +54,7 @@ public class PostsControllerTest {
         ResponseEntity<Long> responseEntity = testRestTemplate.postForEntity(url, dto, Long.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
         AssertionsForClassTypes.assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Posts> all = postsRepository.findAll();
