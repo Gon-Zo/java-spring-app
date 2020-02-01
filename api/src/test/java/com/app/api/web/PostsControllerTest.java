@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
@@ -59,33 +61,33 @@ public class PostsControllerTest {
         AssertionsForClassTypes.assertThat(all.get(0).getTitle()).isEqualTo(title);
     }
 
-//    @Test
-//    public void 포스트_삭제() throws Exception {
-//        long id = 1;
-//
-//        포스트_저장();
-//
-//        String url = "http://localhost:" + port + "/posts/" + id;
-//
-//
-//        testRestTemplate.delete(url);
-//    }
-//
-//
-//    @Test
-//    public void 포스트_디테일() throws Exception {
-//
-//        long id = 1;
-//
-//        포스트_저장();
-//
-//        String url = "http://localhost:" + port + "/posts/" + id;
-//
-//        ResponseEntity<Optional> result = testRestTemplate.getForEntity(url, Optional.class);
-//
-//        assertThat(result.getStatusCode());
-//
-//        AssertionsForClassTypes.assertThat(result.getBody());
-//
-//    }
+    @Test
+    public void 포스트_삭제() throws Exception {
+        long id = 1;
+
+        포스트_저장();
+
+        String url = "http://localhost:" + port + "/posts/" + id;
+
+
+        testRestTemplate.delete(url);
+    }
+
+    @Test
+    public void 포스트_디테일() throws Exception {
+
+        long id = 1;
+
+        포스트_저장();
+
+        String url = "http://localhost:" + port + "/posts/" + id;
+
+        ResponseEntity<Optional> result = testRestTemplate.getForEntity(url, Optional.class);
+
+        assertThat(result.getStatusCode());
+
+        AssertionsForClassTypes.assertThat(result.getBody());
+
+    }
+
 }
