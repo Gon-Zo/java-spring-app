@@ -17,7 +17,7 @@ const actions = {
     context.dispatch('blog/actionToBlog', null, {root: true})
   }
 
-}
+};
 
 export default {
   namespaced: true,

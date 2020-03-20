@@ -1,12 +1,14 @@
 <template>
   <div>
-    <span>blog</span>
+    <AppTable/>
   </div>
 </template>
 
 <script>
+  import AppTable from "../table/AppTable";
   export default {
-    name: "blog"
+    name: "blog",
+    components: {AppTable}
   }
 </script>
 

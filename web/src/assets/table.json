@@ -1,0 +1,37 @@
+[
+  {
+    "key": "seq",
+    "name": "번호",
+    "isUse": true,
+    "isShow": true,
+    "order": 1
+  },
+  {
+    "key": "id",
+    "name": "아이디",
+    "isUse": true,
+    "isShow": true,
+    "order": 2
+  },
+  {
+    "key": "pwd",
+    "name": "비밀번호",
+    "isUse": true,
+    "isShow": true,
+    "order": 3
+  },
+  {
+    "key": "name",
+    "name": "이름",
+    "isUse": true,
+    "isShow": true,
+    "order": 4
+  },
+  {
+    "key": "address",
+    "name": "주소",
+    "isUse": true,
+    "isShow": false,
+    "order": 5
+  }
+]
