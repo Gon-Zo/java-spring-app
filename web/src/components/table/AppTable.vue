@@ -22,7 +22,7 @@
         <th scope="col" v-for=" ( aa , idx) in headerData">
           <div class="input-group mb-2" v-if="aa.isShow">
             <div class="input-group-prepend">
-              <div class="input-group-text" @click="$isClick(idx)">@</div>
+              <div class="input-group-text" style="cursor: pointer;" @click="$isClick(idx)">@</div>
               <template v-if="aa.isOpen">
                 <ul
                   style="width: 100px; height: 100px; background-color: #f00; position: absolute; top:40px; left: 0px; ">
