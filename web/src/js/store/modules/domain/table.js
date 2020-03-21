@@ -1,5 +1,6 @@
 import axios from 'axios'
 import name from '../../../../../src/assets/table'
+
 const state ={
   tableData : [],
   headerData : [],
@@ -16,7 +17,16 @@ const mutations ={
 
  buildTableData : (state , data)=>{
    state.tableData = data.data
- }
+ },
+
+ setIsOpen : (state , payload)=>{
+   state.headerData[payload].isOpen = !state.headerData[payload].isOpen;
+ },
+
+  setInputType: (state, payload) => {
+    let idx = payload.idx;
+    state.headerData[idx].inputType = payload.type;
+  }
 
 };
 const actions ={
@@ -32,8 +42,10 @@ const actions ={
 
     //
     // let test1
-    let searchVal = headerData.map(m=>{
-      return `${m.key}:${m.inputVal}`
+    let searchVal = context.state.headerData
+      .filter(f=>f.inputVal !== '')
+      .map(m=>{
+      return `${m.key}:${m.inputVal}:${m.inputType}`
     }).toString();
 
     console.log("search >> " , searchVal);
@@ -41,6 +53,7 @@ const actions ={
     axios.get("http://localhost:3030/api/admin/user")
       .then((res)=> context.commit('buildTableData' , res.data))
       .catch(err=>console.log(err))
+
   },
 
 
@@ -53,7 +66,8 @@ const actions ={
         isUse : m.isUse ,
         isShow : m.isShow ,
         inputVal : '' ,
-        inputType : '',
+        inputType : 'container',
+        isOpen : false,
       }
     });
 
