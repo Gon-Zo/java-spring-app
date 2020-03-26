@@ -8,7 +8,39 @@ plugins {
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 
     id 'java'
+
+    id 'com.bmuschko.docker-remote-api' version '6.4.0'
 }
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+docker {
+    registryCredentials {
+        username = 'jkpark1191517'
+        password = 'park52380612$$'
+        email = 'pnw123456@icloud.com'
+    }
+}
+
+task copyDockerFile(type: Copy) {
+    dependsOn build
+    from 'Dockerfile'
+    into buildDir
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn copyDockerFile
+    inputDir = buildDir
+    images.add('jkpark1191517/gon-zo:latest')
+
+    //https://bmuschko.github.io/gradle-docker-plugin/“
+}
+
+task pushImage(type: DockerPushImage) {
+    dependsOn buildImage
+}
+
 
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
