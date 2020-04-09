@@ -1,27 +1,16 @@
-// springVserion = '2.2.3.RELEASE'
+//spring_version = '2.2.3.RELEASE
 
 plugins {
     id 'org.springframework.boot' version '2.2.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-
     // querydsl add
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
-
     id 'java'
-
     id 'com.bmuschko.docker-remote-api' version '6.4.0'
 }
 
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
-
-//docker {
-//    registryCredentials {
-//        username = 'jkpark1191517'
-//        password = 'park52380612$$'
-//        email = 'pnw123456@icloud.com'
-//    }
-//}
 
 task copyDockerFile(type: Copy) {
     dependsOn build
@@ -32,31 +21,26 @@ task copyDockerFile(type: Copy) {
 task buildImage(type: DockerBuildImage) {
     dependsOn copyDockerFile
     inputDir = buildDir
-//    network
-    images.add('jkpark1191517/gon-zo:latest')
-//    registryCredentials {
-//        username = 'jkpark1191517'
-//        password = 'park52380612$$'
-//        email = 'pnw123456@icloud.com'
-//    }
+    images.add('jkpark1191517/java_app')
 }
 
-task pushDockerImage(type: Exec) {
+task pushImage(type: DockerPushImage) {
     dependsOn buildImage
-    commandLine "docker", "push", "jkpark1191517/gon-zo:latest"
+    images.set(buildImage.images)
+    registryCredentials {
+        username = 'jkpark1191517'
+        password = 'park52380612$$'
+        email = 'pnw123456@icloud.com'
+    }
 }
 
-//task pushImage(type: DockerPushImage) {
-//    dependsOn buildImage
-////    registryCredentials {
-////        url = "https://index.docker.io/v1/jkpark1191517/gon-zo/latest"
-////        username = 'jkpark1191517'
-////        password = 'park52380612$$'
-////        email = 'pnw123456@icloud.com'
-////    }
-//    commandLine "docker", "push", "maniekq/${project.name}:${project.version}"
-//}
+buildDir = 'target'
 
+bootJar {
+    archiveFileName = 'demo.jar'
+    destinationDirectory = file(project.buildDir)
+    enabled = true
+}
 
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
