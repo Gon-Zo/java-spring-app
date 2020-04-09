@@ -22,7 +22,7 @@ task createDockerfile(type: Dockerfile) {
     from 'java:8'
     addFile("demo.jar" , "./deom.jar")
     entryPoint('java')
-    defaultCommand('-jar', '/demo.jar')
+    defaultCommand('-jar', 'demo.jar')
 }
 
 task buildImage(type: DockerBuildImage) {
