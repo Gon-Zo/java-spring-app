@@ -20,16 +20,10 @@ import com.bmuschko.gradle.docker.tasks.image.*
 task createDockerfile(type: Dockerfile) {
     dependsOn build
     from 'java:8'
-    addFile("demo.jar" , "deom.jar")
+    addFile("demo.jar" , "./deom.jar")
     entryPoint('java')
     defaultCommand('-jar', '/demo.jar')
 }
-
-//task buildImage(type: DockerBuildImage) {
-//    dependsOn createDockerfile
-////    inputDir = buildDir
-//    images.add('jkpark1191517/java_app')
-//}
 
 task buildImage(type: DockerBuildImage) {
     dependsOn createDockerfile
@@ -47,8 +41,6 @@ task pushImage(type: DockerPushImage) {
 }
 
 buildDir = 'target'
-
-//SpringBootVersion = '2.2.3.RELEASE'
 
 bootJar {
     archiveFileName = 'demo.jar'
