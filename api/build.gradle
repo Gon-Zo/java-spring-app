@@ -1,4 +1,3 @@
-//spring_version = '2.2.3.RELEASE
 
 plugins {
     id 'org.springframework.boot' version '2.2.3.RELEASE'
@@ -12,16 +11,29 @@ plugins {
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
 
-task copyDockerFile(type: Copy) {
+//task createDockerfile(type: Copy) {
+//    dependsOn build
+//    from 'Dockerfile'
+//    into buildDir
+//}
+
+task createDockerfile(type: Dockerfile) {
     dependsOn build
-    from 'Dockerfile'
-    into buildDir
+    from 'java:8'
+    addFile("demo.jar" , "deom.jar")
+    entryPoint('java')
+    defaultCommand('-jar', '/demo.jar')
 }
 
+//task buildImage(type: DockerBuildImage) {
+//    dependsOn createDockerfile
+////    inputDir = buildDir
+//    images.add('jkpark1191517/java_app')
+//}
+
 task buildImage(type: DockerBuildImage) {
-    dependsOn copyDockerFile
-    inputDir = buildDir
-    images.add('jkpark1191517/java_app')
+    dependsOn createDockerfile
+    images.add('jkpark1191517/java_app:latest')
 }
 
 task pushImage(type: DockerPushImage) {
@@ -36,9 +48,11 @@ task pushImage(type: DockerPushImage) {
 
 buildDir = 'target'
 
+//SpringBootVersion = '2.2.3.RELEASE'
+
 bootJar {
     archiveFileName = 'demo.jar'
-    destinationDirectory = file(project.buildDir)
+    destinationDirectory = file("${project.buildDir}/docker")
     enabled = true
 }
 
