@@ -24,8 +24,15 @@ public class PostsController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Posts> showDetail(@PathVariable long id) {
-        return postsService.findBy(id);
+    public Posts showDetail(@PathVariable long id) {
+        return postsService.findBy(id)
+                .orElse(
+                        Posts.builder()
+                                .author("None")
+                                .content("None")
+                                .title("None")
+                                .build()
+                );
     }
 
     @PostMapping("")
