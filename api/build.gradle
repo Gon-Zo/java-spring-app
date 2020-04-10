@@ -27,9 +27,15 @@ task pushImage(type: DockerPushImage) {
     dependsOn buildImage
     images.set(buildImage.images)
     registryCredentials {
+
+//        username = dockerUser
+//        password = dockerPassword
+//        email = dockerEmail
+
         username = 'jkpark1191517'
         password = 'park52380612$$'
         email = 'pnw123456@icloud.com'
+
     }
 }
 
@@ -125,3 +131,4 @@ sourceSets {
 clean {
     delete file(querydslSrcDir)
 }
+
