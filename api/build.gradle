@@ -10,18 +10,12 @@ plugins {
 import com.bmuschko.gradle.docker.tasks.container.*
 import com.bmuschko.gradle.docker.tasks.image.*
 
-//task createDockerfile(type: Copy) {
-//    dependsOn build
-//    from 'Dockerfile'
-//    into buildDir
-//}
-
 task createDockerfile(type: Dockerfile) {
     dependsOn build
     from 'java:8'
     addFile("demo.jar" , "./demo.jar")
     entryPoint('java')
-    defaultCommand('-jar', 'demo.jar')
+    defaultCommand('-XX:MaxMetaspaceSize=512m', '-XX:MetaspaceSize=256m', '-jar', 'demo.jar')
 }
 
 task buildImage(type: DockerBuildImage) {
