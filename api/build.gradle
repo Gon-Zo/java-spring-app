@@ -1,11 +1,10 @@
 
 plugins {
-    id 'org.springframework.boot' version '2.2.3.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    // querydsl add
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'org.springframework.boot' version "${SpringBootVersion}"
+    id 'io.spring.dependency-management' version "${ManagementVersion}"
+    id "com.ewerk.gradle.plugins.querydsl" version "${QuerydslVersion}"
     id 'java'
-    id 'com.bmuschko.docker-remote-api' version '6.4.0'
+    id 'com.bmuschko.docker-remote-api' version "${DockerRemoteApiVersion}"
 }
 
 import com.bmuschko.gradle.docker.tasks.container.*
@@ -20,7 +19,7 @@ import com.bmuschko.gradle.docker.tasks.image.*
 task createDockerfile(type: Dockerfile) {
     dependsOn build
     from 'java:8'
-    addFile("demo.jar" , "./deom.jar")
+    addFile("demo.jar" , "./demo.jar")
     entryPoint('java')
     defaultCommand('-jar', 'demo.jar')
 }
@@ -50,7 +49,7 @@ bootJar {
 
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
+sourceCompatibility = '8'
 
 configurations {
     developmentOnly
