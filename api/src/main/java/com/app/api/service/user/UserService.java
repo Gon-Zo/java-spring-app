@@ -25,4 +25,6 @@ public interface UserService {
 
     Page<User> getPageList(Pageable pageable);
 
+    User searchUser(UserRespoenseDto dto);
+
 }

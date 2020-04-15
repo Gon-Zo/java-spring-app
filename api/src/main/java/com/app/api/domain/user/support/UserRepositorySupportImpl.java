@@ -1,17 +1,19 @@
 package com.app.api.domain.user.support;
 
 
-import com.app.api.domain.user.QUser;
 import com.app.api.domain.user.User;
 import com.app.api.web.dto.UserRespoenseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
+import java.util.Optional;
 
 import static com.app.api.domain.user.QUser.user;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
@@ -37,6 +39,24 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
                 .execute();
     }
 
+    @Override
+    public Optional<User> findByUser(UserRespoenseDto dto) {
+        return Optional
+                .ofNullable(
+                        (User) jpaQueryFactory
+                                .selectFrom(user)
+                                .where(booleanBuilder(dto))
+                                .fetchOne()
+                );
+
+    }
+
+    /**
+     * udpate query setting
+     * @param update
+     * @param dto
+     * @return
+     */
     private JPAUpdateClause updateQuery(JPAUpdateClause update, UserRespoenseDto dto) {
 
         if (isNotEmpty(dto.getEmail())) {
@@ -48,6 +68,18 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
         }
 
         return update;
+    }
+
+
+    private BooleanBuilder booleanBuilder (UserRespoenseDto dto){
+        BooleanBuilder bb = new BooleanBuilder();
+        if(isNotEmpty(dto.getEmail())){
+            bb.and(user.email.eq(dto.getEmail()));
+        }
+        if(isNotEmpty(dto.getPassword())){
+            bb.and(user.password.eq(dto.getPassword()));
+        }
+        return bb;
     }
 
 }
