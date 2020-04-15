@@ -7,7 +7,7 @@ import com.app.api.global.error.exception.BusinessException;
 import com.app.api.global.error.exception.ErrorCode;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long updateFrom(long seq, UserRespoenseDto dto) {
-        return userRepositorySupport.update(seq, dto);
+        return userRepositorySupport.update(seq, dto)
+                        .orElseThrow(()->new BusinessException(ErrorCode.USER_UPDATE_FAIL));
     }
 
     @Override
@@ -38,17 +39,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public User searchUser(UserRespoenseDto dto) {
 
-        if (StringUtils.isEmpty(dto.getEmail())) {
+        if (ObjectUtils.isEmpty(dto.getEmail())) {
             throw new BusinessException(ErrorCode.USER_EMAIL_FAIL);
         }
 
-        if (StringUtils.isEmpty(dto.getPassword())) {
+        if (ObjectUtils.isEmpty(dto.getPassword())) {
             throw new BusinessException(ErrorCode.USER_PASSWORD_FAIL);
         }
 
         return userRepositorySupport
                 .findByUser(dto)
-                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() ->
+                        new BusinessException(ErrorCode.USER_NOT_FOUND));
     }
+
+    /**
+     * delete User
+     *
+     * @param seq
+     */
+    @Override
+    public void deleteByUser(long seq) {
+        userRepository.deleteById(seq);
+    }
+
 
 }

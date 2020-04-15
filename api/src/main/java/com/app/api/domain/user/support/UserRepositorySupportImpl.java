@@ -33,10 +33,10 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
 
     @Override
     @Transactional
-    public Long update(long seq, UserRespoenseDto dto) {
-        return updateQuery(jpaQueryFactory.update(user), dto)
+    public Optional<Long> update(long seq, UserRespoenseDto dto) {
+        return Optional.ofNullable(updateQuery(jpaQueryFactory.update(user), dto)
                 .where(user.seq.eq(seq))
-                .execute();
+                .execute());
     }
 
     @Override
