@@ -23,8 +23,22 @@ public interface UserService {
      */
     Long updateFrom(long seq, UserRespoenseDto dto);
 
+    /**
+     * Show User List
+     * @param pageable
+     * @return
+     */
     Page<User> getPageList(Pageable pageable);
 
+    /**
+     * Login User
+     *
+     * @param dto
+     * @return
+     */
     User searchUser(UserRespoenseDto dto);
+
+
+    void deleteByUser(long seq);
 
 }

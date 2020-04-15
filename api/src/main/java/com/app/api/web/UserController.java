@@ -31,7 +31,7 @@ public class UserController {
     }
 
     /**
-     * PageObject uset
+     * PageObject user
      * page >> 페이지 번호
      * size >> num page
      * sort >> order
@@ -46,8 +46,13 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public User userLogin(UserRespoenseDto dto){
+    public User userLogin(@RequestBody UserRespoenseDto dto){
         return userService.searchUser(dto);
+    }
+
+    @DeleteMapping("/{seq}")
+    public void removeUser(@PathVariable long seq) {
+        userService.deleteByUser(seq);
     }
 
 }

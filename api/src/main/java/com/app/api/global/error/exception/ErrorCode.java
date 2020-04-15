@@ -22,9 +22,11 @@ public enum ErrorCode {
     COUPON_EXPIRE(400, "CO002", "Coupon was already expired"),
 
 
+    // Uesr
     USER_NOT_FOUND(500, "U001", "Login User Not Found"),
     USER_EMAIL_FAIL(500, "U002", "Login User Email Fail"),
     USER_PASSWORD_FAIL(500, "U003", "Login User Password fail"),
+    USER_UPDATE_FAIL(500, "U004", "User Update Fail"),
     ;
 
     private final String code;
