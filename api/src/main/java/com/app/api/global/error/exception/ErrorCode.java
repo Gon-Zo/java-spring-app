@@ -19,7 +19,12 @@ public enum ErrorCode {
 
     // Coupon
     COUPON_ALREADY_USE(400, "CO001", "Coupon was already used"),
-    COUPON_EXPIRE(400, "CO002", "Coupon was already expired")
+    COUPON_EXPIRE(400, "CO002", "Coupon was already expired"),
+
+
+    USER_NOT_FOUND(500, "U001", "Login User Not Found"),
+    USER_EMAIL_FAIL(500, "U002", "Login User Email Fail"),
+    USER_PASSWORD_FAIL(500, "U003", "Login User Password fail"),
     ;
 
     private final String code;

@@ -44,4 +44,10 @@ public class UserController {
         return userService.getPageList(pageable);
     }
 
+
+    @PostMapping("/login")
+    public User userLogin(UserRespoenseDto dto){
+        return userService.searchUser(dto);
+    }
+
 }
