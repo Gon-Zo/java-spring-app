@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -20,6 +22,23 @@ public class User extends BaseEntity {
 
     @Column(name = "passworad")
     private String password;
+
+    @Column(name = "birthDate")
+    private LocalDate birthDate;
+
+    @Lob
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "type")
+    private String type;
+
+    @Lob
+    @Column(name = "img")
+    private String img;
+
+    @Column(name = "isUse")
+    private Boolean isUse;
 
     @Builder
     public User(String email, String password) {
