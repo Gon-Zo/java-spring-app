@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_users")
 public class User extends BaseEntity {
 
     @Column(name = "email")
