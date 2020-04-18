@@ -21,7 +21,6 @@ public class Category extends BaseEntity {
     private Long order;
 
     @OneToMany
-    @JoinColumn(name = "seq")
     private List<Product> products;
 
 }
