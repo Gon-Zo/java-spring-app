@@ -33,8 +33,6 @@ task pushImage(type: DockerPushImage) {
     }
 }
 
-
-
 buildDir = 'target'
 
 bootJar {
@@ -94,6 +92,7 @@ dependencies {
     implementation 'org.jetbrains:annotations:15.0'
     implementation 'org.jetbrains:annotations:15.0'
 
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:1.17"
 }
 
 test {
