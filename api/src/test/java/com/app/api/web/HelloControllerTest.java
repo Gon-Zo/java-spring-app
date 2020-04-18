@@ -13,34 +13,34 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.is;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-@AutoConfigureMockMvc
+//@ExtendWith(SpringExtension.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+//@AutoConfigureMockMvc
 public class HelloControllerTest {
 
-    @Autowired
-    private MockMvc mvc;
-
-    @Test
-    public void Hello_출력() throws Exception {
-        String hello = "hello";
-
-        mvc.perform(get("/hello"))
-                // 위의 결과 검증
-                .andExpect(status().isOk())
-                //결과 검증
-                .andExpect(content().string(hello));
-    }
-
-    @Test
-    public void Hello_DTO_출력() throws Exception {
-        String name = "test";
-        String amount = "10000";
-
-        mvc.perform(get("/hello/dto").param("name", name).param("amount", amount))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is(name)))
-                .andExpect(jsonPath("$.amount" , is(Integer.valueOf(amount))));
-    }
+//    @Autowired
+//    private MockMvc mvc;
+//
+//    @Test
+//    public void Hello_출력() throws Exception {
+//        String hello = "hello";
+//
+//        mvc.perform(get("/hello"))
+//                // 위의 결과 검증
+//                .andExpect(status().isOk())
+//                //결과 검증
+//                .andExpect(content().string(hello));
+//    }
+//
+//    @Test
+//    public void Hello_DTO_출력() throws Exception {
+//        String name = "test";
+//        String amount = "10000";
+//
+//        mvc.perform(get("/hello/dto").param("name", name).param("amount", amount))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.name", is(name)))
+//                .andExpect(jsonPath("$.amount" , is(Integer.valueOf(amount))));
+//    }
 
 }

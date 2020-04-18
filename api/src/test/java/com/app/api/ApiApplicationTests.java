@@ -13,9 +13,9 @@ class ApiApplicationTests {
 //    S - Self Validating (매뉴얼 없이 테스트 코드만 실행해도 성공,실패 여부를 알 수 있어야 한다.)
 //    T - Timely (바로 사용 가능해야 한다. )
 
-    @Test
-    void contextLoads() {
-
-    }
+//    @Test
+//    void contextLoads() {
+//
+//    }
 
 }
