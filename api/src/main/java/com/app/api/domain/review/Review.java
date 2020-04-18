@@ -1,5 +1,6 @@
 package com.app.api.domain.review;
 
+import com.app.api.domain.image.Image;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.user.User;
 import com.app.api.util.BaseEntity;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -27,5 +29,7 @@ public class Review extends BaseEntity {
     @OneToOne
     private User user;
 
+    @OneToMany
+    private List<Image> images;
 
 }
