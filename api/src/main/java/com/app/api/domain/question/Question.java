@@ -1,5 +1,6 @@
 package com.app.api.domain.question;
 
+import com.app.api.domain.image.Image;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.user.User;
 import com.app.api.util.BaseEntity;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -28,5 +30,7 @@ public class Question extends BaseEntity {
     @OneToOne
     private User user;
 
+    @OneToMany
+    private List<Image> images;
 
 }

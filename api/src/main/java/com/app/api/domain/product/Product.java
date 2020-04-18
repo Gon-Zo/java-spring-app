@@ -1,5 +1,6 @@
 package com.app.api.domain.product;
 
+import com.app.api.domain.image.Image;
 import com.app.api.domain.store.Store;
 import com.app.api.util.BaseEntity;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -33,5 +35,8 @@ public class Product extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "store_seq")
     private Store store;
+
+    @OneToMany
+    private List<Image> images;
 
 }
