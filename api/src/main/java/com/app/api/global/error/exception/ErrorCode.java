@@ -29,7 +29,12 @@ public enum ErrorCode {
     USER_UPDATE_FAIL(500, "U004", "User Update Fail"),
     USER_NOT_FOUND(500 , "U005" , "User is Not Found") ,
 
+    // Store
     STORE_NOT_FOUND(500 , "S001" , "Store is Not Found"),
+
+    // Category
+    CATEGORY_NOT_FOUND(500 , "P001" , "Category is Not Found"),
+    PRODUCT_NOT_FOUND(500 , "P002" , "Product is Not Found"),
     ;
 
     private final String code;
