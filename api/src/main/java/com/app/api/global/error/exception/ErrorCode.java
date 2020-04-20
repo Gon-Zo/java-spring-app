@@ -23,10 +23,13 @@ public enum ErrorCode {
 
 
     // Uesr
-    USER_NOT_FOUND(500, "U001", "Login User Not Found"),
+    LOGIN_USER_NOT_FOUND(500, "U001", "Login User Not Found"),
     USER_EMAIL_FAIL(500, "U002", "Login User Email Fail"),
     USER_PASSWORD_FAIL(500, "U003", "Login User Password fail"),
     USER_UPDATE_FAIL(500, "U004", "User Update Fail"),
+    USER_NOT_FOUND(500 , "U005" , "User is Not Found") ,
+
+    STORE_NOT_FOUND(500 , "S001" , "Store is Not Found"),
     ;
 
     private final String code;

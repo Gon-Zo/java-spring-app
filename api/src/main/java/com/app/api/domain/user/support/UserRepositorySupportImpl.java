@@ -6,7 +6,6 @@ import com.app.api.web.dto.UserRespoenseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +15,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static com.app.api.domain.user.QUser.user;
+//import static
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 @Repository
