@@ -3,6 +3,7 @@ package com.app.api.domain.product;
 import com.app.api.domain.image.Image;
 import com.app.api.domain.store.Store;
 import com.app.api.util.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,8 +26,7 @@ public class Product extends BaseEntity {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Lob
-    @Column(name = "info")
+    @Column(name = "info" , columnDefinition = "TEXT")
     private String info;
 
     @Column(name = "isSold")
@@ -38,5 +38,16 @@ public class Product extends BaseEntity {
 
     @OneToMany
     private List<Image> images;
+
+
+    @Builder
+    public Product(String title , Integer cnt , BigDecimal price , String info , Boolean isSold) {
+       this.title = title;
+       this.cnt = cnt;
+       this.price = price;
+       this.info = info;
+       this.isSold = isSold;
+    }
+
 
 }

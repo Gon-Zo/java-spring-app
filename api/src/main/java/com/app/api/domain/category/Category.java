@@ -2,6 +2,7 @@ package com.app.api.domain.category;
 
 import com.app.api.domain.product.Product;
 import com.app.api.util.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,5 +23,12 @@ public class Category extends BaseEntity {
 
     @OneToMany
     private List<Product> products;
+
+
+    @Builder
+    public Category(String title , long order){
+       this.title = title;
+       this.order = order;
+    }
 
 }
