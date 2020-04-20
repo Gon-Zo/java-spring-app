@@ -11,11 +11,13 @@ import lombok.ToString;
 @NoArgsConstructor
 public class  UserRespoenseDto {
 
+    private long seq;
     private String email;
     private String password;
 
     @Builder
-    public UserRespoenseDto(String email, String password) {
+    public UserRespoenseDto( long seq , String email, String password) {
+        this.seq = seq;
         this.email = email;
         this.password = password;
     }

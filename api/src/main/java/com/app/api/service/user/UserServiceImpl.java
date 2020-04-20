@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         return userRepositorySupport
                 .findByUser(dto)
                 .orElseThrow(() ->
-                        new BusinessException(ErrorCode.USER_NOT_FOUND));
+                        new BusinessException(ErrorCode.LOGIN_USER_NOT_FOUND));
     }
 
     /**

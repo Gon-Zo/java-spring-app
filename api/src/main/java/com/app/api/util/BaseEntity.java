@@ -17,11 +17,12 @@ public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seq" , nullable = false)
     private Long seq;
 
-    @Column(updatable = false)
+    @Column(updatable = false , nullable = false)
     protected LocalDate createdAt;
-    @Column
+    @Column(nullable = false)
     protected LocalDate updatedAt;
 
     @PrePersist
@@ -33,4 +34,5 @@ public class BaseEntity {
     protected void onUpdate() {
         this.updatedAt = LocalDate.now();
     }
+
 }
