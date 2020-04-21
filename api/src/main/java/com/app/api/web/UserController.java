@@ -20,6 +20,17 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/test1`")
+    public String createUser() {
+        userService.saveBy(
+                UserRespoenseDto.builder()
+                        .email("test@naver.com")
+                        .password("{noop}1234")
+                        .build()
+        );
+        return "success";
+    }
+
     @PostMapping("")
     public void signUpTo(@RequestBody UserRespoenseDto dto) {
         userService.saveBy(dto);
