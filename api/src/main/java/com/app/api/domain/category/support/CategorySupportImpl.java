@@ -1,6 +1,6 @@
 package com.app.api.domain.category.support;
 
-import com.app.api.web.dto.ProductDto;
+import com.app.api.web.dto.CategoryResponseDto;
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.jpa.JPQLQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
@@ -19,7 +19,7 @@ public class CategorySupportImpl extends QuerydslRepositorySupport implements Ca
     }
 
     @Override
-    public void update(long seq, ProductDto.CategoryResponse dto) {
+    public void update(long seq, CategoryResponseDto dto) {
 
         UpdateClause<JPAUpdateClause> update = update(category);
 

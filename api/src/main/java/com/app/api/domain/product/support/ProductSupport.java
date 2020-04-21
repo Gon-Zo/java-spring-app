@@ -1,8 +1,8 @@
 package com.app.api.domain.product.support;
 
-import com.app.api.web.dto.ProductDto;
+import com.app.api.web.dto.ProductResponseDto;
 
 public interface ProductSupport {
 
-    void update(long seq , ProductDto.ProductResponse dto);
+    void update(long seq , ProductResponseDto dto);
 }

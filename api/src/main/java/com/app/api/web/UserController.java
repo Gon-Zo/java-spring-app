@@ -40,7 +40,8 @@ public class UserController {
      * @return
      */
     @GetMapping("")
-    public Page<User> showUserList(@PageableDefault(size = 10, page = 0, sort = "seq", direction = Sort.Direction.ASC) Pageable pageable) {
+    public Page<User> showUserList(
+            @PageableDefault(size = 10, page = 0, sort = "seq", direction = Sort.Direction.ASC) Pageable pageable) {
         return userService.getPageList(pageable);
     }
 
