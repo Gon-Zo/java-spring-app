@@ -6,11 +6,13 @@ import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import static com.app.api.domain.product.QProduct.product;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
+@Repository
 public class ProductSupportImpl extends QuerydslRepositorySupport  implements ProductSupport {
 
     private final JPAQueryFactory jpaQueryFactory;

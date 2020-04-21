@@ -1,6 +1,5 @@
 package com.app.api.core;
 
-import com.app.api.core.auth.JwtAuthInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -24,16 +23,16 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
     }
 
 
-    private String [] INTERCEPTOR_WHITE_LIST = {
-            "/signUp/**" ,
-            "/signIn/**"
-    };
+//    private String [] INTERCEPTOR_WHITE_LIST = {
+//            "/signUp/**" ,
+//            "/signIn/**"
+//    };
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-       registry.addInterceptor(new JwtAuthInterceptor())
-               .addPathPatterns("/*")
-               .excludePathPatterns("/signUp" , "/signIn");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//       registry.addInterceptor(new JwtAuthInterceptor())
+//               .addPathPatterns("/*")
+//               .excludePathPatterns("/signUp" , "/signIn");
+//    }
 
 }
