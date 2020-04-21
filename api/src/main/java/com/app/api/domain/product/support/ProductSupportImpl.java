@@ -1,7 +1,7 @@
 package com.app.api.domain.product.support;
 
 import com.app.api.domain.product.Product;
-import com.app.api.web.dto.ProductDto;
+import com.app.api.web.dto.ProductResponseDto;
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
@@ -24,27 +24,27 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
     }
 
     @Override
-    public void update(long seq, ProductDto.ProductResponse dto) {
+    public void update(long seq, ProductResponseDto dto) {
         UpdateClause<JPAUpdateClause> update = update(product);
 
-        if(isNotEmpty(dto.getTitle())){
+        if (isNotEmpty(dto.getTitle())) {
             update.set(product.title, dto.getTitle());
         }
 
-        if(isNotEmpty(dto.getCnt())) {
-           update.set(product.cnt , dto.getCnt());
+        if (isNotEmpty(dto.getCnt())) {
+            update.set(product.cnt, dto.getCnt());
         }
 
-        if(isNotEmpty(dto.getPrice())){
+        if (isNotEmpty(dto.getPrice())) {
             update.set(product.price, dto.getPrice());
         }
 
-        if(isNotEmpty(dto.getInfo())){
+        if (isNotEmpty(dto.getInfo())) {
             update.set(product.info, dto.getInfo());
         }
 
-        if(isNotEmpty(dto.getIsSold())){
-           update.set( product.isSold , dto.getIsSold());
+        if (isNotEmpty(dto.getIsSold())) {
+            update.set(product.isSold, dto.getIsSold());
         }
 
         update.where(product.seq.eq(seq)).execute();
