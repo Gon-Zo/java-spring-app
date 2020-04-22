@@ -1,6 +1,7 @@
 package com.app.api.web.dto;
 
 //import com.app.api.domain.category.Category;
+import com.app.api.domain.category.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -14,12 +15,12 @@ public class CategoryResponseDto {
 
     private long order;
 
-//    public Category toEntitiy() {
-//        return Category
-//                .builder()
-//                .title(title)
-//                .order(order)
-//                .build();
-//    }
+    public Category toEntitiy() {
+        return Category
+                .builder()
+                .title(title)
+                .order(order)
+                .build();
+    }
 
 }

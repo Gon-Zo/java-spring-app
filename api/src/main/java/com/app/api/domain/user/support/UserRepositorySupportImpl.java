@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static com.app.api.domain.user.QUser.user;
-//import static
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 @Repository
