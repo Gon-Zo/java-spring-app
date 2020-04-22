@@ -1,6 +1,6 @@
 package com.app.api.domain.user;
 
-import com.app.api.util.BaseEntity;
+import com.app.api.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

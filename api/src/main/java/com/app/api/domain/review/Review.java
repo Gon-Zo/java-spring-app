@@ -3,7 +3,7 @@ package com.app.api.domain.review;
 import com.app.api.domain.image.Image;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.user.User;
-import com.app.api.util.BaseEntity;
+import com.app.api.domain.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

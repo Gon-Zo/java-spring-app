@@ -1,4 +1,4 @@
-package com.app.api.util;
+package com.app.api.domain;
 
 import lombok.Getter;
 

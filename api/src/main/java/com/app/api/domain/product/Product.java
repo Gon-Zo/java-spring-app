@@ -2,7 +2,7 @@ package com.app.api.domain.product;
 
 import com.app.api.domain.image.Image;
 import com.app.api.domain.store.Store;
-import com.app.api.util.BaseEntity;
+import com.app.api.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
