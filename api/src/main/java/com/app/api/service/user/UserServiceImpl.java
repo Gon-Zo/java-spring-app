@@ -22,7 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveBy(UserRespoenseDto dto) {
-        userRepository.save(dto.toEntity());
+        User user = dto.toEntity();
+        userRepository.save(user);
     }
 
     @Override
