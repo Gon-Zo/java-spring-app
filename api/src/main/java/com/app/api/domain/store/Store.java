@@ -1,7 +1,7 @@
 package com.app.api.domain.store;
 
 import com.app.api.domain.user.User;
-import com.app.api.util.BaseEntity;
+import com.app.api.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
