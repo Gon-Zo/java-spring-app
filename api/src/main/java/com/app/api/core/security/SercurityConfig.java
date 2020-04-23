@@ -1,11 +1,14 @@
 package com.app.api.core.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -13,39 +16,22 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+//        super.configure(http);
 
-//        http.authorizeRequests()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll();
+        http.httpBasic()
+                .and()
+                .authorizeRequests()
+                //admin 시작 인증요구
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                // user 시작 시 인증요구
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/**").permitAll();
 
-//
-//        http.authorizeRequests()
-//                .antMatchers("/assets/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .usernameParameter("j_username")
-//                .passwordParameter("j_password")
-//                .loginPage("/login")
-//                .defaultSuccessUrl("/", true)
-//                .successHandler(customAuthenticationSuccessHandler)
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .invalidateHttpSession(true)
-//                .logoutSuccessUrl("/")
-//                .deleteCookies("JSESSIONID")
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .and()
-//                .csrf();
-//
+//        http.cors().disable()
+//                .addFilterBefore()
 
+//        http.addFilterBefore( , BasicAuthenticationFilter.class)
+//                .addFilterAfter()
     }
 
     /**
@@ -63,6 +49,12 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER");
 
 
+    }
+
+    // Passwoard 암호화 Bean
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 }
