@@ -93,6 +93,8 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:1.17"
 
     implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation 'com.auth0:java-jwt:3.10.2'
+
 }
 
 test {
@@ -118,7 +120,7 @@ compileQuerydsl {
 sourceSets {
     main {
         java {
-            srcDirs = [ 'src/main/java', querydslSrcDir]
+            srcDirs = [ "src/main/java" , "${querydslSrcDir}"]
         }
     }
 }

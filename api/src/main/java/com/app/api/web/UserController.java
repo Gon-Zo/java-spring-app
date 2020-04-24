@@ -20,17 +20,6 @@ public class UserController {
 
     private final UserService userService;
 
-//    @GetMapping("/test1`")
-//    public String createUser() {
-//        userService.saveBy(
-//                UserRespoenseDto.builder()
-//                        .email("test@naver.com")
-//                        .password("{noop}1234")
-//                        .build()
-//        );
-//        return "success";
-//    }
-
     @PostMapping("")
     public void signUpTo(@RequestBody UserRespoenseDto dto) {
         userService.saveBy(dto);
@@ -54,11 +43,6 @@ public class UserController {
     public Page<User> showUserList(
             @PageableDefault(size = 10, page = 0, sort = "seq", direction = Sort.Direction.ASC) Pageable pageable) {
         return userService.getPageList(pageable);
-    }
-
-    @PostMapping("/login")
-    public User userLogin(@RequestBody UserRespoenseDto dto){
-        return userService.searchUser(dto);
     }
 
     @DeleteMapping("/{seq}")

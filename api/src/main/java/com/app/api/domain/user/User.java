@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -28,23 +31,45 @@ public class User extends BaseEntity {
     @Column(name = "address"  , columnDefinition = "TEXT" ,  nullable = false)
     private String address;
 
-    @Column(name = "type" ,  nullable = false)
-    private String type;
-
     @Column(name = "img"  , columnDefinition = "TEXT")
     private String img;
 
     @Column(name = "is_use" ,  nullable = false)
     private Boolean isUse;
 
-//    @OneToOne(mappedBy = "store")
-//    private Store store;
+    @Column(name ="roles" , nullable = false)
+    private String roles = "";
 
-//    @Builder
-//    public User(String email, String password) {
-//        this.email = email;
-//        this.password = password;
-//    }
+    @Column(name = "permissions" , nullable = false)
+    private String permissions = "";
+
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    public List<String> getPermissionList(){
+        if(this.permissions.length()>0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
+    }
+
+    public List<String> getRoleList(){
+        if(this.roles.length()>0){
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
+
+//
+//    /**
+//     *
+//     * USER
+//     * ADMIN
+//     * MANAGER
+//     *
+//     */
+//    @Column(name = "role" , nullable = false)
+//    private String role;
 
     @Builder
     public User(
@@ -52,17 +77,19 @@ public class User extends BaseEntity {
             String password,
             String address,
             LocalDate birthDate,
-            String type,
             String img,
-            Boolean isUse) {
+            Boolean isUse ,
+            String roles ,
+            String permissions , String userName) {
         this.email = email;
         this.password = password;
         this.address = address;
         this.birthDate = birthDate;
-        this.type = type;
         this.img = img;
         this.isUse = isUse;
+        this.roles = roles;
+        this.permissions = permissions;
+        this.userName = userName;
     }
-
 
 }
