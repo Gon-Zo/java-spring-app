@@ -2,6 +2,7 @@ package com.app.api.domain.user.support;
 
 
 import com.app.api.domain.user.User;
+import com.app.api.web.dto.LoginViewModel;
 import com.app.api.web.dto.UserRespoenseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -39,12 +40,14 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
     }
 
     @Override
-    public Optional<User> findByUser(UserRespoenseDto dto) {
+    public Optional<User> findByUser(LoginViewModel dto) {
         return Optional
                 .ofNullable(
                         (User) jpaQueryFactory
                                 .selectFrom(user)
-                                .where(booleanBuilder(dto))
+                                .where(
+                                        user.email.eq(dto.getEmail()).and(user.password.eq(dto.getPassword()))
+                                )
                                 .fetchOne()
                 );
 
