@@ -19,13 +19,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 @Configuration
 @EnableWebSecurity
-public class SercurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;
     private final UserPrincipalDetailsService userPrincipalDetailsService;
 
 
-    public SercurityConfig(UserRepository userRepository, UserPrincipalDetailsService userPrincipalDetailsService) {
+    public SecurityConfig(UserRepository userRepository, UserPrincipalDetailsService userPrincipalDetailsService) {
         this.userRepository = userRepository;
         this.userPrincipalDetailsService = userPrincipalDetailsService;
     }
@@ -33,22 +33,17 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
-//                .csrf().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
-//                .and()
-
-                .csrf().disable()
+        http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
 
                 // add jwt filters (1. authentication, 2. authorization)
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(),  this.userRepository))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
 
                 .authorizeRequests()
                 // No Auth
-                .antMatchers( "/login", "/sign").permitAll()
+                .antMatchers("/login", "/sign").permitAll()
                 .antMatchers("/user").hasAuthority("HELLO")
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .anyRequest()
