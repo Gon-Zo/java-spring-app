@@ -21,7 +21,6 @@ public class  UserRespoenseDto {
     private Boolean isUse;
     private String userName;
     private String roles;
-    private String permissions;
 
     @Builder
     public UserRespoenseDto( long seq , String email, String password) {
@@ -39,9 +38,12 @@ public class  UserRespoenseDto {
                 .img(this.img)
                 .isUse(this.isUse)
                 .roles(this.roles)
-                .permissions(this.permissions)
                 .userName(this.userName)
                 .build();
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

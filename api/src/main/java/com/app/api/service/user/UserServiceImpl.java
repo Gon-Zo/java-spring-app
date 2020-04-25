@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveBy(UserRespoenseDto dto) {
+        String rawPassword = dto.getPassword();
+        String encodedPassword = new BCryptPasswordEncoder().encode(rawPassword);
+        dto.setPassword(encodedPassword);
         User user = dto.toEntity();
         userRepository.save(user);
     }

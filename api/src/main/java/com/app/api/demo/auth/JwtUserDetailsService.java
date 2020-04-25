@@ -1,6 +1,5 @@
-package com.app.api.core.auth;
+package com.app.api.demo.auth;
 
-import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,19 +7,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserPrincipalDetailsService implements UserDetailsService {
+public class JwtUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-    public UserPrincipalDetailsService(UserRepository userRepository){
+    public JwtUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.userRepository.findByUserName(username);
-        UserPrincipal userPrincipal = new UserPrincipal(user);
-
-        return userPrincipal;
+        UserDetails customUserDetails = userRepository.findByEmail(username);
+        return customUserDetails;
     }
+
 }

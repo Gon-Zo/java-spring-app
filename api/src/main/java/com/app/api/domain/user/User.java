@@ -4,6 +4,9 @@ import com.app.api.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,19 +14,23 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "app_users")
-public class User extends BaseEntity {
+public class User extends BaseEntity  implements UserDetails {
 
     @Column(name = "email" , nullable = false)
     private String email;
 
     @Column(name = "passworad" ,  nullable = false)
     private String password;
+
+    @Column(name = "user_name", nullable = false)
+    private String userName;
 
     @Column(name = "birth_date",  nullable = false)
     private LocalDate birthDate;
@@ -38,20 +45,8 @@ public class User extends BaseEntity {
     private Boolean isUse;
 
     @Column(name ="roles" , nullable = false)
-    private String roles = "";
+    private String roles;
 
-    @Column(name = "permissions" , nullable = false)
-    private String permissions = "";
-
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    public List<String> getPermissionList(){
-        if(this.permissions.length()>0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
 
     public List<String> getRoleList(){
         if(this.roles.length()>0){
@@ -59,17 +54,6 @@ public class User extends BaseEntity {
         }
         return new ArrayList<>();
     }
-
-//
-//    /**
-//     *
-//     * USER
-//     * ADMIN
-//     * MANAGER
-//     *
-//     */
-//    @Column(name = "role" , nullable = false)
-//    private String role;
 
     @Builder
     public User(
@@ -80,7 +64,7 @@ public class User extends BaseEntity {
             String img,
             Boolean isUse ,
             String roles ,
-            String permissions , String userName) {
+             String userName) {
         this.email = email;
         this.password = password;
         this.address = address;
@@ -88,8 +72,39 @@ public class User extends BaseEntity {
         this.img = img;
         this.isUse = isUse;
         this.roles = roles;
-        this.permissions = permissions;
         this.userName = userName;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+        auth.add(new SimpleGrantedAuthority(roles));
+        return auth;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
 }
