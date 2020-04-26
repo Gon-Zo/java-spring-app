@@ -3,6 +3,7 @@ package com.app.api.demo.security;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Slf4j
 @Configuration
@@ -26,11 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private UserDetailsService jwtUserDetailsService;
     private JwtRequestFilter jwtRequestFilter;
+    private RolesFilter rolesFilter;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { // configure AuthenticationManager so that it knows from where to load
-// user for matching credentials
-// Use BCryptPasswordEncoder
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -47,18 +48,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-// We don't need CSRF for this example
+
+        /**
+         *  ========== Http Request Filter ==========
+         */
         httpSecurity.csrf().disable()
-// dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate" , "/sign").permitAll().
-// all other requests need to be authenticated
-        anyRequest().authenticated().and().
-// make sure we use stateless session; session won't be used to
-// store user's state.
-        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+                .authorizeRequests()
+                // ========== method is POST all Success ==========
+                .antMatchers(HttpMethod.POST, "/login", "/sign")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    // Add a filter to validate the tokens with every request
+
+        /**
+         * ========== Auth Jwt Filter ==========
+         */
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+        httpSecurity.addFilter(rolesFilter);
+
     }
 
 }

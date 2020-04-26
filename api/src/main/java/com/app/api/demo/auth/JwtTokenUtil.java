@@ -1,16 +1,12 @@
 package com.app.api.demo.auth;
 
 import java.io.Serializable;
-import java.security.Key;
-import java.security.MessageDigest;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import com.app.api.domain.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -44,7 +40,11 @@ public class JwtTokenUtil implements Serializable {
 
     //for retrieveing any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
+        return Jwts
+                .parser()
+                .setSigningKey(getKeys())
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     //check if the token has expired
@@ -53,10 +53,25 @@ public class JwtTokenUtil implements Serializable {
         return expiration.before(new Date());
     }
 
+    private Boolean isNotTokenExpired(String token){
+        return !isTokenExpired(token);
+    }
+
     //generate token for user
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(User userDetails) {
         Map<String, Object> claims = new HashMap<>();
+
+        claims.put("email" , userDetails.getEmail());
+        claims.put("address" , userDetails.getAddress());
+        claims.put("birthDate" , userDetails.getBirthDate());
+        claims.put("roles" , userDetails.getRoles());
+
+        // Email == UserName
         return doGenerateToken(claims, userDetails.getUsername());
+    }
+
+    private byte[] getKeys() {
+        return secret.getBytes();
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
@@ -65,14 +80,14 @@ public class JwtTokenUtil implements Serializable {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS256, secret.getBytes())
+                .signWith(SignatureAlgorithm.HS256, getKeys())
                 .compact();
     }
 
     //validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && isNotTokenExpired(token));
     }
 
 }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -29,9 +28,6 @@ public class User extends BaseEntity  implements UserDetails {
     @Column(name = "passworad" ,  nullable = false)
     private String password;
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
     @Column(name = "birth_date",  nullable = false)
     private LocalDate birthDate;
 
@@ -47,14 +43,6 @@ public class User extends BaseEntity  implements UserDetails {
     @Column(name ="roles" , nullable = false)
     private String roles;
 
-
-    public List<String> getRoleList(){
-        if(this.roles.length()>0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
     @Builder
     public User(
             String email,
@@ -63,8 +51,8 @@ public class User extends BaseEntity  implements UserDetails {
             LocalDate birthDate,
             String img,
             Boolean isUse ,
-            String roles ,
-             String userName) {
+            String roles
+            ) {
         this.email = email;
         this.password = password;
         this.address = address;
@@ -72,7 +60,6 @@ public class User extends BaseEntity  implements UserDetails {
         this.img = img;
         this.isUse = isUse;
         this.roles = roles;
-        this.userName = userName;
     }
 
     @Override

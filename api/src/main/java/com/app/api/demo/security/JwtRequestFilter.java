@@ -1,14 +1,14 @@
 package com.app.api.demo.security;
 
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.app.api.demo.auth.JwtTokenUtil;
 import com.app.api.demo.auth.JwtUserDetailsService;
-import lombok.AllArgsConstructor;
+import com.app.api.global.error.exception.BusinessException;
+import com.app.api.global.error.exception.ErrorCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
@@ -30,45 +31,53 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        log.info("======== {} ========", "JwtRequestFilter");
+
         final String requestTokenHeader = request.getHeader("Authorization");
+
         String username = null;
         String jwtToken = null;
-        // JWT Token is in the form "Bearer token". Remove Bearer word and get
-        // only the Token
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
+
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                log.info("======== Auth User Name :: {} ========", username);
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
+                throw new BusinessException(ErrorCode.UNABLE_JWT_TOKEN);
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
+                throw new BusinessException(ErrorCode.EXPIRED_JWT_TOKEN);
             }
+
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+            throw new BusinessException(ErrorCode.AUTHORIZATION_NOT_FOUND);
         }
-        // Once we get the token validate it.
+
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
-        // if token is valid configure Spring Security to manually set
-        // authentication
 
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken
-                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // After setting the Authentication in the context, we specify
-                // that the current user is authenticated. So it passes the
-                // Spring Security Configurations successfully.
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+
             }
+
+        }else{
+            /**
+             * Jwt Not init subject
+             * ==============================
+             */
+            throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
+
         }
+
         chain.doFilter(request, response);
     }
 

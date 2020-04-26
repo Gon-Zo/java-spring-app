@@ -35,6 +35,12 @@ public enum ErrorCode {
     // Category
     CATEGORY_NOT_FOUND(500 , "P001" , "Category is Not Found"),
     PRODUCT_NOT_FOUND(500 , "P002" , "Product is Not Found"),
+
+    //jwt
+    UNABLE_JWT_TOKEN(500 , "J001" , "Unable to get JWT Token"),
+    EXPIRED_JWT_TOKEN(500 , "J002" , "JWT Token has expired"),
+    AUTHORIZATION_NOT_FOUND(500, "J003", "JWT Authorization Not Found"),
+    USERNAME_NOT_FOUND(500, "J004", "JWT UserName Not Found"),
     ;
 
     private final String code;
