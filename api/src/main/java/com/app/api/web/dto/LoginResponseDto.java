@@ -5,7 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginViewModel {
+public class LoginResponseDto {
+
+    private static final long serialVersionUID = 5926468583005150707L;
 
     private String email;
 

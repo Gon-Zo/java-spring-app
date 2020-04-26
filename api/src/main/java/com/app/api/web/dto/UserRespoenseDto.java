@@ -19,7 +19,6 @@ public class  UserRespoenseDto {
     private String address;
     private String img;
     private Boolean isUse;
-    private String userName;
     private String roles;
 
     @Builder
@@ -38,7 +37,6 @@ public class  UserRespoenseDto {
                 .img(this.img)
                 .isUse(this.isUse)
                 .roles(this.roles)
-                .userName(this.userName)
                 .build();
     }
 

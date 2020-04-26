@@ -5,7 +5,7 @@ import com.app.api.domain.user.UserRepository;
 import com.app.api.domain.user.support.UserRepositorySupport;
 import com.app.api.global.error.exception.BusinessException;
 import com.app.api.global.error.exception.ErrorCode;
-import com.app.api.web.dto.LoginViewModel;
+import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User searchUser(LoginViewModel dto) {
+    public User searchUser(LoginResponseDto dto) {
 
         if (ObjectUtils.isEmpty(dto.getEmail())) {
             throw new BusinessException(ErrorCode.USER_EMAIL_FAIL);
