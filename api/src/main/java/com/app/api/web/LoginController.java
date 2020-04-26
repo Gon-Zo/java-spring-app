@@ -4,9 +4,12 @@ import com.app.api.demo.auth.JwtResponse;
 import com.app.api.demo.auth.JwtTokenUtil;
 import com.app.api.demo.auth.JwtUserDetailsService;
 import com.app.api.domain.user.User;
+import com.app.api.global.error.exception.BusinessException;
+import com.app.api.global.error.exception.ErrorCode;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.UserRespoenseDto;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -50,6 +53,8 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody LoginResponseDto dto) throws Exception{
 
+        checkParam(dto);
+
         authenticate(dto.getEmail(), dto.getPassword());
 
         final User userDetails = (User) userDetailsService.loadUserByUsername(dto.getEmail());
@@ -64,6 +69,13 @@ public class LoginController {
         userService.saveBy(dto);
     }
 
+    /**
+     * Auth Function
+     *
+     * @param username
+     * @param password
+     * @throws Exception
+     */
     private void authenticate(String username, String password) throws Exception {
 
         try {
@@ -74,6 +86,18 @@ public class LoginController {
         } catch (BadCredentialsException e) {
             e.printStackTrace();
             throw new Exception("INVALID_CREDENTIALS", e);
+        }
+
+    }
+
+    private void checkParam(LoginResponseDto dto){
+
+        if (ObjectUtils.isEmpty(dto.getEmail())) {
+            throw new BusinessException(ErrorCode.USER_EMAIL_FAIL);
+        }
+
+        if (ObjectUtils.isEmpty(dto.getPassword())) {
+            throw new BusinessException(ErrorCode.USER_PASSWORD_FAIL);
         }
 
     }
