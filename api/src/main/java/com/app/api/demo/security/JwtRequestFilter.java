@@ -6,9 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.app.api.demo.auth.JwtTokenUtil;
 import com.app.api.demo.auth.JwtUserDetailsService;
+import com.app.api.enums.Roles;
 import com.app.api.global.error.exception.BusinessException;
 import com.app.api.global.error.exception.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,7 +54,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
 
         } else {
-            throw new BusinessException(ErrorCode.AUTHORIZATION_NOT_FOUND);
+
+//            throw new BusinessException(ErrorCode.AUTHORIZATION_NOT_FOUND);
+            log.info("JWT Authorization Not Found");
+
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -74,11 +79,26 @@ public class JwtRequestFilter extends OncePerRequestFilter {
              * Jwt Not init subject
              * ==============================
              */
-            throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
 
+            log.info("user Name not found");
+
+//            throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
         }
 
+//        String roles = jwtUserDetailsService.loadUserRoles(username);
+
+        log.info("======== {} ========", "RolesFilter");
+//        log.info("======== Roles {} ========", roles);
+
+        final String url = request.getRequestURI();
+        log.info("======== URL {} ========", url);
+
+//        if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
+//            throw new BusinessException(ErrorCode.ROLE_NOT_USER);
+//        }
+
         chain.doFilter(request, response);
+
     }
 
 }
