@@ -38,67 +38,61 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         final String requestTokenHeader = request.getHeader("Authorization");
 
+        final String url = request.getRequestURI();
+        log.info("======== URL :: {} ========", url);
+
         String username = null;
         String jwtToken = null;
 
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+        if (!url.startsWith("/login") && !url.startsWith("/sign")) {
 
-            try {
-                username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-                log.info("======== Auth User Name :: {} ========", username);
-            } catch (IllegalArgumentException e) {
-                throw new BusinessException(ErrorCode.UNABLE_JWT_TOKEN);
-            } catch (ExpiredJwtException e) {
-                throw new BusinessException(ErrorCode.EXPIRED_JWT_TOKEN);
+            if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+                jwtToken = requestTokenHeader.substring(7);
+
+                try {
+                    username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                    log.info("======== Auth User Name :: {} ========", username);
+                } catch (IllegalArgumentException e) {
+                    throw new BusinessException(ErrorCode.UNABLE_JWT_TOKEN);
+                } catch (ExpiredJwtException e) {
+                    throw new BusinessException(ErrorCode.EXPIRED_JWT_TOKEN);
+                }
+
+            } else {
+                throw new BusinessException(ErrorCode.AUTHORIZATION_NOT_FOUND);
             }
 
-        } else {
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
-//            throw new BusinessException(ErrorCode.AUTHORIZATION_NOT_FOUND);
-            log.info("JWT Authorization Not Found");
+                if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
-        }
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                }
 
-                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-
+            } else {
+                /**
+                 * Jwt not init subject
+                 * ==============================
+                 */
+                throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
-        }else{
-            /**
-             * Jwt Not init subject
-             * ==============================
-             */
+            String roles = jwtUserDetailsService.loadUserRoles(username);
 
-            log.info("user Name not found");
+            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
+                throw new BusinessException(ErrorCode.ROLE_NOT_USER);
+            }
 
-//            throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
         }
-
-//        String roles = jwtUserDetailsService.loadUserRoles(username);
-
-        log.info("======== {} ========", "RolesFilter");
-//        log.info("======== Roles {} ========", roles);
-
-        final String url = request.getRequestURI();
-        log.info("======== URL {} ========", url);
-
-//        if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
-//            throw new BusinessException(ErrorCode.ROLE_NOT_USER);
-//        }
 
         chain.doFilter(request, response);
 
     }
-
 }
