@@ -11,7 +11,7 @@ public class WebControllerAdvice {
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
-        log.info("Been Success :: WebDataBinder");
+        log.info("======== {} ========" , "WebDataBinder");
         webDataBinder.initDirectFieldAccess();
     }
 

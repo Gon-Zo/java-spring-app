@@ -35,7 +35,6 @@ public class ErrorResponse {
         this.errors = new ArrayList<>();
     }
 
-
     public static ErrorResponse of(final ErrorCode code, final BindingResult bindingResult) {
         return new ErrorResponse(code, FieldError.of(bindingResult));
     }

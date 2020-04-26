@@ -41,6 +41,11 @@ public enum ErrorCode {
     EXPIRED_JWT_TOKEN(500 , "J002" , "JWT Token has expired"),
     AUTHORIZATION_NOT_FOUND(500, "J003", "JWT Authorization Not Found"),
     USERNAME_NOT_FOUND(500, "J004", "JWT UserName Not Found"),
+
+    //roles
+    ROLE_NOT_MANAGER(500, "R001", "Role Is Not Manager"),
+    ROLE_NOT_USER(500, "R002", "Role Is Not User"),
+
     ;
 
     private final String code;

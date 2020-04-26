@@ -1,5 +1,6 @@
 package com.app.api.demo.auth;
 
+import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,5 +22,9 @@ public class JwtUserDetailsService implements UserDetailsService {
         return customUserDetails;
     }
 
+    public String loadUserRoles (String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+        return user.getRoles();
+    }
 
 }
