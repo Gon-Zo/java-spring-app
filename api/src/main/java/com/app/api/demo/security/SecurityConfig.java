@@ -71,8 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          * ========== Auth Jwt Filter and Role Check ==========
          */
         httpSecurity
-//                .addFilterBefore(globalCorsFilter , BasicAuthenticationFilter.class)
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(globalCorsFilter , BasicAuthenticationFilter.class)
+                .addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 
