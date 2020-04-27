@@ -50,11 +50,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 jwtToken = requestTokenHeader.substring(7);
 
                 try {
+
                     username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                     log.info("======== Auth User Name :: {} ========", username);
                 } catch (IllegalArgumentException e) {
+
                     throw new BusinessException(ErrorCode.UNABLE_JWT_TOKEN);
                 } catch (ExpiredJwtException e) {
+
                     throw new BusinessException(ErrorCode.EXPIRED_JWT_TOKEN);
                 }
 
@@ -77,6 +80,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
 
             } else {
+
                 /**
                  * Jwt not init subject
                  * ==============================
@@ -86,13 +90,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             String roles = jwtUserDetailsService.loadUserRoles(username);
 
-            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
-                throw new BusinessException(ErrorCode.ROLE_NOT_USER);
-            }
+            log.info("======== Auth Roles {} ========", roles);
+
+
+//            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.M.getValue())) {
+//                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
+//            }
 
         }
 
         chain.doFilter(request, response);
-
     }
+
 }
