@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
+
+body {
+  font-family: 'Noto Sans KR', sans-serif !important;
+  /*background-color: #fff !important;*/
+}
+
+/*상품 css*/
+.dp-none{
+  display: none;
+}
+
+.light-ft{
+  color: #fff !important;
+}
+
+.light-ft:hover {
+  color: #BB86FC !important;
+}
+
+div.dropdown-menu {
+  left: -5em !important;
+}
+
+
+.lf-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.container-fluid{
+  padding: 0 0 0 0 !important; ;
+}
+
+.container-main{
+  padding: 0 15px 0 15px;
+}
