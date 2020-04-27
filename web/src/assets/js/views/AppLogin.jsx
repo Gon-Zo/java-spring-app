@@ -18,7 +18,7 @@ export default () => {
     let dispatch = useDispatch();
 
     const loginUser = () => {
-        $httpLogin(dispatch, {id: id, pwd: pwd} , history)
+        $httpLogin(dispatch, {"email": id, "password": pwd}, history)
     };
 
     const _keyDown = (event) => {
