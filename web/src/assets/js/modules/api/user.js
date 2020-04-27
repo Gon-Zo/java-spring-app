@@ -12,17 +12,11 @@ export const $httpLogout = (dispatch , history) =>{
 
 export const $httpLogin = (dispatch, payload , history) => {
 
-    let temp = {
-        "email": payload.id,
-        "password": payload.pwd
-    }
-
-    axios.post(`http://localhost:8080/login`, temp )
+    axios.post(`/login`, payload)
         .then((res) => {
             let token = res.data.token;
             sessionStorage.setItem("Token", token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            // context.router.history.push("/home")
             dispatch(onLogin())
             history.push('/home')
         })

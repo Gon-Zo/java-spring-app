@@ -14,7 +14,7 @@ import "react-day-picker/lib/style.css";
 
 const store = createStore(rootReducer, composeWithDevTools());
 
-// axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'http://localhost:8080'
 
 // 10 초
 axios.defaults.timeout = 10000
