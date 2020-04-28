@@ -1,16 +1,14 @@
-package com.app.api.demo.security;
+package com.app.api.core.security;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.app.api.demo.auth.JwtTokenUtil;
-import com.app.api.demo.auth.JwtUserDetailsService;
-import com.app.api.enums.Roles;
+import com.app.api.core.auth.JwtTokenUtil;
+import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.global.error.exception.BusinessException;
 import com.app.api.global.error.exception.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

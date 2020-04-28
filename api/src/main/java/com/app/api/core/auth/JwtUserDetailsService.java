@@ -1,4 +1,4 @@
-package com.app.api.demo.auth;
+package com.app.api.core.auth;
 
 import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;

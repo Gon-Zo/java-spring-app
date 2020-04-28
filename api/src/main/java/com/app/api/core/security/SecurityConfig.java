@@ -1,4 +1,4 @@
-package com.app.api.demo.security;
+package com.app.api.core.security;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

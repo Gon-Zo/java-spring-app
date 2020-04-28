@@ -1,4 +1,4 @@
-package com.app.api.demo.security;
+package com.app.api.core.security;
 
 import java.io.IOException;
 import java.io.Serializable;
