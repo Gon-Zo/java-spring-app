@@ -1,4 +1,4 @@
-package com.app.api.demo.auth;
+package com.app.api.core.auth;
 
 import java.io.Serializable;
 import java.util.Date;
