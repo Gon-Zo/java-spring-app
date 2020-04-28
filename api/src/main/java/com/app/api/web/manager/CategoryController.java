@@ -1,23 +1,20 @@
-package com.app.api.web;
+package com.app.api.web.manager;
 
 import com.app.api.domain.category.Category;
 import com.app.api.service.category.CategoryService;
 import com.app.api.web.dto.CategoryResponseDto;
 //import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
-//@Component
+@RequestMapping("/manager/category")
+@AllArgsConstructor
 public class CategoryController {
 
     private final CategoryService service;
-
-    public CategoryController(CategoryService service) {
-        this.service = service;
-    }
 
     @PostMapping("")
     public void makeCategory(CategoryResponseDto dto){

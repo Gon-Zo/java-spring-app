@@ -1,8 +1,9 @@
-package com.app.api.web;
+package com.app.api.web.manager;
 
 import com.app.api.domain.product.Product;
 import com.app.api.service.product.ProductService;
 import com.app.api.web.dto.ProductResponseDto;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/manager/product")
+@AllArgsConstructor
 public class ProductController {
 
     private ProductService service;
-
-    public ProductController(ProductService service) {
-        this.service = service;
-    }
 
     @PostMapping("")
     public void makeProdcut(ProductResponseDto dto){

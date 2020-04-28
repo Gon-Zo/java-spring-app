@@ -33,30 +33,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long updateFrom(long seq, UserRespoenseDto dto) {
-        return userRepositorySupport.update(seq, dto)
-                        .orElseThrow(()->new BusinessException(ErrorCode.USER_UPDATE_FAIL));
+        return userRepositorySupport
+                .update(seq, dto)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_UPDATE_FAIL));
     }
 
     @Override
     public Page<User> getPageList(Pageable pageable) {
         return userRepository.findAll(pageable);
-    }
-
-    @Override
-    public User searchUser(LoginResponseDto dto) {
-
-        if (ObjectUtils.isEmpty(dto.getEmail())) {
-            throw new BusinessException(ErrorCode.USER_EMAIL_FAIL);
-        }
-
-        if (ObjectUtils.isEmpty(dto.getPassword())) {
-            throw new BusinessException(ErrorCode.USER_PASSWORD_FAIL);
-        }
-
-        return userRepositorySupport
-                .findByUser(dto)
-                .orElseThrow(() ->
-                        new BusinessException(ErrorCode.LOGIN_USER_NOT_FOUND));
     }
 
     /**
@@ -69,5 +53,11 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(seq);
     }
 
+    @Override
+    public User getUser(long seq) {
+        return userRepository
+                .findById(seq)
+                .orElseThrow(()-> new BusinessException(ErrorCode.USER_NOT_FOUND));
+    }
 
 }

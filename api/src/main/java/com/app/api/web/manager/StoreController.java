@@ -1,4 +1,4 @@
-package com.app.api.web;
+package com.app.api.web.manager;
 
 import com.app.api.domain.store.Store;
 import com.app.api.service.store.StoreService;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/store")
+@RequestMapping("/manager/store")
 @AllArgsConstructor
 @RestController
 public class StoreController {
