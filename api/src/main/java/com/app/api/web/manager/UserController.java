@@ -1,4 +1,4 @@
-package com.app.api.web;
+package com.app.api.web.manager;
 
 
 import com.app.api.domain.user.User;
@@ -12,42 +12,39 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
-@RequestMapping("/user")
 @RestController
 @AllArgsConstructor
+@RequestMapping("/manager/user")
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("")
-    public void signUpTo(@RequestBody UserRespoenseDto dto) {
-        userService.saveBy(dto);
-    }
-
+    // ===== User Info
     @PutMapping("/{seq}")
     public Long modifyInfo(@PathVariable long seq, @RequestBody UserRespoenseDto dto) {
         return userService.updateFrom(seq, dto);
     }
 
-    /**
-     * PageObject user
-     * page >> 페이지 번호
-     * size >> num page
-     * sort >> order
-     *
-     * @param pageable
-     * @return
-     */
+    // ===== Page Users
     @GetMapping("")
     public Page<User> showUserList(
-            @PageableDefault(size = 10, page = 0, sort = "seq", direction = Sort.Direction.ASC) Pageable pageable) {
+            @PageableDefault(size = 10,
+                    page = 0,
+                    sort = "seq",
+                    direction = Sort.Direction.ASC) Pageable pageable) {
         return userService.getPageList(pageable);
     }
 
+    // ===== Delete User
     @DeleteMapping("/{seq}")
     public void removeUser(@PathVariable long seq) {
         userService.deleteByUser(seq);
+    }
+
+    // ==== Users Info
+    @GetMapping("/{seq}")
+    public User showUser(@PathVariable long seq) {
+        return userService.getUser(seq);
     }
 
 }
