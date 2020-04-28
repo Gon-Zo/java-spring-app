@@ -1,8 +1,8 @@
-package com.app.api.web;
+package com.app.api.web.statics;
 
-import com.app.api.demo.auth.JwtResponse;
-import com.app.api.demo.auth.JwtTokenUtil;
-import com.app.api.demo.auth.JwtUserDetailsService;
+import com.app.api.core.auth.JwtResponse;
+import com.app.api.core.auth.JwtTokenUtil;
+import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.domain.user.User;
 import com.app.api.global.error.exception.BusinessException;
 import com.app.api.global.error.exception.ErrorCode;
@@ -11,11 +11,7 @@ import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.authentication.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,7 +40,7 @@ public class LoginController {
     }
 
     /**
-     * ======== All Users Login Controller
+     * Login User
      *
      * @param dto
      * @return
@@ -64,6 +60,11 @@ public class LoginController {
 
     }
 
+    /**
+     * Sign Up to User
+     *
+     * @param dto
+     */
     @PostMapping("sign")
     public void signUpTo(@RequestBody UserRespoenseDto dto) {
         userService.saveBy(dto);
@@ -80,16 +81,21 @@ public class LoginController {
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            e.printStackTrace();
-            throw new Exception("USER_DISABLED", e);
+        } catch (InternalAuthenticationServiceException e) {
+            throw new BusinessException(ErrorCode.LOGIN_USER_NOT_FOUND);
+        }catch (DisabledException e) {
+            throw new BusinessException(ErrorCode.USER_DISABLED);
         } catch (BadCredentialsException e) {
-            e.printStackTrace();
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new BusinessException(ErrorCode.INVALID_CREDENTIALS);
         }
 
     }
 
+    /**
+     * Check To Login User Info
+     *
+     * @param dto
+     */
     private void checkParam(LoginResponseDto dto){
 
         if (ObjectUtils.isEmpty(dto.getEmail())) {
