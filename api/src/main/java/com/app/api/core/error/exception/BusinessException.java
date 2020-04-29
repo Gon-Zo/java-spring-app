@@ -18,4 +18,8 @@ public class BusinessException extends RuntimeException {
         return errorCode;
     }
 
+    public ErrorCode getStaticErrorCode (){
+       return errorCode;
+    }
+
 }
