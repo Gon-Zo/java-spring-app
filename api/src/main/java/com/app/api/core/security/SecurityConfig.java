@@ -27,7 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private UserDetailsService jwtUserDetailsService;
     private JwtRequestFilter jwtRequestFilter;
-    private FilterEntryPoint filterEntryPoint;
     private GlobalCorsFilter globalCorsFilter;
 
     @Autowired

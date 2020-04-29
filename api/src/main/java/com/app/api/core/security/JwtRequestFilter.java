@@ -88,6 +88,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             log.info("======== Auth Roles {} ========", roles);
 
+            /**
+             * User Roles Checking
+             *
+             * ========================
+             */
+
 //            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.M.getValue())) {
 //                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
 //            }
