@@ -8,7 +8,9 @@ import com.app.api.core.auth.JwtTokenUtil;
 import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.enums.Roles;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -94,9 +96,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
              * ========================
              */
 
-//            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.M.getValue())) {
-//                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
-//            }
+            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
+                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
+            }
 
         }
 
