@@ -1,4 +1,4 @@
-package com.app.api.global.error;
+package com.app.api.core.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.app.api.global.error.exception;
+package com.app.api.core.error.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

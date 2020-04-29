@@ -16,7 +16,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Slf4j
@@ -72,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          */
         httpSecurity
                 .addFilterBefore(globalCorsFilter , BasicAuthenticationFilter.class)
-                .addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAfter(jwtRequestFilter, GlobalCorsFilter.class);
 
     }
 
