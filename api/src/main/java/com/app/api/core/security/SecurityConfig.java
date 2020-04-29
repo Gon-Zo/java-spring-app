@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          */
         httpSecurity.csrf().disable()
                 .authorizeRequests()
+
                 // ========== method is POST all Success ==========
                 .antMatchers(HttpMethod.POST, "/login", "/sign")
                 .permitAll()

@@ -34,11 +34,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+
         log.info("======== {} ========", "JwtRequestFilter");
 
         final String requestTokenHeader = request.getHeader("Authorization");
 
         final String url = request.getRequestURI();
+
         log.info("======== URL :: {} ========", url);
 
         String username = null;
@@ -64,6 +66,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+                /**
+                 * User Info Search
+                 *
+                 * ======================
+                 */
                 UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
                 if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
@@ -81,6 +89,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                 /**
                  * Jwt not init subject
+                 *
                  * ==============================
                  */
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
