@@ -3,8 +3,8 @@ package com.app.api.service.category;
 import com.app.api.domain.category.Category;
 import com.app.api.domain.category.CategoryRepository;
 import com.app.api.domain.category.support.CategorySupport;
-import com.app.api.global.error.exception.BusinessException;
-import com.app.api.global.error.exception.ErrorCode;
+import com.app.api.core.error.exception.BusinessException;
+import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.web.dto.CategoryResponseDto;
 import org.springframework.stereotype.Service;
 

@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.app.api.core.auth.JwtTokenUtil;
 import com.app.api.core.auth.JwtUserDetailsService;
-import com.app.api.global.error.exception.BusinessException;
-import com.app.api.global.error.exception.ErrorCode;
+import com.app.api.core.error.exception.BusinessException;
+import com.app.api.core.error.exception.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +31,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+    protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         log.info("======== {} ========", "JwtRequestFilter");
 
         final String requestTokenHeader = request.getHeader("Authorization");
@@ -46,9 +46,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
                 jwtToken = requestTokenHeader.substring(7);
-
                 try {
-
                     username = jwtTokenUtil.getUsernameFromToken(jwtToken);
                     log.info("======== Auth User Name :: {} ========", username);
                 } catch (IllegalArgumentException e) {
@@ -89,7 +87,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             String roles = jwtUserDetailsService.loadUserRoles(username);
 
             log.info("======== Auth Roles {} ========", roles);
-
 
 //            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.M.getValue())) {
 //                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);

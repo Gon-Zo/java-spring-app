@@ -1,6 +1,6 @@
-package com.app.api.global.error;
+package com.app.api.core.error;
 
-import com.app.api.global.error.exception.ErrorCode;
+import com.app.api.core.error.exception.ErrorCode;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
