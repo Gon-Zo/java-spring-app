@@ -12,7 +12,6 @@ public enum ErrorCode {
     INVALID_TYPE_VALUE(400, "C005", " Invalid Type Value"),
     HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied"),
 
-
     // Member
     EMAIL_DUPLICATION(400, "M001", "Email is Duplication"),
     LOGIN_INPUT_INVALID(400, "M002", "Login input is invalid"),
@@ -20,7 +19,6 @@ public enum ErrorCode {
     // Coupon
     COUPON_ALREADY_USE(400, "CO001", "Coupon was already used"),
     COUPON_EXPIRE(400, "CO002", "Coupon was already expired"),
-
 
     // Uesr
     LOGIN_USER_NOT_FOUND(500, "U001", "Login User Not Found"),
@@ -48,6 +46,9 @@ public enum ErrorCode {
     //roles
     ROLE_NOT_MANAGER(500, "R001", "Role Is Not Manager"),
     ROLE_NOT_USER(500, "R002", "Role Is Not User"),
+
+    SYSTEM_ERROR(500, "E001", "System Error"),
+    BAD_REQUEST(500 , "E002" , "Bad Request"),
 
     ;
 
