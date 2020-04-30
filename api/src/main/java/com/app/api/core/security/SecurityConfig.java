@@ -52,19 +52,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          *  ========== Http Request Filter ==========
          */
         httpSecurity.csrf().disable()
-                .authorizeRequests()
+//                .authorizeRequests()
 
                 // ========== method is POST all Success ==========
-                .antMatchers(HttpMethod.POST, "/login", "/sign")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+//                .antMatchers(HttpMethod.POST, "/login", "/sign")
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
 
 //                .and()
 //                .exceptionHandling()
 //                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
 
-                .and()
+//                .and()
+                
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
