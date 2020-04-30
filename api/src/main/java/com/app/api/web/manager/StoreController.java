@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/manager/store")
-@AllArgsConstructor
 @RestController
+@AllArgsConstructor
+@RequestMapping("/manager/store")
 public class StoreController {
 
     private final StoreService service;

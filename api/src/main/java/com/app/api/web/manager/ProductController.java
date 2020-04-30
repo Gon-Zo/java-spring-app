@@ -18,7 +18,7 @@ public class ProductController {
     private ProductService service;
 
     @PostMapping("")
-    public void makeProdcut(ProductResponseDto dto){
+    public void makeProduct(ProductResponseDto dto){
         service.createProduct(dto);
     }
 
