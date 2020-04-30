@@ -39,7 +39,7 @@ public enum ErrorCode {
 
     //jwt
     UNABLE_JWT_TOKEN(500 , "J001" , "Unable to get JWT Token"),
-    EXPIRED_JWT_TOKEN(500 , "J002" , "JWT Token has expired"),
+    EXPIRED_JWT_TOKEN(500 , "J002" , "JWT Token has expired 1"),
     AUTHORIZATION_NOT_FOUND(500, "J003", "JWT Authorization Not Found"),
     USERNAME_NOT_FOUND(500, "J004", "JWT UserName Not Found"),
 
