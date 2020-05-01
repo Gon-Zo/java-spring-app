@@ -3,7 +3,6 @@ package com.app.api.core.security;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,29 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          *  ========== Http Request Filter ==========
          */
         httpSecurity.csrf().disable()
-//                .authorizeRequests()
-
-                // ========== method is POST all Success ==========
-//                .antMatchers(HttpMethod.POST, "/login", "/sign")
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated()
-
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-
-//                .and()
-                
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        /**
-         * ========== Auth Jwt Filter and Role Check ==========
-         */
-        httpSecurity
-                .addFilterBefore(globalCorsFilter , BasicAuthenticationFilter.class)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(globalCorsFilter, BasicAuthenticationFilter.class)
                 .addFilterAfter(jwtRequestFilter, GlobalCorsFilter.class);
+
 
     }
 
