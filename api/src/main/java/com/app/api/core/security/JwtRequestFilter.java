@@ -104,7 +104,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
              *
              * ========================
              */
-
             if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
                 throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
             }
