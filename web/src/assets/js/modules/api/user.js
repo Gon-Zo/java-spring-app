@@ -32,7 +32,7 @@ export const $fetchUsers = (dispatch, payload) => {
         params: {
             page: payload.page - 1,
             size: payload.numPage,
-            sort: "seq"
+            sort: payload.sort.toString()
         }
     }).then(res => dispatch(onUser(res.data))
     ).catch((err) => console.log(err))
