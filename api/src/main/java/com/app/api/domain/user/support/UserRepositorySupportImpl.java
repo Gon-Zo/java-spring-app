@@ -7,12 +7,14 @@ import com.app.api.web.dto.UserRespoenseDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static com.app.api.domain.user.QUser.user;
@@ -69,7 +71,24 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
             update.set(user.password, dto.getPassword());
         }
 
+        if (ObjectUtils.isNotEmpty(dto.getBirthDate())){
+            update.set(user.birthDate  , dto.getBirthDate());
+        }
+
+        if (isNotEmpty(dto.getAddress())) {
+            update.set(user.address , dto.getAddress());
+        }
+
+        if (isNotEmpty(dto.getImg())) {
+            update.set(user.img , dto.getImg());
+        }
+
+        if (ObjectUtils.isNotEmpty(dto.getIsUse())){
+            update.set(user.isUse, dto.getIsUse());
+        }
+
         return update;
+
     }
 
 

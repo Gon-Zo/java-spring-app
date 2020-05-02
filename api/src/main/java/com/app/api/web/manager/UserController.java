@@ -5,7 +5,6 @@ import com.app.api.domain.user.User;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,7 +18,7 @@ public class UserController {
 
     private final UserService userService;
 
-    // ===== User Info
+    // ===== Update User Info
     @PutMapping("/{seq}")
     public Long modifyInfo(@PathVariable long seq, @RequestBody UserRespoenseDto dto) {
         return userService.updateFrom(seq, dto);
