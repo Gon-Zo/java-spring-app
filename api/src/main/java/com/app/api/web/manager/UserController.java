@@ -3,12 +3,10 @@ package com.app.api.web.manager;
 
 import com.app.api.domain.user.User;
 import com.app.api.service.user.UserService;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,16 +21,16 @@ public class UserController {
     public Long modifyInfo(@PathVariable long seq, @RequestBody UserRespoenseDto dto) {
         return userService.updateFrom(seq, dto);
     }
-
-    // ===== Page Users
-    @GetMapping("")
-    public Page<User> showUserList(
-            @PageableDefault(size = 10,
-                    page = 0,
-                    sort = "seq",
-                    direction = Sort.Direction.ASC) Pageable pageable) {
-        return userService.getPageList(pageable);
-    }
+//
+//    // ===== Page Users
+//    @GetMapping("")
+//    public Page<User> showUserList(
+//            @PageableDefault(size = 10,
+//                    page = 0,
+//                    sort = "seq",
+//                    direction = Sort.Direction.ASC) Pageable pageable) {
+//        return userService.getPageList(pageable);
+//    }
 
     // ===== Delete User
     @DeleteMapping("/{seq}")
@@ -44,6 +42,13 @@ public class UserController {
     @GetMapping("/{seq}")
     public User showUser(@PathVariable long seq) {
         return userService.getUser(seq);
+    }
+
+
+    //=== find By Page Users
+    @GetMapping("")
+    public Page<User> showPageUsers(PageableDto dto){
+       return userService.getUsers(dto);
     }
 
 }

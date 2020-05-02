@@ -5,6 +5,7 @@ import com.app.api.domain.user.UserRepository;
 import com.app.api.domain.user.support.UserRepositorySupport;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -57,6 +58,11 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .findById(seq)
                 .orElseThrow(()-> new BusinessException(ErrorCode.USER_NOT_FOUND));
+    }
+
+    @Override
+    public Page<User> getUsers(PageableDto dto) {
+        return userRepositorySupport.findByUsers(dto);
     }
 
 }
