@@ -26,6 +26,7 @@ public enum ErrorCode {
     USER_PASSWORD_FAIL(500, "U003", "Login User Password fail"),
     USER_UPDATE_FAIL(500, "U004", "User Update Fail"),
     USER_NOT_FOUND(500 , "U005" , "User is Not Found") ,
+    SAME_USER(500 , "U006" , "User same email") ,
 
     USER_DISABLED(500 , "U006" , "USER DISABLED") ,
     INVALID_CREDENTIALS(500 , "U007" , "INVALID CREDENTIALS") ,
