@@ -27,43 +27,62 @@ export default () => {
     let _bindData = () => {
 
         let payload = initUser.users;
-        let count = 0
-        let numPages = 0
-        let showPages = 0
-        let data = []
-        let keys = []
 
-        if (typeof payload !== 'undefined') {
-            count = payload.count;
-            numPages = payload.numPages;
-            showPages = payload.showPages;
+        // Data
+        let data = typeof payload === 'undefined' ?
+            undefined : payload.content;
 
-            data = payload.data.map((m) =>
-                new UserDto(m.seq, m.id, m.pwd, m.name, m.birthDate, m.address, m.type, m.is_use, m.create_at))
+        // keys
+        let keys = typeof data == 'undefined' ?
+            undefined :
+            Object.keys(data[0])
+                .filter(m =>
+                    m === 'email' ||
+                    m === 'updatedAt' ||
+                    m === 'email' ||
+                    m === 'birthDate' ||
+                    m === 'createdAt' ||
+                    m === 'isUse' ||
+                    m === 'address'
+                )
 
-            if (data.length > 0) {
-                keys = Object.keys(data[0]).filter(f => f !== 'seq')
-            }
-        }
+        // let count = 0
+        // let numPages = 0
+        // let showPages = 0
+        // let data = []
+        // let keys = []
+        //
+        // if (typeof payload !== 'undefined') {
+        //     count = payload.count;
+        //     numPages = payload.numPages;
+        //     showPages = payload.showPages;
+        //
+        //     data = payload.data.map((m) =>
+        //         new UserDto(m.seq, m.id, m.pwd, m.name, m.birthDate, m.address, m.type, m.is_use, m.create_at))
+        //
+        //     if (data.length > 0) {
+        //         keys = Object.keys(data[0]).filter(f => f !== 'seq')
+        //     }
+        // }
+        //
+        // return {
+        //     count: count,
+        //     numPages: numPages,
+        //     showPages: showPages,
+        //     data: data,
+        //     key: keys,
+        // }
 
         return {
-            count: count,
-            numPages: numPages,
-            showPages: showPages,
             data: data,
             key: keys,
         }
 
     }
 
-    // let _clickToCol = (idx) =>{
-    //     $setUser(dispatch, _bindData().data[idx]);
-    //     $isUserModalOpen(dispatch)
-    // }
-
-    let _isUse = (idx , flag) => {
-        let data = initUser.users.data[idx]
-        $isUse(dispatch, idx , data , flag )
+    let _isUse = (idx, flag) => {
+        let data = initUser.users.content[idx]
+        $isUse(dispatch, idx, data, flag)
     }
 
     let _onEdit = () => {
@@ -90,8 +109,7 @@ export default () => {
                 </div>
                 <div className="card card-user card-bg">
                     <div className="card-title ml-2 mt-1">
-                        <span className="main-ft">사용자 추이</span>
-                    </div>
+                        <span className="main-ft">사용자 추이</span> </div>
                     <div className="card-body">
                         <BarChart/>
                     </div>
@@ -107,11 +125,12 @@ export default () => {
                        delete={_onDelete}
                 />
 
-                <Pagination count={_bindData().count}
-                            numPages={_bindData().numPages}
-                            showPages={_bindData().showPages}
-                            refresh={_onReFresh}
-                            page={initUser.page}/>
+                {/*<Pagination count={_bindData().count}*/}
+                {/*            numPages={_bindData().numPages}*/}
+                {/*            showPages={_bindData().showPages}*/}
+                {/*            refresh={_onReFresh}*/}
+                {/*            page={initUser.page}/>*/}
+
             </div>
         </div>
     )

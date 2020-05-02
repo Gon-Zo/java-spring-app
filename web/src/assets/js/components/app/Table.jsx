@@ -25,6 +25,7 @@ export default (props) => {
     let theme = initUser.isTheme
 
     if (typeof payload == 'undefined' || payload.length == 0) {
+
         return (
             <div className="loading-wrap">
                 <Spinner animation="border" role="status" variant={ theme ? "dark" : "light"}>
@@ -63,7 +64,9 @@ export default (props) => {
                         <th>#</th>
                         {
                             keys.map((k, i) =>
-                                <th key={i}>{k}</th>
+                                <th key={i} onClick={()=>{
+                                    console.log("test success")
+                                }}>{k}</th>
                             )
                         }
                         <th>Action</th>
@@ -73,14 +76,12 @@ export default (props) => {
                     <tbody>
                         {
                             payload.map((d, i) => (
-                                // <tr key={i} onClick={() => _clickCol(i)}>
                                 <tr key={i}>
                                     <td>{i + 1}</td>
                                     {
                                         keys.map((k, j) => (
                                             <td key={j}>
                                                 {_checkToValue(d[`${k}`], i)}
-                                                {/*<b>{d[`${k}`]}</b>*/}
                                             </td>
                                         ))
                                     }

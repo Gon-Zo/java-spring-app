@@ -51,7 +51,7 @@ const userReducer = (state = initUser, action) => {
             state.isOpen = !state.isOpen;
             break;
         case ISUSE:
-            state.users.data[action.idx].is_use = action.flag
+            state.users.content[action.idx].isUse = action.flag
             break;
     }
 

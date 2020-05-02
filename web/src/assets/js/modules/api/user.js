@@ -1,7 +1,6 @@
 import React from "react";
 import axios from 'axios'
 import {onUser, isOpen, clickPage, setUser, onLogout, onLogin, isUse} from '../reducer/user'
-// import { useHistory } from "react-router-dom";
 
 export const $httpLogout = (dispatch , history) =>{
     axios.defaults.headers.common['Authorization'] = undefined;
@@ -11,7 +10,6 @@ export const $httpLogout = (dispatch , history) =>{
 };
 
 export const $httpLogin = (dispatch, payload , history) => {
-
     axios.post(`/login`, payload)
         .then((res) => {
             let token = res.data.token;
@@ -30,13 +28,15 @@ export const $httpLogin = (dispatch, payload , history) => {
 
 export const $fetchUsers = (dispatch, payload) => {
 
-    axios.get(`/admin/user`, {
+    axios.get(`/manager/user`, {
         params: {
-            type: 'U',
-            page: payload.page
+            page: payload.page - 1,
+            size: payload.numPage,
+            sort: "seq"
         }
     }).then(res => dispatch(onUser(res.data))
     ).catch((err) => console.log(err))
+
 };
 
 export const $updateUser = (dispatch, payload) => {
@@ -44,15 +44,10 @@ export const $updateUser = (dispatch, payload) => {
     let seq = payload.seq
     let user = buildUser(payload)
 
-    console.log('update User', JSON.stringify(payload))
+    axios.put(`/manager/user/${seq}`, user)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
 
-    axios.put(`/admin/user/${seq}`, user)
-        .then((res) => {
-            // $isOpen(dispatch);
-            // $fetchUsers(dispatch, payload)
-            // todo : update dev
-        })
-        .catch((err) => console.log(err))
 };
 
 export const $deleteUser = (dispatch, payload) => {
@@ -78,15 +73,23 @@ export const $isUserModalOpen = (dispatch) => {
 }
 
 export const $isUse = (dispatch, idx, payload, flag) => {
+   payload['isUse'] = flag
     dispatch(isUse(idx , flag))
-    payload['is_use'] = flag
-    $updateUser(dispatch, payload)
+   $updateUser(dispatch, payload)
 }
 
 let buildUser = (payload) => {
     let user = payload
     let keys = Object.keys(user)
     let temp = {}
-    keys.filter(f => f !== 'seq' && f !== 'create_at').map(m => temp[m] = user[m]);
+    keys.filter( m =>
+        m === 'email' ||
+        m === 'email' ||
+        m === 'birthDate' ||
+        m === 'isUse' ||
+        m === 'address'
+    )
+        .map(m => temp[m] = user[m]);
     return temp
 }
+
