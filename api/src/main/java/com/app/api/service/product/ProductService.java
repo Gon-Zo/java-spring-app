@@ -1,6 +1,7 @@
 package com.app.api.service.product;
 
 import com.app.api.domain.product.Product;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,6 @@ public interface ProductService {
 
     void createProduct(ProductResponseDto dto);
 
-    Page<Product> getProducts (Pageable pageable);
+    Page<Product> getProducts (PageableDto dto);
 
 }

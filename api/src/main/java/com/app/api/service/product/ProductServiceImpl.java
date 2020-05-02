@@ -5,6 +5,7 @@ import com.app.api.domain.product.ProductRepository;
 import com.app.api.domain.product.support.ProductSupport;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -42,8 +43,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getProducts(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Product> getProducts(PageableDto dto) {
+        return support.findByProducts(dto);
     }
 
 }
