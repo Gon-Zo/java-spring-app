@@ -18,7 +18,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,6 +81,11 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
 
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return jpaQueryFactory.selectFrom(user).where(user.email.eq(email)).fetchOne();
+    }
+
     /**
      * udpate query setting
      * @param update
@@ -115,7 +119,8 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
         }
 
         return update;
-
     }
+
+
 
 }

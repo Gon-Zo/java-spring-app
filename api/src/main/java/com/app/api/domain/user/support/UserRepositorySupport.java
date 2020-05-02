@@ -16,4 +16,6 @@ public interface UserRepositorySupport {
 
     Page<User> findByUsers(PageableDto dto);
 
+    User findByEmail(String email);
+
 }

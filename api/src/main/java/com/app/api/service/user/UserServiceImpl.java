@@ -8,6 +8,7 @@ import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,10 +24,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveBy(UserRespoenseDto dto) {
-        String rawPassword = dto.getPassword();
-        String encodedPassword = new BCryptPasswordEncoder().encode(rawPassword);
-        dto.setPassword(encodedPassword);
+
+        if(checkByEmail(dto.getEmail())){
+            throw new BusinessException(ErrorCode.SAME_USER);
+        }
+
+        dto.setPassword(encodingByPwd(dto.getPassword()));
+
         User user = dto.toEntity();
+
         userRepository.save(user);
     }
 
@@ -43,11 +49,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll(pageable);
     }
 
-    /**
-     * delete User
-     *
-     * @param seq
-     */
     @Override
     public void deleteByUser(long seq) {
         userRepository.deleteById(seq);
@@ -63,6 +64,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<User> getUsers(PageableDto dto) {
         return userRepositorySupport.findByUsers(dto);
+    }
+
+    // checking to email
+    private boolean checkByEmail(String email){
+        return ObjectUtils.isEmpty(userRepositorySupport.findByEmail(email));
+    }
+
+    // encoding passworad
+    private String encodingByPwd(String pwd){
+        String rawPassword = pwd;
+        String encodedPassword = new BCryptPasswordEncoder().encode(rawPassword);
+        return  encodedPassword;
     }
 
 }
