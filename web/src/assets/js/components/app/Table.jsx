@@ -24,6 +24,11 @@ export default (props) => {
 
     let theme = initUser.isTheme
 
+    let _sortTable = (idx) =>{
+       let sortStr = keys[idx]
+        console.log('sortStr', sortStr)
+    }
+
     if (typeof payload == 'undefined' || payload.length == 0) {
 
         return (
@@ -64,9 +69,7 @@ export default (props) => {
                         <th>#</th>
                         {
                             keys.map((k, i) =>
-                                <th key={i} onClick={()=>{
-                                    console.log("test success")
-                                }}>{k}</th>
+                                <th key={i} onClick={() => _sortTable(i)}>{k}</th>
                             )
                         }
                         <th>Action</th>
