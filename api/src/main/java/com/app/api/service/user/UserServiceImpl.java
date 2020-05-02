@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
     public Long updateFrom(long seq, UserRespoenseDto dto) {
         return userRepositorySupport
                 .update(seq, dto)
-                .orElseThrow(() -> new BusinessException(ErrorCode.USER_UPDATE_FAIL));
+                .orElseThrow(() ->
+                        new BusinessException(ErrorCode.USER_UPDATE_FAIL));
     }
 
     @Override
