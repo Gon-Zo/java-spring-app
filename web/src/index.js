@@ -23,8 +23,9 @@ axios.interceptors.request.use(request => {
     console.log('request', request);
     let authToken = request.headers.common.Authorization;
     if(typeof authToken === 'undefined'){
-        request.headers.common.Authorization = sessionStorage.getItem("Token")
-        axios.defaults.headers.common['Authorization'] = sessionStorage.getItem("Token")
+        let token = sessionStorage.getItem("Token")
+        request.headers.common.Authorization = `Bearer ${token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
     return request;
 }, error => {
