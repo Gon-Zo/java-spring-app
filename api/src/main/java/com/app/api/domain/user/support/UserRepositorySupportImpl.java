@@ -1,24 +1,30 @@
 package com.app.api.domain.user.support;
 
-
 import com.app.api.domain.user.User;
+import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.LoginResponseDto;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
-import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
+import io.jsonwebtoken.lang.Collections;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static com.app.api.domain.user.QUser.user;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
+import static com.app.api.utils.ApiDomainUtils.isNotEmpty;
 
 @Repository
 public class UserRepositorySupportImpl extends QuerydslRepositorySupport implements UserRepositorySupport {
@@ -52,6 +58,28 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
                                 )
                                 .fetchOne()
                 );
+
+    }
+
+    @Override
+    public Page<User> findByUsers(PageableDto dto) {
+
+        JPAQuery<User> query = jpaQueryFactory.selectFrom(user);
+
+        if (isNotEmpty(dto.getSort())) {
+            List<OrderSpecifier<?>> orders = ApiDomainUtils.getOrder(dto.getSort());
+            orders.stream().forEach(f->query.orderBy(f));
+        }
+
+        QueryResults<User> fetchResult = query.fetchResults();
+
+        long total = fetchResult.getTotal();
+
+        List<User> results = fetchResult.getResults();
+
+        Pageable pageable = PageRequest.of(dto.getPage(), dto.getSize());
+
+        return new PageImpl<>(results, pageable, total);
 
     }
 
@@ -89,18 +117,6 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
 
         return update;
 
-    }
-
-
-    private BooleanBuilder booleanBuilder (UserRespoenseDto dto){
-        BooleanBuilder bb = new BooleanBuilder();
-        if(isNotEmpty(dto.getEmail())){
-            bb.and(user.email.eq(dto.getEmail()));
-        }
-        if(isNotEmpty(dto.getPassword())){
-            bb.and(user.password.eq(dto.getPassword()));
-        }
-        return bb;
     }
 
 }
