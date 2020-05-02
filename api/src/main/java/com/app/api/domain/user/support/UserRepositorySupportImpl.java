@@ -10,7 +10,6 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
-import io.jsonwebtoken.lang.Collections;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +51,7 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
     public Optional<User> findByUser(LoginResponseDto dto) {
         return Optional
                 .ofNullable(
-                        (User) jpaQueryFactory
+                        jpaQueryFactory
                                 .selectFrom(user)
                                 .where(
                                         user.email.eq(dto.getEmail()).and(user.password.eq(dto.getPassword()))
@@ -67,8 +67,7 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
         JPAQuery<User> query = jpaQueryFactory.selectFrom(user);
 
         if (isNotEmpty(dto.getSort())) {
-            List<OrderSpecifier<?>> orders = ApiDomainUtils.getOrder(dto.getSort());
-            orders.stream().forEach(f->query.orderBy(f));
+            query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
         }
 
         QueryResults<User> fetchResult = query.fetchResults();
