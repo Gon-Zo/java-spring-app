@@ -21,7 +21,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.app.api.domain.product.QProduct.product;
-import static org.apache.commons.lang3.ObjectUtils.compare;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static com.app.api.utils.ApiDomainUtils.isNotEmpty;
 

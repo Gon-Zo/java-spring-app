@@ -2,6 +2,7 @@ package com.app.api.web.manager;
 
 import com.app.api.domain.product.Product;
 import com.app.api.service.product.ProductService;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -38,10 +39,8 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public Page<Product> showProds(
-            @PageableDefault(size = 10, page = 0, sort = "seq", direction = Sort.Direction.ASC)
-            Pageable pageable){
-        return service.getProducts(pageable);
+    public Page<Product> showProds(PageableDto dto){
+        return service.getProducts(dto);
     }
 
 }

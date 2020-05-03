@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
     // checking to email
     private boolean checkByEmail(String email){
-        return ObjectUtils.isEmpty(userRepositorySupport.findByEmail(email));
+        return ObjectUtils.isNotEmpty(userRepositorySupport.findByEmail(email));
     }
 
     // encoding passworad
