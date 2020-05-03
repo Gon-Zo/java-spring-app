@@ -74,13 +74,15 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
             query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
         }
 
+        Pageable pageable = PageRequest.of(dto.getPage(), dto.getSize());
+
+        query.limit(pageable.getPageSize()).offset(pageable.getOffset());
+
         QueryResults<Product> results = query.fetchResults();
 
         long total = results.getTotal();
 
         List<Product> result = results.getResults();
-
-        Pageable pageable = PageRequest.of(dto.getPage(), dto.getSize());
 
         return new PageImpl<>(result, pageable, total);
 
