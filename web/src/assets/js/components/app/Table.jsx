@@ -14,8 +14,6 @@ export default (props) => {
 
     let initUser = useSelector(state => state.userReducer, []);
 
-    let _clickCol = props.click
-
     let _isChange = props.switch
 
     let _isDelete = props.delete
@@ -24,10 +22,7 @@ export default (props) => {
 
     let theme = initUser.isTheme
 
-    let _sortTable = (idx) =>{
-       let sortStr = keys[idx]
-        console.log('sortStr', sortStr)
-    }
+    let _sortTable = props.sort
 
     if (typeof payload == 'undefined' || payload.length == 0) {
 
@@ -69,6 +64,7 @@ export default (props) => {
                         <th>#</th>
                         {
                             keys.map((k, i) =>
+                                // todo : sort function
                                 <th key={i} onClick={() => _sortTable(i)}>{k}</th>
                             )
                         }
