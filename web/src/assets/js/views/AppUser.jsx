@@ -3,10 +3,9 @@
 import React, {useEffect, useState} from "react";
 import Table from "../components/app/Table";
 import {useSelector, useDispatch} from "react-redux";
-import {$deleteUser, $fetchUsers, $isUserModalOpen, $setUser , $isUse} from '../modules/api/user'
+import {$deleteUser, $fetchUsers, $isUserModalOpen, $setUser, $isUse} from '../modules/api/user'
 import {UserInfoModal} from "../components/app/AppModal";
 import Pagination from "../components/app/Pagination";
-import { UserDto} from "../modules/data/AppDto";
 import LineChart from "../components/chart/LineChart";
 import BarChart from "../components/chart/BarChart";
 
@@ -46,36 +45,18 @@ export default () => {
                     m === 'address'
                 )
 
-        // let count = 0
-        // let numPages = 0
-        // let showPages = 0
-        // let data = []
-        // let keys = []
-        //
-        // if (typeof payload !== 'undefined') {
-        //     count = payload.count;
-        //     numPages = payload.numPages;
-        //     showPages = payload.showPages;
-        //
-        //     data = payload.data.map((m) =>
-        //         new UserDto(m.seq, m.id, m.pwd, m.name, m.birthDate, m.address, m.type, m.is_use, m.create_at))
-        //
-        //     if (data.length > 0) {
-        //         keys = Object.keys(data[0]).filter(f => f !== 'seq')
-        //     }
-        // }
-        //
-        // return {
-        //     count: count,
-        //     numPages: numPages,
-        //     showPages: showPages,
-        //     data: data,
-        //     key: keys,
-        // }
+        let count = typeof payload === 'undefined' ? undefined : payload.totalElements
+
+        let numPages = typeof payload === 'undefined' ? undefined : payload.totalPages
+
+        let showPages = typeof payload === 'undefined' ? undefined : payload.size;
 
         return {
             data: data,
             key: keys,
+            count: count,
+            numPages: numPages,
+            showPages: showPages,
         }
 
     }
@@ -94,6 +75,13 @@ export default () => {
         $deleteUser(dispatch, {idx: seq, data: initUser})
     }
 
+    let _sortTable = (idx) => {
+        // let sortStr = keys[idx]
+        // console.log('sortStr', sortStr)
+        let key = _bindData().key[idx]
+        console.log('key', key);
+    }
+
     return (
         <div className="container-main">
             <UserInfoModal initData={initUser} dispatch={dispatch}/>
@@ -109,7 +97,7 @@ export default () => {
                 </div>
                 <div className="card card-user card-bg">
                     <div className="card-title ml-2 mt-1">
-                        <span className="main-ft">사용자 추이</span> </div>
+                        <span className="main-ft">사용자 추이</span></div>
                     <div className="card-body">
                         <BarChart/>
                     </div>
@@ -123,13 +111,15 @@ export default () => {
                        keys={_bindData().key}
                        update={_onEdit}
                        delete={_onDelete}
+                       sort={_sortTable}
                 />
 
-                {/*<Pagination count={_bindData().count}*/}
-                {/*            numPages={_bindData().numPages}*/}
-                {/*            showPages={_bindData().showPages}*/}
-                {/*            refresh={_onReFresh}*/}
-                {/*            page={initUser.page}/>*/}
+                <Pagination count={_bindData().count}
+                            numPages={_bindData().numPages}
+                            showPages={_bindData().showPages}
+                            refresh={_onReFresh}
+                            page={initUser.page}
+                />
 
             </div>
         </div>

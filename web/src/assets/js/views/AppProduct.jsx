@@ -35,34 +35,27 @@ export default () => {
     }
 
     let _bindData = () =>{
-        let payload = initProd.products;
-        let count = payload.count;
-        let numPages = payload.numPages;
-        let showPages = payload.showPages;
-        let result = []
-        let keys = []
 
-        if (typeof payload.data !== 'undefined') {
-            keys = Object
-                .keys(payload.data[0])
-                .filter(f => f != 'store' && f != 'info' && f != 'seq' && f != 'create_at')
-            payload.data
-                .forEach(m => {
-                    let temp = {}
-                    keys.forEach(f => {
-                        temp[f] = m[f]
-                    })
-                    result.push(temp)
-                })
-        }
+        let payload = initProd.products;
+
+        let data = typeof payload === 'undefined' ? undefined : payload.content;
+
+        let keys = typeof data === 'undefined' ? undefined : Object.keys(data[0])
+
+        let count = typeof payload === 'undefined' ? undefined : payload.totalElements
+
+        let numPages = typeof payload === 'undefined' ? undefined : payload.totalPages
+
+        let showPages = typeof payload === 'undefined' ? undefined : payload.size;
 
         return {
+            data: data,
+            key: keys,
             count: count,
             numPages: numPages,
             showPages: showPages,
-            data: result,
-            keys: keys
         }
+
     }
 
     let _onEdit = (idx) => {
@@ -119,15 +112,17 @@ export default () => {
             <div className="mt-4">
 
                 <Table data={_bindData().data}
-                          keys={_bindData().keys}
+                          keys={_bindData().key}
                           delete={_onDelete}
                           update={_onEdit}
                           switch={_isSold}/>
 
-                <Pagination count={initProd.products.count}
-                            numPages={initProd.products.numPages}
+                <Pagination count={_bindData().count}
+                            numPages={_bindData().numPages}
+                            showPages={_bindData().showPages}
                             refresh={_onReFresh}
                             page={initProd.page}/>
+
             </div>
 
         </div>
