@@ -69,13 +69,15 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
             query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
         }
 
+        PageRequest pageable = PageRequest.of(dto.getPage(), dto.getSize());
+
+        query.limit(pageable.getPageSize()).offset(pageable.getOffset());
+
         QueryResults<User> fetchResult = query.fetchResults();
 
         long total = fetchResult.getTotal();
 
         List<User> results = fetchResult.getResults();
-
-        Pageable pageable = PageRequest.of(dto.getPage(), dto.getSize());
 
         return new PageImpl<>(results, pageable, total);
 

@@ -22,6 +22,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
 
+        log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
+
         return ErrorDto.builder()
                 .errorCode(ErrorCode.INVALID_INPUT_VALUE.getCode())
                 .errorMsg(ErrorCode.INVALID_INPUT_VALUE.getMessage())
@@ -34,6 +37,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+
+        log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
 
         return ErrorDto.builder()
                 .errorCode(ErrorCode.BAD_REQUEST.getCode())
@@ -48,6 +54,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ErrorDto handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+
+        log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
+
         return ErrorDto.builder()
                 .errorCode(ErrorCode.METHOD_NOT_ALLOWED.getCode())
                 .errorMsg(ErrorCode.METHOD_NOT_ALLOWED.getMessage())
@@ -60,6 +70,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AccessDeniedException.class)
     public ErrorDto handleAccessDeniedException(AccessDeniedException e) {
+
+        log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
+
         return ErrorDto.builder()
                 .errorCode(ErrorCode.HANDLE_ACCESS_DENIED.getCode())
                 .errorMsg(ErrorCode.HANDLE_ACCESS_DENIED.getMessage())
@@ -74,6 +88,9 @@ public class GlobalExceptionHandler {
 
         ErrorCode errorCode = e.getStaticErrorCode();
 
+        log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
+
         return ErrorDto.builder()
                 .errorCode(errorCode.getCode())
                 .errorMsg(errorCode.getMessage())
@@ -86,6 +103,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto handleException(Exception e) {
+
+        log.error(e.getMessage());
+        log.error(ExceptionUtils.getStackTrace(e));
 
         return ErrorDto.builder()
                 .errorCode(ErrorCode.SYSTEM_ERROR.getCode())
