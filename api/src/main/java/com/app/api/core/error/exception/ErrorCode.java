@@ -51,6 +51,8 @@ public enum ErrorCode {
     SYSTEM_ERROR(500, "E001", "System Error"),
     BAD_REQUEST(500 , "E002" , "Bad Request"),
 
+    ORDER_NOT_FOUND(500 , "O001" , "Order Not Found"),
+
     ;
 
     private final String code;

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-public class LoginController {
+public class StaticController {
 
     private final UserService userService;
 
@@ -29,10 +29,10 @@ public class LoginController {
 
     private final JwtUserDetailsService userDetailsService;
 
-    public LoginController(UserService userService,
-                           AuthenticationManager authenticationManager,
-                           JwtTokenUtil jwtTokenUtil,
-                           JwtUserDetailsService userDetailsService) {
+    public StaticController(UserService userService,
+                            AuthenticationManager authenticationManager,
+                            JwtTokenUtil jwtTokenUtil,
+                            JwtUserDetailsService userDetailsService) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
