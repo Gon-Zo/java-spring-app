@@ -1,4 +1,4 @@
-package com.app.api;
+package java.com.app.api;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
