@@ -6,11 +6,13 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import static com.app.api.domain.order.QOrder.order;
 
-public class OrderSupportImpl extends QuerydslRepositorySupport  implements OrderSupport {
+@Repository
+public class OrderSupportImpl extends QuerydslRepositorySupport implements OrderSupport {
 
     private final JPAQueryFactory jpaQueryFactory;
 
@@ -45,7 +47,5 @@ public class OrderSupportImpl extends QuerydslRepositorySupport  implements Orde
         return bb;
 
     }
-
-
 
 }
