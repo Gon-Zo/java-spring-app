@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react";
 import Table from "../components/app/Table";
 import {useSelector, useDispatch} from "react-redux";
-import {$deleteUser, $fetchUsers, $isUserModalOpen, $setUser, $isUse} from '../modules/api/user'
+import {$deleteUser, $fetchUsers, $isUserModalOpen, $setUser, $isUse, $pushSortData} from '../modules/api/user'
 import {UserInfoModal} from "../components/app/AppModal";
 import Pagination from "../components/app/Pagination";
 import LineChart from "../components/chart/LineChart";
@@ -76,10 +76,9 @@ export default () => {
     }
 
     let _sortTable = (idx) => {
-        // let sortStr = keys[idx]
-        // console.log('sortStr', sortStr)
         let key = _bindData().key[idx]
         console.log('key', key);
+        $pushSortData(dispatch, key)
     }
 
     return (
@@ -112,6 +111,7 @@ export default () => {
                        update={_onEdit}
                        delete={_onDelete}
                        sort={_sortTable}
+                       sortData={initUser.sort}
                 />
 
                 <Pagination count={_bindData().count}

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios'
-import {onUser, isOpen, clickPage, setUser, onLogout, onLogin, isUse} from '../reducer/user'
+import {onUser, isOpen, clickPage, setUser, onLogout, onLogin, isUse, putSort} from '../reducer/user'
 
 export const $httpLogout = (dispatch , history) =>{
     axios.defaults.headers.common['Authorization'] = undefined;
@@ -91,5 +91,9 @@ let buildUser = (payload) => {
     )
         .map(m => temp[m] = user[m]);
     return temp
+}
+
+export const $pushSortData = (dispatch , data) => {
+    dispatch(putSort(data))
 }
 
