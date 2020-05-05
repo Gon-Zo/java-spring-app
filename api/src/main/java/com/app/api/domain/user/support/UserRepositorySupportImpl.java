@@ -1,6 +1,7 @@
 package com.app.api.domain.user.support;
 
 import com.app.api.domain.user.User;
+import com.app.api.enums.Roles;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.PageableDto;
@@ -63,7 +64,9 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
     @Override
     public Page<User> findByUsers(PageableDto dto) {
 
-        JPAQuery<User> query = jpaQueryFactory.selectFrom(user);
+        JPAQuery<User> query = jpaQueryFactory
+                .selectFrom(user)
+                .where(user.roles.eq(Roles.M.getValue()));
 
         if (isNotEmpty(dto.getSort())) {
             query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
