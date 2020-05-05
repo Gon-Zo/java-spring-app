@@ -1,4 +1,4 @@
-import React  from "react";
+import React, {useState , useEffect} from "react";
 import {Table,} from "react-bootstrap"
 import { useSelector} from 'react-redux'
 import Switch from "react-switch";
@@ -22,7 +22,7 @@ export default (props) => {
 
     let theme = initUser.isTheme
 
-    let _sortTable = props.sort
+    let [sortArray, setSortArray] = useState([])
 
     if (typeof payload == 'undefined' || payload.length == 0) {
 
@@ -55,6 +55,10 @@ export default (props) => {
         )
     }
 
+    let _sortTable = (idx) => {
+
+    }
+
     return (
         <div className="row">
             <div className="col min-hg">
@@ -64,7 +68,6 @@ export default (props) => {
                         <th>#</th>
                         {
                             keys.map((k, i) =>
-                                // todo : sort function
                                 <th key={i} onClick={() => _sortTable(i)}>{k}</th>
                             )
                         }
@@ -101,4 +104,5 @@ export default (props) => {
             </div>
         </div>
     )
+
 }
