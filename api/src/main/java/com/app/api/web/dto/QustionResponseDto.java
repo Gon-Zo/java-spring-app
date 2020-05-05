@@ -1,7 +1,10 @@
 package com.app.api.web.dto;
 
+import com.app.api.domain.question.Question;
 import com.app.api.domain.user.User;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @ToString
@@ -16,6 +19,8 @@ public class QustionResponseDto {
 
    private long userSeq;
 
+   private List<String> imageVals;
+
    @Setter
    private User user;
 
@@ -25,6 +30,15 @@ public class QustionResponseDto {
       this.content = content;
       this.isLock = isLock;
       this.userSeq = userSeq;
+   }
+
+   public Question toEntity(){
+      return Question.builder()
+              .title(title)
+              .content(content)
+              .isLock(isLock)
+              .user(user)
+              .build();
    }
 
 }
