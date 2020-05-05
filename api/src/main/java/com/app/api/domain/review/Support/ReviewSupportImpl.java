@@ -2,10 +2,13 @@ package com.app.api.domain.review.Support;
 
 import com.app.api.domain.review.Review;
 import com.app.api.web.dto.PageableDto;
+import com.app.api.web.dto.ReviewResponseDto;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.impl.JPAUpdateClause;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +23,7 @@ import java.util.List;
 import static com.app.api.domain.review.QReview.review;
 import static com.app.api.utils.ApiDomainUtils.getOrder;
 import static com.app.api.utils.ApiDomainUtils.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 @Repository
 public class ReviewSupportImpl extends QuerydslRepositorySupport implements ReviewSupport {
@@ -55,6 +59,23 @@ public class ReviewSupportImpl extends QuerydslRepositorySupport implements Revi
         List<Review> result = results.getResults();
 
         return new PageImpl<>(result , pageable , total);
+    }
+
+    @Override
+    public void update(ReviewResponseDto dto) {
+
+        UpdateClause<JPAUpdateClause> updateQuery = update(review);
+
+        if (isNotEmpty(dto.getTitle())) {
+            updateQuery.set(review.title , dto.getTitle());
+        }
+
+        if(isNotEmpty(dto.getContent())){
+            updateQuery.set(review.content, dto.getContent());
+        }
+
+        updateQuery.execute();
+
     }
 
 }
