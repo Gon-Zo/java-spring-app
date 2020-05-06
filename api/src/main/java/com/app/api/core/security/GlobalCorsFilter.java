@@ -18,7 +18,7 @@ public class GlobalCorsFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
-        log.info("======== {} ========", "GlobalCorsFilter");
+        log.error("======== {} ========", "GlobalCorsFilter");
 
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "*");
