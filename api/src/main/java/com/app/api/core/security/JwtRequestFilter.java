@@ -8,9 +8,10 @@ import com.app.api.core.auth.JwtTokenUtil;
 import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
-import com.app.api.enums.Roles;
+import com.app.api.domain.menu.Menu;
+import com.app.api.domain.role.Role;
+import com.app.api.domain.role.support.RoleSupport;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -26,10 +28,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private JwtUserDetailsService jwtUserDetailsService;
     private JwtTokenUtil jwtTokenUtil;
+    private RoleSupport roleSupport;
 
-    public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService, JwtTokenUtil jwtTokenUtil) {
+    public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService,
+                            JwtTokenUtil jwtTokenUtil,
+                            RoleSupport roleSupport) {
         this.jwtUserDetailsService = jwtUserDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.roleSupport = roleSupport;
     }
 
     @Override
@@ -99,14 +105,25 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             log.error("======== Auth Roles {} ========", roles);
 
-            /**
-             * User Roles Checking
-             *
-             * ========================
-             */
-            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
-                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
-            }
+//            /**
+//             * User Roles Checking
+//             *
+//             * ========================
+//             */
+//            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
+//                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
+//            }
+
+            Role role = roleSupport.findByTitle(roles);
+
+            List<Menu> menus = role.getMenus();
+
+            menus.stream().forEach(f->{
+               String title = f.getTitle();
+                System.out.println(title);
+            });
+
+            String test = "";
 
         }
 
