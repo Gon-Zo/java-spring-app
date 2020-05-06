@@ -1,4 +1,4 @@
-package com.app.api.domain.Menu;
+package com.app.api.domain.menu;
 
 import com.app.api.domain.BaseEntity;
 import com.app.api.domain.role.Role;

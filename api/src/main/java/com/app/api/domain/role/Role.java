@@ -1,7 +1,7 @@
 package com.app.api.domain.role;
 
 import com.app.api.domain.BaseEntity;
-import com.app.api.domain.Menu.Menu;
+import com.app.api.domain.menu.Menu;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
