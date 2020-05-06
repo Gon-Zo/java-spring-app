@@ -35,13 +35,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-        log.info("======== {} ========", "JwtRequestFilter");
+        log.error("======== {} ========", "JwtRequestFilter");
 
         final String requestTokenHeader = request.getHeader("Authorization");
 
         final String url = request.getRequestURI();
 
-        log.info("======== URL :: {} ========", url);
+        log.error("======== URL :: {} ========", url);
 
         String username = null;
         String jwtToken = null;
@@ -52,7 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 jwtToken = requestTokenHeader.substring(7);
                 try {
                     username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-                    log.info("======== Auth User Name :: {} ========", username);
+                    log.error("======== Auth User Name :: {} ========", username);
                 } catch (IllegalArgumentException e) {
 
                     throw new BusinessException(ErrorCode.UNABLE_JWT_TOKEN);
@@ -97,7 +97,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             String roles = jwtUserDetailsService.loadUserRoles(username);
 
-            log.info("======== Auth Roles {} ========", roles);
+            log.error("======== Auth Roles {} ========", roles);
 
             /**
              * User Roles Checking
