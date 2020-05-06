@@ -4,7 +4,6 @@ import com.app.api.domain.image.Image;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.user.User;
 import com.app.api.domain.BaseEntity;
-import com.sun.deploy.util.IconEncoder;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
