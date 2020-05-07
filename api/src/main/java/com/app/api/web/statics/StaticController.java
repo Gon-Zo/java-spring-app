@@ -3,19 +3,24 @@ package com.app.api.web.statics;
 import com.app.api.core.auth.JwtResponse;
 import com.app.api.core.auth.JwtTokenUtil;
 import com.app.api.core.auth.JwtUserDetailsService;
+import com.app.api.domain.menu.Menu;
 import com.app.api.domain.user.User;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.service.menu.MenuService;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -29,14 +34,17 @@ public class StaticController {
 
     private final JwtUserDetailsService userDetailsService;
 
+    private final MenuService menuService;
+
     public StaticController(UserService userService,
                             AuthenticationManager authenticationManager,
                             JwtTokenUtil jwtTokenUtil,
-                            JwtUserDetailsService userDetailsService) {
+                            JwtUserDetailsService userDetailsService, MenuService menuService) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
+        this.menuService = menuService;
     }
 
     /**
@@ -107,5 +115,13 @@ public class StaticController {
         }
 
     }
+
+    @GetMapping("/menu")
+    public List<Menu> showAuthMenus(Authentication authentication) {
+        return menuService.getAuthMenu(
+                        authentication.getAuthorities().iterator().next().getAuthority()
+                );
+    }
+
 
 }
