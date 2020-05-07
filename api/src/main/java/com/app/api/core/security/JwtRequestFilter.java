@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.app.api.utils.ApiDomainUtils.notStartWith;
+
 @Slf4j
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -54,7 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
 
-        if (!url.startsWith("/login") && !url.startsWith("/sign")) {
+        if (notStartWith(url, "/login") && notStartWith(url, "/sign")) {
 
             if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
                 jwtToken = requestTokenHeader.substring(7);
@@ -103,16 +105,21 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
-            String roles = jwtUserDetailsService.loadUserRoles(username);
 
-            log.error("======== Auth Roles {} ========", roles);
+            if ( notStartWith(url, "/menu")) {
 
-            Role role = roleSupport.findByTitle(roles);
+                String roles = jwtUserDetailsService.loadUserRoles(username);
 
-            List<Menu> authMenu = role.getMenus().stream().filter(f -> f.getAuthUrl().equals(url)).collect(Collectors.toList());
+                log.error("======== Auth Roles {} ========", roles);
 
-            if(Collections.isEmpty(authMenu)){
-                throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);
+                Role role = roleSupport.findByTitle(roles);
+
+                List<Menu> authMenu = role.getMenus().stream().filter(f -> f.getAuthUrl().equals(url)).collect(Collectors.toList());
+
+                if (Collections.isEmpty(authMenu)) {
+                    throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);
+                }
+
             }
 
         }

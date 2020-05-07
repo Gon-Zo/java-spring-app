@@ -45,4 +45,13 @@ public class ApiDomainUtils {
         }).collect(Collectors.toList());
     }
 
-    public static boolean isNotEmpty(List<?> list){ return ! Collections.isEmpty(list); } }
+    public static boolean isNotEmpty(List<?> list){ return ! Collections.isEmpty(list); }
+
+    public static boolean notStartWith(String str , String str2){
+        return !str.startsWith(str2);
+    }
+
+}
+
+
+
