@@ -1,9 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import * as i from '@fortawesome/free-solid-svg-icons'
+import * as icon from '@fortawesome/free-solid-svg-icons'
+import axios from "axios";
 
 export default () => {
+
+    let [menuList , setMenuList] = useState([])
+
+    useEffect(()=>{
+
+        axios.get(`/menu`)
+            .then(res => {
+               setMenuList(res.data)
+            })
+            .catch(err=>console.log(err))
+
+
+    } , [])
+
+
     return (
         <div className="sidebar-bg" id="sidebar-wrapper">
             <div className="app-wrap surface-bg">
@@ -19,7 +35,7 @@ export default () => {
                         <MenuItem
                             key={i}
                             url={m.url}
-                            icon={m.icon}
+                            icon={icon[`${m.icon}`]}
                             title={m.title}
                         />
                     ))
@@ -29,15 +45,15 @@ export default () => {
     );
 }
 
-let menuList = [
-    {url: '/home', icon: i.faHome, title: "Home"},
-    {url: '/dashboard', icon: i.faChartBar, title: "Dashboard"},
-    {url: '/user', icon: i.faUsers, title: "users"},
-    {url: '/product', icon: i.faShoppingCart, title: "product"},
-    {url: '/category', icon: i.faClipboardList, title: "category"},
-    {url: '/order', icon: i.faListAlt, title: "order"},
-    {url: '/setting', icon: i.faCog, title: "setting"},
-]
+// let menuList = [
+//     {url: '/home', icon: i.faHome, title: "Home"},
+//     {url: '/dashboard', icon: i.faChartBar, title: "Dashboard"},
+//     {url: '/user', icon: i.faUsers, title: "users"},
+//     {url: '/product', icon: i.faShoppingCart, title: "product"},
+//     {url: '/category', icon: i.faClipboardList, title: "category"},
+//     {url: '/order', icon: i.faListAlt, title: "order"},
+//     {url: '/setting', icon: i.faCog, title: "setting"},
+// ]
 
 function MenuItem(props) {
 
