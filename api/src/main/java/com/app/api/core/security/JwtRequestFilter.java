@@ -11,6 +11,7 @@ import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.menu.Menu;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.role.support.RoleSupport;
+import io.jsonwebtoken.lang.Collections;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -105,25 +107,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             log.error("======== Auth Roles {} ========", roles);
 
-//            /**
-//             * User Roles Checking
-//             *
-//             * ========================
-//             */
-//            if (url.startsWith("/hello") && !StringUtils.equals(roles, Roles.U.getValue())) {
-//                throw new BusinessException(ErrorCode.ROLE_NOT_MANAGER);
-//            }
-
             Role role = roleSupport.findByTitle(roles);
 
-            List<Menu> menus = role.getMenus();
+            List<Menu> authMenu = role.getMenus().stream().filter(f -> f.getAuthUrl().equals(url)).collect(Collectors.toList());
 
-            menus.stream().forEach(f->{
-               String title = f.getTitle();
-                System.out.println(title);
-            });
-
-            String test = "";
+            if(Collections.isEmpty(authMenu)){
+                throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);
+            }
 
         }
 

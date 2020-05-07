@@ -5,10 +5,7 @@ import com.app.api.domain.menu.Menu;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -20,7 +17,7 @@ public class Role extends BaseEntity {
     @Column(name = "title")
     private String title;
 
-    @ManyToMany
+    @ManyToMany(fetch= FetchType.EAGER)
     private List<Menu> menus;
 
 }
