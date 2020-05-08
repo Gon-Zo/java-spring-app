@@ -45,13 +45,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-        log.error("======== {} ========", "JwtRequestFilter");
+        log.info("======== {} ========", "JwtRequestFilter");
 
         final String requestTokenHeader = request.getHeader("Authorization");
 
         final String url = request.getRequestURI();
 
-        log.error("======== URL :: {} ========", url);
+        log.info("======== URL :: {} ========", url);
 
         String username = null;
         String jwtToken = null;
@@ -62,12 +62,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 jwtToken = requestTokenHeader.substring(7);
                 try {
                     username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-                    log.error("======== Auth User Name :: {} ========", username);
+                    log.info("======== Auth User Name :: {} ========", username);
                 } catch (IllegalArgumentException e) {
-
                     throw new BusinessException(ErrorCode.UNABLE_JWT_TOKEN);
                 } catch (ExpiredJwtException e) {
-
                     throw new BusinessException(ErrorCode.EXPIRED_JWT_TOKEN);
                 }
 
@@ -105,12 +103,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
-
             if ( notStartWith(url, "/menu")) {
 
                 String roles = jwtUserDetailsService.loadUserRoles(username);
 
-                log.error("======== Auth Roles {} ========", roles);
+                log.info("======== Auth Roles {} ========", roles);
 
                 Role role = roleSupport.findByTitle(roles);
 
