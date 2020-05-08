@@ -3,7 +3,6 @@ package com.app.api.service.menu;
 import com.app.api.domain.menu.Menu;
 import com.app.api.domain.menu.MenuRepository;
 import com.app.api.domain.menu.support.MenuSupport;
-import com.app.api.domain.role.Role;
 import com.app.api.domain.role.RoleRepository;
 import com.app.api.domain.role.support.RoleSupport;
 import org.springframework.stereotype.Service;
@@ -35,4 +34,5 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getAuthMenu(String role) {
         return roleSupport.findByTitle(role).getMenus();
     }
+
 }
