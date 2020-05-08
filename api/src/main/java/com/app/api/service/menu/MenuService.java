@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface MenuService {
 
-    List<Menu> getAuthMenu(String role);
+    List<Menu> getAuthMenu(List<String> role);
 
 }

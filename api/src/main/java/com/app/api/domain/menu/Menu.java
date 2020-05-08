@@ -26,6 +26,9 @@ public class Menu extends BaseEntity {
     @Column(name = "auth_url", columnDefinition = "TEXT")
     private String authUrl;
 
+    @Column(name = "menu_order")
+    private Long menuOrder;
+
 //    @ManyToMany
 //    @JoinColumn(name = "role_seq")
 //    private List<Role> roles;

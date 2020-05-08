@@ -1,15 +1,15 @@
 package com.app.api.domain.user;
 
 import com.app.api.domain.BaseEntity;
+import com.app.api.domain.role.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,9 +40,6 @@ public class User extends BaseEntity  implements UserDetails {
     @Column(name = "is_use" ,  nullable = false)
     private Boolean isUse;
 
-    @Column(name ="roles" , nullable = false)
-    private String roles;
-
     @Builder
     public User(
             String email,
@@ -50,8 +47,7 @@ public class User extends BaseEntity  implements UserDetails {
             String address,
             LocalDate birthDate,
             String img,
-            Boolean isUse ,
-            String roles
+            Boolean isUse
             ) {
         this.email = email;
         this.password = password;
@@ -59,13 +55,15 @@ public class User extends BaseEntity  implements UserDetails {
         this.birthDate = birthDate;
         this.img = img;
         this.isUse = isUse;
-        this.roles = roles;
     }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-        auth.add(new SimpleGrantedAuthority(roles));
+        roles.stream().forEach(f -> auth.add(new SimpleGrantedAuthority(f.getTitle())));
         return auth;
     }
 
