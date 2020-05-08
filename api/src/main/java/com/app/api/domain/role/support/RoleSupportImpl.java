@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static com.app.api.domain.role.QRole.role;
 
 @Repository
@@ -24,9 +26,9 @@ public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSu
     }
 
     @Override
-    @Transactional
-    public Role findByTitle(String title) {
-        return jpaQueryFactory.selectFrom(role).where(role.title.eq(title)).fetchOne();
+    public List<Role> findByTitles(List<String> titles) {
+        return jpaQueryFactory.selectFrom(role)
+                .where(role.title.in(titles)).fetch();
     }
 
 }

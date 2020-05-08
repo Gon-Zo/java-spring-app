@@ -65,8 +65,8 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
     public Page<User> findByUsers(PageableDto dto) {
 
         JPAQuery<User> query = jpaQueryFactory
-                .selectFrom(user)
-                .where(user.roles.eq(Roles.M.getValue()));
+                .selectFrom(user);
+//                .where(user.roles.eq(Roles.M.getValue()));
 
         if (isNotEmpty(dto.getSort())) {
             query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));

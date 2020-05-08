@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -118,9 +119,18 @@ public class StaticController {
 
     @GetMapping("/menu")
     public List<Menu> showAuthMenus(Authentication authentication) {
-        return menuService.getAuthMenu(
-                        authentication.getAuthorities().iterator().next().getAuthority()
-                );
+
+        Collection<? extends GrantedAuthority> collect = authentication.getAuthorities();
+
+        Iterator<? extends GrantedAuthority> iterator = collect.iterator();
+
+        List<String> roles = new ArrayList<>();
+
+        while (iterator.hasNext()){
+            roles.add(iterator.next().getAuthority());
+        }
+
+        return menuService.getAuthMenu(roles);
     }
 
 

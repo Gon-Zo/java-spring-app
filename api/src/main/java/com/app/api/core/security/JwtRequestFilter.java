@@ -4,14 +4,13 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.app.api.core.auth.JwtTokenUtil;
 import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
-import com.app.api.domain.menu.Menu;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.role.support.RoleSupport;
-import io.jsonwebtoken.lang.Collections;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,8 +20,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.app.api.utils.ApiDomainUtils.notStartWith;
 
@@ -103,18 +104,27 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
-            if ( notStartWith(url, "/menu")) {
+            if (notStartWith(url, "/menu")) {
 
-                String roles = jwtUserDetailsService.loadUserRoles(username);
+                List<Role> roles = jwtUserDetailsService.loadUserRoles(username);
 
                 log.info("======== Auth Roles {} ========", roles);
 
-                Role role = roleSupport.findByTitle(roles);
+                List<String> roleTitle = roles.stream().map(m -> m.getTitle()).collect(Collectors.toList());
 
-                List<Menu> authMenu = role.getMenus().stream().filter(f -> f.getAuthUrl().equals(url)).collect(Collectors.toList());
+                List<Role> role = roleSupport.findByTitles(roleTitle);
 
-                if (Collections.isEmpty(authMenu)) {
+                List<String> auths = new ArrayList<>();
+
+                role.stream().map(Role::getMenus).forEach(f -> auths.addAll(f.stream().map(v -> v.getAuthUrl()).collect(Collectors.toList())));
+
+                if (auths.stream()
+                        .map(f -> f.equals(url))
+                        .distinct()
+                        .anyMatch(f -> f.equals(Boolean.TRUE))) {
+
                     throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);
+
                 }
 
             }
