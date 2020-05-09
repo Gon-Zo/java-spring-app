@@ -21,7 +21,7 @@ export const $httpLogin = (dispatch, payload , history) => {
         .catch(error => {
             console.log(error)
             console.log(error.message)
-            alert("로그인 실패")
+            // alert("로그인 실패")
         })
 
 };
