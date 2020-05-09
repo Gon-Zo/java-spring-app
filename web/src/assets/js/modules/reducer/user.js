@@ -21,13 +21,14 @@ export const putSort = (data) => ({type: PUTSORT, data: data})
 
 let initUser = {
     isLogin: sessionStorage.getItem("Token") ? true : false,
-    isTheme: true,
+    isTheme: false,
     page: 1,
     numPage: 10,
     sort : [],
     users: undefined,
     user: undefined,
     isOpen: false,
+    test : false ,
 }
 
 const userReducer = (state = initUser, action) => {

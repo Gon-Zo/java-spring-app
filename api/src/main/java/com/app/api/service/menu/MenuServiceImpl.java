@@ -8,7 +8,7 @@ import com.app.api.domain.role.RoleRepository;
 import com.app.api.domain.role.support.RoleSupport;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,13 +37,9 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Menu> getAuthMenu(List<String> role) {
 
-        List<Role> menus = roleSupport.findByTitles(role);
-
-        List<Menu> result = new ArrayList<>();
-
-        menus.stream().forEach(m -> result.addAll(m.getMenus()));
-
-        return result.stream()
+        return roleSupport.findByTitles(role).stream()
+                .map(m->m.getMenus())
+                .flatMap(Collection::parallelStream)
                 .sorted(Comparator.comparing(Menu::getMenuOrder))
                 .collect(Collectors.toList());
 

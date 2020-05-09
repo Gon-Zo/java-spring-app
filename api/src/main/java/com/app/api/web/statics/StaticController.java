@@ -133,5 +133,4 @@ public class StaticController {
         return menuService.getAuthMenu(roles);
     }
 
-
 }

@@ -11,6 +11,7 @@ import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.role.support.RoleSupport;
+import com.app.api.domain.url.Url;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -104,27 +106,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
+
             if (notStartWith(url, "/menu")) {
 
                 List<Role> roles = jwtUserDetailsService.loadUserRoles(username);
 
-                log.info("======== Auth Roles {} ========", roles);
+                List<Url> authUrl = roles.stream()
+                        .map(m -> m.getAuthUrl())
+                        .flatMap(Collection::parallelStream)
+                        .collect(Collectors.toList());
 
-                List<String> roleTitle = roles.stream().map(m -> m.getTitle()).collect(Collectors.toList());
 
-                List<Role> role = roleSupport.findByTitles(roleTitle);
-
-                List<String> auths = new ArrayList<>();
-
-                role.stream().map(Role::getMenus).forEach(f -> auths.addAll(f.stream().map(v -> v.getAuthUrl()).collect(Collectors.toList())));
-
-                if (auths.stream()
-                        .map(f -> f.equals(url))
-                        .distinct()
-                        .anyMatch(f -> f.equals(Boolean.TRUE))) {
-
+                if (authUrl.stream().anyMatch(y -> y.equals(url))){
                     throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);
-
                 }
 
             }

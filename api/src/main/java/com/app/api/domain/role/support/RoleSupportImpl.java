@@ -1,13 +1,11 @@
 package com.app.api.domain.role.support;
 
 import com.app.api.domain.role.Role;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 import java.util.List;
 

@@ -12,24 +12,16 @@ function App() {
         <BrowserRouter
             basename="/#"
             forceRefresh={true}>
-            {/*<Root/>*/}
-            <MarketApp login={isLogin}/>
+            {/*<MarketApp login={isLogin} />*/}
+            {
+                isLogin ? (<Root/>)  : (<AppLogin/>)
+            }
         </BrowserRouter>
     )
 }
 
-function MarketApp(props) {
-    let isLogin = props.login
-
-    if(isLogin){
-       return(
-           <Root/>
-       )
-    }else{
-        return (
-            <AppLogin/>
-        )
-    }
-}
+// function MarketApp(props) {
+//    return props.login ? (<Root/>)  : (<AppLogin/>)
+// }
 
 export default App;
