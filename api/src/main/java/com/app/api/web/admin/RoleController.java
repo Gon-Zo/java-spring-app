@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(name = "/admin/role")
 public class RoleController {
 
-    private RoleService roleService;
+    private final RoleService roleService;
+
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @GetMapping("")
     public Page<Role> showPages (PageableDto dto){
@@ -26,6 +30,11 @@ public class RoleController {
     @PutMapping("/{seq}")
     public void changeRole (@PathVariable long seq ,  RoleResponseDto dto){
         roleService.modifyRole(seq, dto);
+    }
+
+    @DeleteMapping("/{seq}")
+    public void redPencilRole(@PathVariable long seq){
+       roleService.removeRole(seq);
     }
 
 }
