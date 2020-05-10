@@ -52,6 +52,10 @@ public enum ErrorCode {
 
     ORDER_NOT_FOUND(500 , "O001" , "Order Not Found"),
 
+    MENUN_NOT_FOUND(500 , "M001" , "Menu Not Found"),
+
+    AUTHURL_NOT_FOUND(500 , "A001" , "AuthUrl Not Found"),
+
     ;
 
     private final String code;

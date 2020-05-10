@@ -3,6 +3,7 @@ package com.app.api.domain.role;
 import com.app.api.domain.BaseEntity;
 import com.app.api.domain.menu.Menu;
 import com.app.api.domain.url.Url;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,5 +24,12 @@ public class Role extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Url> authUrl;
+
+    @Builder
+    public Role(String title , List<Menu> menus , List<Url> authUrl) {
+        this.title = title;
+        this.menus = menus;
+        this.authUrl = authUrl;
+    }
 
 }
