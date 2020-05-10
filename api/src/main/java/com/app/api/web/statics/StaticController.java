@@ -117,6 +117,12 @@ public class StaticController {
 
     }
 
+    /**
+     * User's Menu Custom
+     *
+     * @param authentication
+     * @return
+     */
     @GetMapping("/menu")
     public List<Menu> showAuthMenus(Authentication authentication) {
 
