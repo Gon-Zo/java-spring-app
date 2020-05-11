@@ -16,17 +16,12 @@ public class RoleResponseDto {
 
     private List<Long> menuSeq;
 
-    private List<Long> authUrlSeq;
-
     @Setter private List<Menu> menus;
-
-    @Setter private List<Url> authUrl;
 
     public Role toEntity() {
         return Role.builder()
                 .title(title)
                 .menus(menus)
-                .authUrl(authUrl)
                 .build();
     }
 

@@ -41,11 +41,6 @@ public class RoleServiceImpl implements RoleService {
                                 .add(menuRepository.findById(f)
                                         .orElseThrow(() -> new BusinessException(ErrorCode.MENUN_NOT_FOUND))));
 
-        dto.getAuthUrlSeq()
-                .stream()
-                .forEach(f -> dto.getAuthUrl()
-                        .add(urlRepository.findById(f).orElseThrow(() -> new BusinessException(ErrorCode.AUTHURL_NOT_FOUND))));
-
         roleRepository.save(dto.toEntity());
 
     }

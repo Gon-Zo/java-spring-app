@@ -31,11 +31,12 @@ public class Menu extends BaseEntity {
     private List<Url> authUrl;
 
     @Builder
-    public Menu(String title  , String url , String icon , Long menuOrder ) {
+    public Menu(String title  , String url , String icon , Long menuOrder , List<Url> authUrl) {
         this.title = title;
         this.url = url;
         this.icon = icon;
         this.menuOrder = menuOrder;
+        this.authUrl = authUrl;
     }
 
 }

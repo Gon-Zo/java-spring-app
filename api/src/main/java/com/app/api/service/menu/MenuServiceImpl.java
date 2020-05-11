@@ -1,12 +1,16 @@
 package com.app.api.service.menu;
 
+import com.app.api.core.error.exception.BusinessException;
+import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.menu.Menu;
 import com.app.api.domain.menu.MenuRepository;
 import com.app.api.domain.menu.support.MenuSupport;
 import com.app.api.domain.role.RoleRepository;
 import com.app.api.domain.role.support.RoleSupport;
+import com.app.api.domain.url.UrlRepository;
 import com.app.api.web.dto.MenuResponseDto;
 import com.app.api.web.dto.PageableDto;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class MenuServiceImpl implements MenuService {
 
     private final MenuSupport menuSupport;
@@ -27,15 +32,7 @@ public class MenuServiceImpl implements MenuService {
 
     private final RoleRepository roleRepository;
 
-    public MenuServiceImpl(MenuSupport menuSupport,
-                           MenuRepository menuRepository,
-                           RoleSupport roleSupport,
-                           RoleRepository roleRepository) {
-        this.menuSupport = menuSupport;
-        this.menuRepository = menuRepository;
-        this.roleSupport = roleSupport;
-        this.roleRepository = roleRepository;
-    }
+    private final UrlRepository urlRepository;
 
     @Override
     public List<Menu> getAuthMenu(List<String> role) {
@@ -49,7 +46,16 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void createMenu(MenuResponseDto dto) {
+
+        dto.setAuthUrl(
+                dto.getUrlSeq().stream()
+                        .map(m -> urlRepository.findById(m)
+                                .orElseThrow(()->new BusinessException(ErrorCode.MENUN_NOT_FOUND)))
+                        .collect(Collectors.toList())
+        );
+
         menuRepository.save(dto.toEntity());
+
     }
 
     @Override
