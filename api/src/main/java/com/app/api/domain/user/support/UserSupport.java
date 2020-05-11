@@ -8,13 +8,13 @@ import org.springframework.data.domain.Page;
 
 import java.util.Optional;
 
-public interface UserRepositorySupport {
+public interface UserSupport {
 
     Optional<Long> update(long id, UserRespoenseDto dto);
 
     Optional<User> findByUser(LoginResponseDto dto);
 
-    Page<User> findByUsers(PageableDto dto);
+    Page<User> findByUsers( PageableDto dto);
 
     User findByEmail(String email);
 

@@ -25,7 +25,6 @@ import static com.app.api.domain.role.QRole.role;
 import static com.app.api.utils.ApiDomainUtils.isNotEmpty;
 import static com.app.api.utils.ApiDomainUtils.getOrder;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-import static com.app.api.utils.ApiDomainUtils.isNotEmpty;
 
 @Repository
 public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSupport {
@@ -37,12 +36,6 @@ public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSu
         super(Role.class);
         this.entityManager = entityManager;
         this.jpaQueryFactory = jpaQueryFactory;
-    }
-
-    @Override
-    public List<Role> findByTitles(List<String> titles) {
-        return jpaQueryFactory.selectFrom(role)
-                .where(role.title.in(titles)).fetch();
     }
 
     @Override
@@ -81,14 +74,17 @@ public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSu
             updateCase.set(role.menus, dto.getMenus());
         }
 
-        if(isNotEmpty(dto.getAuthUrl())){
-            updateCase.set(role.authUrl , dto.getAuthUrl());
-        }
-
         updateCase.where(role.seq.eq(seq));
 
         updateCase.execute();
 
+    }
+
+    @Override
+    public Role findByTitle(String title) {
+        return jpaQueryFactory.selectFrom(role)
+                .where(role.title.eq(title))
+                .fetchOne();
     }
 
 }
