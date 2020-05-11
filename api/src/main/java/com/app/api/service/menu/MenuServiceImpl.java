@@ -39,13 +39,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> getAuthMenu(List<String> role) {
-
-        return roleSupport.findByTitles(role).stream()
-                .map(m->m.getMenus())
+        return role.stream()
+                .map(m -> roleSupport.findByTitle(m))
+                .map(v -> v.getMenus())
                 .flatMap(Collection::parallelStream)
                 .sorted(Comparator.comparing(Menu::getMenuOrder))
                 .collect(Collectors.toList());
-
     }
 
     @Override

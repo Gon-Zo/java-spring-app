@@ -21,11 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.app.api.utils.ApiDomainUtils.notStartWith;
 
@@ -109,13 +105,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             if (notStartWith(url, "/menu")) {
 
-                List<Role> roles = jwtUserDetailsService.loadUserRoles(username);
-
-                List<Url> authUrl = roles.stream()
-                        .map(m -> m.getAuthUrl())
-                        .flatMap(Collection::parallelStream)
-                        .collect(Collectors.toList());
-
+                List<Url> authUrl = jwtUserDetailsService.authRoleUrl(username);
 
                 if (authUrl.stream().anyMatch(y -> y.equals(url))){
                     throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);

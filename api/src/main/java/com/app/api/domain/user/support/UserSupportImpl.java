@@ -1,7 +1,6 @@
 package com.app.api.domain.user.support;
 
 import com.app.api.domain.user.User;
-import com.app.api.enums.Roles;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.PageableDto;
@@ -23,17 +22,18 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.app.api.domain.user.QUser.user;
+
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static com.app.api.utils.ApiDomainUtils.isNotEmpty;
 
 @Repository
-public class UserRepositorySupportImpl extends QuerydslRepositorySupport implements UserRepositorySupport {
+public class UserSupportImpl extends QuerydslRepositorySupport implements UserSupport {
 
     private final EntityManager entityManager;
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    public UserRepositorySupportImpl(EntityManager entityManager, JPAQueryFactory jpaQueryFactory) {
+    public UserSupportImpl(EntityManager entityManager, JPAQueryFactory jpaQueryFactory) {
         super(User.class);
         this.entityManager = entityManager;
         this.jpaQueryFactory = jpaQueryFactory;
@@ -66,7 +66,6 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
 
         JPAQuery<User> query = jpaQueryFactory
                 .selectFrom(user);
-//                .where(user.roles.eq(Roles.M.getValue()));
 
         if (isNotEmpty(dto.getSort())) {
             query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
@@ -125,7 +124,5 @@ public class UserRepositorySupportImpl extends QuerydslRepositorySupport impleme
 
         return update;
     }
-
-
 
 }
