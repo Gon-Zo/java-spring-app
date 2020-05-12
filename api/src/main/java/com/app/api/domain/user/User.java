@@ -47,7 +47,8 @@ public class User extends BaseEntity  implements UserDetails {
             String address,
             LocalDate birthDate,
             String img,
-            Boolean isUse
+            Boolean isUse ,
+            List<Role> roles
             ) {
         this.email = email;
         this.password = password;
@@ -55,6 +56,7 @@ public class User extends BaseEntity  implements UserDetails {
         this.birthDate = birthDate;
         this.img = img;
         this.isUse = isUse;
+        this.roles = roles;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
