@@ -56,6 +56,8 @@ public enum ErrorCode {
 
     AUTHURL_NOT_FOUND(500 , "A001" , "AuthUrl Not Found"),
 
+    INIT_ROLE_ERROR( 500 , "I001" , "inti to Role Error") ,
+
     ;
 
     private final String code;
