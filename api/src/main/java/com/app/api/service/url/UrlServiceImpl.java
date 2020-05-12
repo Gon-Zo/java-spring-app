@@ -1,8 +1,11 @@
 package com.app.api.service.url;
 
+import com.app.api.domain.url.Url;
 import com.app.api.domain.url.UrlRepository;
 import com.app.api.domain.url.support.UrlSupport;
+import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UrlResponseDto;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -11,6 +14,7 @@ import javax.transaction.Transactional;
 public class UrlServiceImpl implements UrlService {
 
     private final UrlRepository urlRepository;
+
     private final UrlSupport urlSupport;
 
     public UrlServiceImpl(UrlRepository urlRepository, UrlSupport urlSupport) {
@@ -32,6 +36,11 @@ public class UrlServiceImpl implements UrlService {
     @Transactional
     public void remove(long seq) {
         urlRepository.deleteById(seq);
+    }
+
+    @Override
+    public Page<Url> getPages(PageableDto dto) {
+        return urlSupport.findByPage(dto);
     }
 
 }
