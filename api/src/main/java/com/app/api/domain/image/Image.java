@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_image")
+@Table(name = "IMAGES")
 public class Image extends BaseEntity {
 
     @Column(name = "photo" , columnDefinition = "TEXT")

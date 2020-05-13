@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Getter
-@Table(name = "app_url")
+@Table(name = "URLS")
 @NoArgsConstructor
 public class Url extends BaseEntity {
 

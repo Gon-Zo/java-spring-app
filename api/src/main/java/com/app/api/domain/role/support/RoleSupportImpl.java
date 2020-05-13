@@ -1,6 +1,8 @@
 package com.app.api.domain.role.support;
 
+import com.app.api.domain.role.QUserRole;
 import com.app.api.domain.role.Role;
+import com.app.api.domain.user.QUser;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.RoleResponseDto;
 import com.querydsl.core.QueryResults;
@@ -85,6 +87,16 @@ public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSu
         return jpaQueryFactory.selectFrom(role)
                 .where(role.title.eq(title))
                 .fetchOne();
+    }
+
+    @Override
+    public List<Role> findByUser(String email) {
+        return jpaQueryFactory.selectFrom(role)
+                .innerJoin(QUserRole.userRole)
+                .on(role.seq.eq(QUserRole.userRole.seq))
+                .innerJoin(QUser.user)
+                .on(QUserRole.userRole.seq.eq(QUser.user.seq))
+                .where(QUser.user.email.eq(email)).fetch();
     }
 
 }

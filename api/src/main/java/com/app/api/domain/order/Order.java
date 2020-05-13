@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_order")
+@Table(name = "ORDERS")
 public class Order extends BaseEntity {
 
 

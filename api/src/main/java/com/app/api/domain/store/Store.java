@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_store")
+@Table(name = "STORES")
 public class Store extends BaseEntity {
 
     @Column(name = "title" , nullable = false)

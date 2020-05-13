@@ -1,7 +1,7 @@
 package com.app.api.core.auth;
 
+import com.app.api.domain.role.Role;
 import com.app.api.domain.role.support.RoleSupport;
-import com.app.api.domain.url.Url;
 import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -27,18 +25,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails customUserDetails = userRepository.findByEmail(username);
+        List<Role> roles = roleSupport.findByUser(username);
+        User user = userRepository.findByEmail(username);
+        user.setRoles(roles);
+        UserDetails customUserDetails = user;
         return customUserDetails;
     }
 
-    public List<Url> authRoleUrl(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        return user.getRoles().stream()
-                .map(m -> m.getMenus())
-                .flatMap(Collection::parallelStream)
-                .map(m -> m.getAuthUrl())
-                .flatMap(Collection::parallelStream)
-                .collect(Collectors.toList());
+    public List<Role> authRole(String username) throws UsernameNotFoundException {
+        return roleSupport.findByUser(username);
     }
 
 }

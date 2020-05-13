@@ -5,6 +5,7 @@ import com.app.api.domain.role.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,15 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_users")
-public class User extends BaseEntity  implements UserDetails {
+@Table(name = "USERS")
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "email" , nullable = false)
     private String email;
@@ -56,10 +56,10 @@ public class User extends BaseEntity  implements UserDetails {
         this.birthDate = birthDate;
         this.img = img;
         this.isUse = isUse;
-        this.roles = roles;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @Transient
+    @Setter
     private List<Role> roles;
 
     @Override

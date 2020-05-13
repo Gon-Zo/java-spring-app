@@ -11,9 +11,9 @@ import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.role.support.RoleSupport;
-import com.app.api.domain.url.Url;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -53,7 +53,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         log.info("======== URL :: {} ========", url);
 
         String username = null;
+
         String jwtToken = null;
+
+        UserDetails userDetails = null;
 
         if (notStartWith(url, "/login") && notStartWith(url, "/sign")) {
 
@@ -79,7 +82,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                  *
                  * ======================
                  */
-                UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+                userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
                 if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
@@ -102,15 +105,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
-
             if (notStartWith(url, "/menu")) {
-
-                List<Url> authUrl = jwtUserDetailsService.authRoleUrl(username);
-
-                if (authUrl.stream().anyMatch(y -> y.equals(url))){
-                    throw new BusinessException(ErrorCode.AUTH_NOT_ROLES);
-                }
-
             }
 
         }
