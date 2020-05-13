@@ -6,6 +6,7 @@ import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserSupport {
@@ -14,7 +15,7 @@ public interface UserSupport {
 
     Optional<User> findByUser(LoginResponseDto dto);
 
-    Page<User> findByUsers( PageableDto dto);
+    Page<User> findByUsers(List<String> roleTitles , PageableDto dto);
 
     User findByEmail(String email);
 

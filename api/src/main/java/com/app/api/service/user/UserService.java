@@ -5,6 +5,8 @@ import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface UserService {
 
     void saveBy(UserRespoenseDto dto);
@@ -15,6 +17,6 @@ public interface UserService {
 
     User getUser (long seq);
 
-    Page<User> getUsers(PageableDto dto);
+    Page<User> getUsers(List<String> roleTitles, PageableDto dto);
 
 }

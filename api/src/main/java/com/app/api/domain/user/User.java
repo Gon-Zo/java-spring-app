@@ -47,8 +47,7 @@ public class User extends BaseEntity implements UserDetails {
             String address,
             LocalDate birthDate,
             String img,
-            Boolean isUse ,
-            List<Role> roles
+            Boolean isUse
             ) {
         this.email = email;
         this.password = password;
@@ -60,7 +59,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Transient
     @Setter
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
