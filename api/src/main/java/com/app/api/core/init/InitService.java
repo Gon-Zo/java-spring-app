@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,8 @@ public class InitService {
             List<String> list = Arrays.asList(
                     "/admin/url",
                     "/admin/menu",
-                    "/admin/menu"
+                    "/admin/menu",
+                    "/admin/user"
             );
 
             urls = list.stream().map(m ->
@@ -131,7 +133,7 @@ public class InitService {
                     .address("")
                     .img("default.jpg")
                     .isUse(Boolean.TRUE)
-                    .birthDate(null)
+                    .birthDate(LocalDate.now())
                     .roles(Arrays.asList(role))
                     .build());
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_like")
+@Table(name = "LIKES")
 public class Like extends BaseEntity {
 
     @ManyToOne

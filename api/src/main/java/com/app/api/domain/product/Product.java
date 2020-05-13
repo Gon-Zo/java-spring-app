@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_product")
+@Table(name = "PRODUCTS")
 public class Product extends BaseEntity {
 
     @Column(name = "title")

@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_role")
+@Table(name = "ROLES")
 public class Role extends BaseEntity {
 
     @Column(name = "title")

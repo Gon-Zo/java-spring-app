@@ -1,5 +1,7 @@
 package com.app.api.domain.user.support;
 
+import com.app.api.domain.role.QRole;
+import com.app.api.domain.role.Role;
 import com.app.api.domain.user.User;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.LoginResponseDto;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +67,8 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
 
     @Override
     public Page<User> findByUsers(PageableDto dto) {
+
+        List<Role> roles = new ArrayList<>();
 
         JPAQuery<User> query = jpaQueryFactory
                 .selectFrom(user);

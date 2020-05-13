@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_baseket")
+@Table(name = "BASEKETS")
 public class Basket extends BaseEntity {
 
     @ManyToOne

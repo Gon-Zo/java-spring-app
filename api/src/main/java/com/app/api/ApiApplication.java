@@ -13,17 +13,18 @@ import javax.annotation.PostConstruct;
 
 public class ApiApplication {
 
-//    @Autowired
-//    private InitService initService;
+    @Autowired
+    private InitService initService;
 
     public static void main(String[] args) {
         SpringApplication.run(ApiApplication.class, args);
     }
 
     // todo : Service opne checking
-//    @PostConstruct
-//    public void prevStart(){
-////        initService.init();
-//    }
+
+    @PostConstruct
+    public void prevStart(){
+//        initService.init();
+    }
 
 }
