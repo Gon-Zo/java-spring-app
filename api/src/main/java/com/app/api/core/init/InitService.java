@@ -134,7 +134,6 @@ public class InitService {
                     .img("default.jpg")
                     .isUse(Boolean.TRUE)
                     .birthDate(LocalDate.now())
-                    .roles(Arrays.asList(role))
                     .build());
 
         }

@@ -1,13 +1,17 @@
 package com.app.api.web.manager;
 
 
+import com.app.api.domain.role.Role;
 import com.app.api.domain.user.User;
+import com.app.api.enums.Roles;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 @RestController
 @AllArgsConstructor
@@ -37,7 +41,7 @@ public class ManagerUserController {
     //=== find By Page Users
     @GetMapping("")
     public Page<User> showPageUsers(PageableDto dto){
-       return userService.getUsers(dto);
+        return userService.getUsers(Arrays.asList(Roles.U.getValue()), dto);
     }
 
 }

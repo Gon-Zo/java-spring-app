@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -59,9 +61,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> getUsers(PageableDto dto) {
-//        roleRepository.findByTitle(roles.getValue());
-        return userSupport.findByUsers(dto);
+    public Page<User> getUsers(List<String> roleTitles , PageableDto dto) {
+        return userSupport.findByUsers( roleTitles , dto);
     }
 
     private boolean checkByEmail(String email){

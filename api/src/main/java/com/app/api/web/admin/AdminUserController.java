@@ -20,7 +20,7 @@ public class AdminUserController {
 
     @GetMapping("")
     public Page<User> showPages(PageableDto dto) {
-        return userService.getUsers(dto);
+        return userService.getUsers( null , dto);
     }
 
 }

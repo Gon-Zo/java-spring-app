@@ -1,17 +1,22 @@
 package com.app.api.domain.user.support;
 
 import com.app.api.domain.role.QRole;
+import com.app.api.domain.role.QUserRole;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.user.User;
+import com.app.api.enums.Roles;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.LoginResponseDto;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
+import com.querydsl.jpa.sql.JPASQLQuery;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -20,10 +25,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.app.api.domain.user.QUser.user;
 
@@ -66,16 +70,23 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
     }
 
     @Override
-    public Page<User> findByUsers(PageableDto dto) {
+    public Page<User> findByUsers( List<String> roleTitles , PageableDto dto) {
 
-        List<Role> roles = new ArrayList<>();
 
         JPAQuery<User> query = jpaQueryFactory
-                .selectFrom(user);
+                .selectFrom(user)
+                .innerJoin(QUserRole.userRole)
+                .on(QUserRole.userRole.user.seq.eq(user.seq))
+                .innerJoin(QRole.role)
+                .on(QRole.role.seq.eq(QUserRole.userRole.role.seq));
 
-        if (isNotEmpty(dto.getSort())) {
-            query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
+        if (isNotEmpty(roleTitles)) {
+            query.where(QRole.role.title.in(roleTitles));
         }
+
+//        if (isNotEmpty(dto.getSort())) {
+//            query.orderBy(ApiDomainUtils.getOrder(dto.getSort()).toArray(new OrderSpecifier[0]));
+//        }
 
         PageRequest pageable = PageRequest.of(dto.getPage(), dto.getSize());
 
@@ -87,7 +98,7 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
 
         List<User> results = fetchResult.getResults();
 
-        return new PageImpl<>(results, pageable, total);
+        return new PageImpl<>( results , pageable, total);
 
     }
 
