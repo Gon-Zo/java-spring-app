@@ -9,11 +9,10 @@ import com.app.api.core.auth.JwtTokenUtil;
 import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
-import com.app.api.domain.role.Role;
 import com.app.api.domain.role.support.RoleSupport;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,9 +20,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 import static com.app.api.utils.ApiDomainUtils.notStartWith;
+import static com.app.api.utils.ApiDomainUtils.isNotTrue;
 
 @Slf4j
 @Component
@@ -56,8 +57,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String jwtToken = null;
 
-        UserDetails userDetails = null;
-
         if (notStartWith(url, "/login") && notStartWith(url, "/sign")) {
 
             if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
@@ -77,12 +76,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                /**
-                 * User Info Search
-                 *
-                 * ======================
-                 */
-                userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+                // ======= User Info
+                UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
                 if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
@@ -96,16 +91,26 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
 
             } else {
-
-                /**
-                 * Jwt not init subject
-                 *
-                 * ==============================
-                 */
+                // ========== Jwt not init subject
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
             if (notStartWith(url, "/menu")) {
+
+                boolean isAuthUrl = jwtUserDetailsService.authRole(username).stream()
+                        .map(r -> r.getMenus())
+                        .flatMap(Collection::parallelStream)
+                        .map(m -> m.getAuthUrl())
+                        .flatMap(Collection::parallelStream)
+                        .collect(Collectors.toList())
+                        .stream().map(m -> StringUtils.equals(url, m.getTitle()))
+                        .distinct()
+                        .anyMatch(v -> v == true);
+
+                if (isNotTrue(isAuthUrl)) {
+                    throw new BusinessException(ErrorCode.AUTHURL_NOT_FOUND);
+                }
+
             }
 
         }

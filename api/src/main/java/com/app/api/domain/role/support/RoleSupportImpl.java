@@ -93,9 +93,9 @@ public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSu
     public List<Role> findByUser(String email) {
         return jpaQueryFactory.selectFrom(role)
                 .innerJoin(QUserRole.userRole)
-                .on(role.seq.eq(QUserRole.userRole.seq))
+                .on(QUserRole.userRole.role.seq.eq(role.seq))
                 .innerJoin(QUser.user)
-                .on(QUserRole.userRole.seq.eq(QUser.user.seq))
+                .on(QUser.user.seq.eq(QUserRole.userRole.user.seq))
                 .where(QUser.user.email.eq(email)).fetch();
     }
 

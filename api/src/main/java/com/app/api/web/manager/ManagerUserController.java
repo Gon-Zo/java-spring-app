@@ -1,7 +1,6 @@
 package com.app.api.web.manager;
 
 
-import com.app.api.domain.role.Role;
 import com.app.api.domain.user.User;
 import com.app.api.enums.Roles;
 import com.app.api.service.user.UserService;

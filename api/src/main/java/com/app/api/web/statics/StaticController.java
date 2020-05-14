@@ -7,6 +7,7 @@ import com.app.api.domain.menu.Menu;
 import com.app.api.domain.user.User;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.enums.Roles;
 import com.app.api.service.menu.MenuService;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.LoginResponseDto;
@@ -75,8 +76,8 @@ public class StaticController {
      * @param dto
      */
     @PostMapping("sign")
-    public void signUpTo(@RequestBody UserRespoenseDto dto) {
-        userService.saveBy(dto);
+    public void signUpTo(@RequestBody UserRespoenseDto dto , Roles roles) {
+        userService.saveBy(dto , roles);
     }
 
     /**

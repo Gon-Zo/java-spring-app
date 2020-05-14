@@ -1,11 +1,15 @@
 package com.app.api.service.user;
 
+import com.app.api.domain.role.Role;
 import com.app.api.domain.role.RoleRepository;
+import com.app.api.domain.role.UserRole;
+import com.app.api.domain.role.support.UserRoleRepository;
 import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import com.app.api.domain.user.support.UserSupport;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.enums.Roles;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.UserRespoenseDto;
 import lombok.AllArgsConstructor;
@@ -26,8 +30,10 @@ public class UserServiceImpl implements UserService {
 
     private final RoleRepository roleRepository;
 
+    private final UserRoleRepository userRoleRepository;
+
     @Override
-    public void saveBy(UserRespoenseDto dto) {
+    public void saveBy(UserRespoenseDto dto , Roles roleType) {
 
         if(checkByEmail(dto.getEmail())){
             throw new BusinessException(ErrorCode.SAME_USER);
@@ -37,7 +43,15 @@ public class UserServiceImpl implements UserService {
 
         User user = dto.toEntity();
 
-        userRepository.save(user);
+        user = userRepository.saveAndFlush(user);
+
+        Role role = roleRepository.findByTitle(roleType.getValue());
+
+        userRoleRepository.save(UserRole.builder()
+                .user(user)
+                .role(role)
+                .build());
+
     }
 
     @Override
