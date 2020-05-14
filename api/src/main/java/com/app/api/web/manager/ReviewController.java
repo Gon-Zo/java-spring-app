@@ -32,7 +32,7 @@ public class ReviewController {
 
     @DeleteMapping("/{seq}")
     public void removeReview(@PathVariable long seq){
-
+        service.removeReview(seq);
     }
 
 }
