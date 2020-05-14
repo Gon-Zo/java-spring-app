@@ -3,10 +3,9 @@ package com.app.api.web.admin;
 import com.app.api.domain.user.User;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.PageableDto;
+import com.app.api.web.dto.UserRespoenseDto;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/user")
@@ -21,6 +20,16 @@ public class AdminUserController {
     @GetMapping("")
     public Page<User> showPages(PageableDto dto) {
         return userService.getUsers( null , dto);
+    }
+
+    @PutMapping("/{seq}")
+    public void updateUser(@PathVariable long seq, UserRespoenseDto dto) {
+        userService.updateFrom(seq, dto);
+    }
+
+    @DeleteMapping("/{seq}")
+    public void removeUser(@PathVariable long seq){
+        userService.deleteByUser(seq);
     }
 
 }
