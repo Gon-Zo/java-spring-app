@@ -2,6 +2,7 @@ package com.app.api.domain.role;
 
 import com.app.api.domain.BaseEntity;
 import com.app.api.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,11 @@ public class UserRole extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "role_seq")
     private Role role;
+
+    @Builder
+    public UserRole(User user, Role role) {
+        this.user = user;
+        this.role = role;
+    }
 
 }

@@ -51,6 +51,10 @@ public class ApiDomainUtils {
         return !str.startsWith(str2);
     }
 
+    public static boolean isNotTrue(Boolean b){
+        return !b;
+    }
+
 }
 
 
