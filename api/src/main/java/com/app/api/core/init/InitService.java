@@ -1,7 +1,5 @@
 package com.app.api.core.init;
 
-import com.app.api.core.error.exception.BusinessException;
-import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.menu.Menu;
 import com.app.api.domain.menu.MenuRepository;
 import com.app.api.domain.role.Role;
@@ -11,7 +9,6 @@ import com.app.api.domain.url.UrlRepository;
 import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

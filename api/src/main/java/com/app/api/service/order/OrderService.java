@@ -8,6 +8,7 @@ import java.util.List;
 public interface OrderService {
 
     List<Order> getByDto(OrderResponseDto dto);
+
     Order getById(long seq);
 
 }
