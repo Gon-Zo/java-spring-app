@@ -16,4 +16,6 @@ public interface RoleService {
 
     void removeRole(long seq);
 
+    Role getRole(long seq);
+
 }
