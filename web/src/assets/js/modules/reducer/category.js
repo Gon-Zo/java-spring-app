@@ -10,7 +10,6 @@ let initData = {
    isOpen : false
 }
 
-
 let categoryReducer = (state = initData , action )=>{
 
    switch (action.type) {

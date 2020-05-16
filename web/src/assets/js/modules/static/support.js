@@ -1,7 +1,4 @@
 import {useSelector} from "react-redux";
-// import Spinner from "react-bootstrap/Spinner";
-// import React from "react";
-
 
 export const isNotEmpty = (data) => {
     return  typeof data !== "undefined" || data !== null
@@ -28,13 +25,22 @@ export const AppReversTheme = () => {
     return str
 }
 
-// export const Test = (data) =>{
-//     if (typeof data == 'undefined') {
-//     console.log("?>")
-//         return (
-//             <Spinner animation="border" role="status" variant="light">
-//                 <span className="sr-only">Loading...</span>
-//             </Spinner>
-//         )
-//     }
-// }
+export const _bindData = (payload , keys) => {
+
+    let data = typeof payload === 'undefined' ? undefined : payload.content;
+
+    let count = typeof payload === 'undefined' ? undefined : payload.totalElements
+
+    let numPages = typeof payload === 'undefined' ? undefined : payload.totalPages
+
+    let showPages = typeof payload === 'undefined' ? undefined : payload.size;
+
+    return {
+        data: data,
+        key: keys,
+        count: count,
+        numPages: numPages,
+        showPages: showPages,
+    }
+
+}

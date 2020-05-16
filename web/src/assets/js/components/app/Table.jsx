@@ -12,15 +12,13 @@ export default (props) => {
 
     let keys = props.keys
 
-    let initUser = useSelector(state => state.userReducer, []);
-
     let _isChange = props.switch
 
     let _isDelete = props.delete
 
     let _isEdit = props.update
 
-    let theme = initUser.isTheme
+    let theme = useSelector(state => state.userReducer, []).isTheme
 
     let [sortArray, setSortArray] = useState([])
 
@@ -68,7 +66,7 @@ export default (props) => {
                         <th>#</th>
                         {
                             keys.map((k, i) =>
-                                <th key={i} onClick={() => _sortTable(i)}>{k}</th>
+                                <th key={i} onClick={() => _sortTable(i)}>{k.name}</th>
                             )
                         }
                         <th>Action</th>
@@ -83,7 +81,7 @@ export default (props) => {
                                     {
                                         keys.map((k, j) => (
                                             <td key={j}>
-                                                {_checkToValue(d[`${k}`], i)}
+                                                {_checkToValue(d[`${k.key}`], i)}
                                             </td>
                                         ))
                                     }
