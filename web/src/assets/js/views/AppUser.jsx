@@ -8,6 +8,7 @@ import {UserInfoModal} from "../components/app/AppModal";
 import Pagination from "../components/app/Pagination";
 import LineChart from "../components/chart/LineChart";
 import BarChart from "../components/chart/BarChart";
+import {_bindData} from "../modules/static/support";
 
 export default () => {
 
@@ -23,43 +24,15 @@ export default () => {
         $fetchUsers(dispatch, initUser)
     }
 
-    let _bindData = () => {
+    let filter = [
+        {key: 'email', name: "이메일"},
+        {key: 'birthDate', name: "생년월일"},
+        {key: 'address', name: "주소"},
+        {key: 'isUse', name: "상태"},
+        {key: 'createdAt', name: "등록일"}
+    ]
 
-        let payload = initUser.users;
-
-        // Data
-        let data = typeof payload === 'undefined' ?
-            undefined : payload.content;
-
-        // keys
-        let keys = typeof data == 'undefined' ?
-            undefined :
-            Object.keys(data[0])
-                .filter(m =>
-                    m === 'email' ||
-                    m === 'updatedAt' ||
-                    m === 'email' ||
-                    m === 'birthDate' ||
-                    m === 'createdAt' ||
-                    m === 'isUse' ||
-                    m === 'address'
-                )
-
-        let count = typeof payload === 'undefined' ? undefined : payload.totalElements
-
-        let numPages = typeof payload === 'undefined' ? undefined : payload.totalPages
-
-        let showPages = typeof payload === 'undefined' ? undefined : payload.size;
-
-        return {
-            data: data,
-            key: keys,
-            count: count,
-            numPages: numPages,
-            showPages: showPages,
-        }
-
-    }
+    let payload = _bindData(initUser.users , filter);
 
     let _isUse = (idx, flag) => {
         let data = initUser.users.content[idx]
@@ -76,8 +49,7 @@ export default () => {
     }
 
     let _sortTable = (idx) => {
-        let key = _bindData().key[idx]
-        console.log('key', key);
+        let key = payload.key[idx]
         $pushSortData(dispatch, key)
     }
 
@@ -105,18 +77,18 @@ export default () => {
 
             <div className="mt-4">
 
-                <Table data={_bindData().data}
+                <Table data={payload.data}
+                       keys={payload.key}
                        switch={_isUse}
-                       keys={_bindData().key}
                        update={_onEdit}
                        delete={_onDelete}
                        sort={_sortTable}
                        sortData={initUser.sort}
                 />
 
-                <Pagination count={_bindData().count}
-                            numPages={_bindData().numPages}
-                            showPages={_bindData().showPages}
+                <Pagination count={payload.count}
+                            numPages={payload.numPages}
+                            showPages={payload.showPages}
                             refresh={_onReFresh}
                             page={initUser.page}
                 />
