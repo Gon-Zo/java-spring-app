@@ -11,7 +11,6 @@ import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.role.support.RoleSupport;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -103,7 +102,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         .map(m -> m.getAuthUrl())
                         .flatMap(Collection::parallelStream)
                         .collect(Collectors.toList())
-                        .stream().map(m -> StringUtils.equals(url, m.getTitle()))
+                        .stream().map(m -> url.contains(m.getTitle()))
                         .distinct()
                         .anyMatch(v -> v == true);
 

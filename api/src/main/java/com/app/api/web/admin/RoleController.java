@@ -22,6 +22,11 @@ public class RoleController {
         return roleService.getPages(dto);
     }
 
+    @GetMapping("/{seq}")
+    public Role showRole(@PathVariable long seq){
+        return roleService.getRole(seq);
+    }
+
     @PostMapping("")
     public void makeRole (RoleResponseDto dto){
         roleService.createRole(dto);

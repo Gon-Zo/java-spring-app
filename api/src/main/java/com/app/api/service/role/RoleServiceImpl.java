@@ -56,4 +56,9 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.findById(seq);
     }
 
+    @Override
+    public Role getRole(long seq) {
+        return roleRepository.findById(seq).orElseThrow(() -> new BusinessException(ErrorCode.AUTH_NOT_ROLES));
+    }
+
 }
