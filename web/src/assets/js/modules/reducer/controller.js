@@ -1,3 +1,5 @@
+import {_bindData} from "../static/support";
+
 let GETMENUS = 'controller/getMenus'
 let GETUSERS = 'controller/getUsers'
 let GETROLES = 'controller/getRoles'
@@ -13,6 +15,7 @@ let initData = {
     roles: undefined,
     urls: undefined,
     users: undefined,
+    payload : [],
 }
 
 let controllerReducer = (state = initData , action) => {
@@ -20,10 +23,12 @@ let controllerReducer = (state = initData , action) => {
 
         case GETMENUS:
             state.menus = action.data;
+            state.payload =  _bindData(action.data, filterBy(action.type))
             break;
 
         case GETUSERS:
             state.users = action.data;
+            state.payload = _bindData(action.data, filterBy(action.type))
             break;
 
         case GETROLES:
@@ -39,5 +44,29 @@ let controllerReducer = (state = initData , action) => {
     return state;
 
 }
+
+let filterBy = (k) => {
+    let filter;
+    switch (k) {
+        case GETMENUS:
+            filter = [
+                {key: 'title', name: '메뉴명'},
+                {key: 'url', name: "주소"},
+                {key: 'icon', name: "아이콘"}
+            ]
+            break;
+        case GETUSERS:
+            filter = [
+                {key: 'email', name: "이메일"},
+                {key: 'birthDate', name: "생년월일"},
+                {key: 'address', name: "주소"},
+                {key: 'isUse', name: "상태"},
+                {key: 'createdAt', name: "등록일"}
+            ]
+            break;
+    }
+    return filter;
+}
+
 
 export default controllerReducer
