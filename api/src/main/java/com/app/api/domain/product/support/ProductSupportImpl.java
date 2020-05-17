@@ -1,12 +1,17 @@
 package com.app.api.domain.product.support;
 
+import com.app.api.domain.basket.QBasket;
+import com.app.api.domain.like.QLike;
 import com.app.api.domain.product.Product;
+import com.app.api.domain.review.QReview;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
@@ -18,6 +23,8 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.app.api.domain.product.QProduct.product;
@@ -85,6 +92,28 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
         List<Product> result = results.getResults();
 
         return new PageImpl<>(result, pageable, total);
+
+    }
+
+    public void test(){
+
+        List<Expressions> select = new ArrayList<>();
+
+        NumberExpression<Long> reivewCnt = QReview.review.seq.count();
+
+        NumberExpression<Long> baseketCnt = QBasket.basket.seq.count();
+
+        NumberExpression<Long> likeCnt = QLike.like.seq.count();
+
+        jpaQueryFactory.select()
+                .from(product)
+                .leftJoin(QReview.review)
+                .on(QReview.review.product.seq.eq(product.seq))
+                .leftJoin(QLike.like)
+                .on(QLike.like.num.eq(product.seq))
+                .leftJoin(QBasket.basket)
+                .on(QBasket.basket.product.seq.eq(product.seq))
+                .fetchAll();
 
     }
 

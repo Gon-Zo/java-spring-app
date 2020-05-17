@@ -32,5 +32,12 @@ INSERT INTO public.urls (seq, created_at, updated_at, title) VALUES (5, '2020-05
 INSERT INTO public.urls (seq, created_at, updated_at, title) VALUES (7, '2020-05-09', '2020-05-09', '/manager/dashboard');
 INSERT INTO public.urls (seq, created_at, updated_at, title) VALUES (8, '2020-05-09', '2020-05-09', '/manager/category');
 
+-- Order
+insert into orders(created_at, updated_at, cnt, product_seq, user_seq)values (now() , now() , 100 , 1 , 3);
+
+-- likes
+insert into likes (created_at, updated_at, num, type, user_seq) values (now() , now()  , 1 , 'P' , 3);
+
+
 -- USER ROLE
 INSERT INTO public.users_role (seq, created_at, updated_at, role_seq, user_seq) VALUES (1, '2020-05-13', '2020-05-13', 2, 1);
