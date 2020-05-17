@@ -8,7 +8,9 @@ import com.app.api.domain.order.support.OrderSupport;
 import com.app.api.domain.product.ProductRepository;
 import com.app.api.domain.user.UserRepository;
 import com.app.api.web.dto.OrderResponseDto;
+import com.app.api.web.dto.PageableDto;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,6 +62,11 @@ public class OrderServiceImpl implements OrderService {
         return repository
                 .findById(seq)
                 .orElseThrow(()-> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
+    }
+
+    @Override
+    public Page<Order> getPages(PageableDto dto) {
+        return support.findByPage(dto);
     }
 
 }
