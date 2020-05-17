@@ -1,13 +1,18 @@
 package com.app.api.domain.order.support;
 
 import com.app.api.domain.order.Order;
+import com.app.api.domain.product.QProduct;
 import com.app.api.web.dto.OrderResponseDto;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import static com.app.api.domain.order.QOrder.order;
 
@@ -45,6 +50,20 @@ public class OrderSupportImpl extends QuerydslRepositorySupport implements Order
         }
 
         return bb;
+
+    }
+
+    public void test(){
+
+        List<Expressions> select = new ArrayList<>();
+
+        List<Order> list = jpaQueryFactory
+                .select(Projections.fields(Order.class, select.toArray(new Expression[0])))
+                .from(order)
+                .innerJoin(QProduct.product)
+                .on(order.product.seq.eq(QProduct.product.seq))
+                .groupBy(order.createdAt, QProduct.product.title)
+                .fetch();
 
     }
 
