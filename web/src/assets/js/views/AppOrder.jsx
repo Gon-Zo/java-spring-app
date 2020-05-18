@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState , useCallback} from "react";
 import Table from "react-bootstrap/Table";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import {useDispatch, useSelector} from "react-redux";
@@ -19,6 +19,14 @@ export default () => {
     useEffect(() => {
         $httpOrders(dispatch)
     }, [])
+
+    // let useForceUpdate = () => {
+    //     const [, setTick] = useState(0);
+    //     const update = useCallback(() => {
+    //         setTick(tick => tick + 1);
+    //     }, [])
+    //     return update;
+    // }
 
 
     function RenderContent() {
