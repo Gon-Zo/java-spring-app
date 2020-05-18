@@ -21,7 +21,7 @@ export const putSort = (data) => ({type: PUTSORT, data: data})
 
 let initUser = {
     isLogin: sessionStorage.getItem("Token") ? true : false,
-    isTheme: false,
+    isTheme: true,
     page: 1,
     numPage: 10,
     sort : [],
