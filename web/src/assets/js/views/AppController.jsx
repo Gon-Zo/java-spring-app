@@ -46,6 +46,7 @@ export default () => {
 
 
     function RenderingTable(props) {
+
         let payload = props.data
 
         return(
@@ -85,15 +86,11 @@ export default () => {
 
 
                 <Tab eventKey="Roles" title="Roles">
-                    <div>
-                        <span>TEST3</span>
-                    </div>
+                    <RenderingTable data={payload}/>
                 </Tab>
 
                 <Tab eventKey="Urls" title="Urls">
-                    <div>
-                        <span>TEST4</span>
-                    </div>
+                    <RenderingTable data={payload}/>
                 </Tab>
 
             </Tabs>
