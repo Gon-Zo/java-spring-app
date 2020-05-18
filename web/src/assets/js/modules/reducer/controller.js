@@ -64,6 +64,17 @@ let filterBy = (k) => {
                 {key: 'createdAt', name: "등록일"}
             ]
             break;
+        case GETROLES:
+            filter = [
+                {key : "title" , name : "권한명"},
+            ];
+           break;
+
+        case GETURLS:
+            filter = [
+                { title : "인증 주소"}
+            ]
+           break;
     }
     return filter;
 }
