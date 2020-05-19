@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {$deleteByProd, $httpProduct, $isOpen, $setIsSold, $setMethod, $setProduct} from '../modules/api/product'
 import {useDispatch, useSelector} from "react-redux";
-import { Product} from "../modules/data/AppDto";
 import { ProductEditor} from "../components/app/AppModal";
 import Pagination from "../components/app/Pagination";
 import Table from "../components/app/Table";
 import RadarChart from "../components/chart/RadarChart";
 import PieChart from "../components/chart/PieChart";
 import BubbleChart from "../components/chart/BubbleChart";
+import {_bindData} from "../modules/static/support";
 
 export default () => {
 
@@ -17,12 +17,6 @@ export default () => {
     useEffect(() => {
         $httpProduct(dispatch, initProd);
     }, []);
-
-    // let $onClick = () => {
-    //     $setMethod(dispatch, 'I');
-    //     $setProduct(dispatch, new Product());
-    //     $isOpen(dispatch)
-    // };
 
     let _onReFresh = (val) =>{
         initProd.page = val
@@ -34,29 +28,14 @@ export default () => {
         $setIsSold(dispatch, data[idx], idx, flag)
     }
 
-    let _bindData = () =>{
+    let filter = [
+        {key : "title" , name : "상품명"} ,
+        {key : "cnt" , name : "수량"} ,
+        {key : "price" , name : "가격"} ,
+        {key : "isSold" , name : "품절유무"} ,
+    ]
 
-        let payload = initProd.products;
-
-        let data = typeof payload === 'undefined' ? undefined : payload.content;
-
-        let keys = typeof data === 'undefined' ? undefined : Object.keys(data[0])
-
-        let count = typeof payload === 'undefined' ? undefined : payload.totalElements
-
-        let numPages = typeof payload === 'undefined' ? undefined : payload.totalPages
-
-        let showPages = typeof payload === 'undefined' ? undefined : payload.size;
-
-        return {
-            data: data,
-            key: keys,
-            count: count,
-            numPages: numPages,
-            showPages: showPages,
-        }
-
-    }
+    let payload = _bindData(initProd.products, filter)
 
     let _onEdit = (idx) => {
         let payload = initProd.products.data
@@ -111,15 +90,15 @@ export default () => {
 
             <div className="mt-4">
 
-                <Table data={_bindData().data}
-                          keys={_bindData().key}
+                <Table data={ payload.data}
+                          keys={payload.key}
                           delete={_onDelete}
                           update={_onEdit}
                           switch={_isSold}/>
 
-                <Pagination count={_bindData().count}
-                            numPages={_bindData().numPages}
-                            showPages={_bindData().showPages}
+                <Pagination count={payload.count}
+                            numPages={payload.numPages}
+                            showPages={payload.showPages}
                             refresh={_onReFresh}
                             page={initProd.page}/>
 

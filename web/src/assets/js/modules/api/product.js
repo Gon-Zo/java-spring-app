@@ -9,11 +9,12 @@ import {decodeJwt} from "../static/auth";
  * @returns {Promise<void>}
  */
 export function $httpProduct(dispatch , payload ) {
-    axios.get(`/admin/product`, {
+    axios.get(`/manager/product`, {
         params : {
-            pageNum : 10 ,
-            page : payload.page ,
-            storeNo : 1,
+            page: payload.page - 1,
+            size: payload.numPage,
+            sort : '',
+            // sort: payload.sort.toString(),
         }
     })
         .then(res => {
