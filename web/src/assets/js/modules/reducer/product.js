@@ -16,12 +16,13 @@ export const setIsSold = (idx , flag) => ({type : ISSOLD , idx : idx , flag : fl
 
 const initProduct = {
     isOpen: false,
-    isCategory : false,
-    methodType : '',
+    isCategory: false,
+    methodType: '',
     products: [],
     product: {},
-    category : {},
-    page : 1 ,
+    category: {},
+    page: 1,
+    numPage: 10,
 };
 
 let productReducer = (state = initProduct, action) => {
