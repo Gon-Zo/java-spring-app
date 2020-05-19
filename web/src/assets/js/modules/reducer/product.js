@@ -3,6 +3,7 @@ let SETPRODUCT  = "product/setProduct"
 let ISOPEN = 'product/isOpen'
 let SETMETHOD = "product/setMethod"
 let ISSOLD =  "product/isSold"
+let SETCHART = "product/setChart"
 
 export const setProducts = (data) => ({type: SETPRODUCTS , data: data});
 
@@ -14,6 +15,8 @@ export const setType = (data) => ({type : SETMETHOD  , data : data});
 
 export const setIsSold = (idx , flag) => ({type : ISSOLD , idx : idx , flag : flag})
 
+export const setChartData = (data) => ({type : SETCHART , data : data})
+
 const initProduct = {
     isOpen: false,
     isCategory: false,
@@ -23,6 +26,7 @@ const initProduct = {
     category: {},
     page: 1,
     numPage: 10,
+    chartData : undefined ,
 };
 
 let productReducer = (state = initProduct, action) => {
@@ -41,6 +45,9 @@ let productReducer = (state = initProduct, action) => {
             break;
         case ISSOLD :
             state.products.data[action.idx].is_sold = action.flag
+            break;
+        case SETCHART :
+            state.chartData = action.data
             break;
     }
     return state;

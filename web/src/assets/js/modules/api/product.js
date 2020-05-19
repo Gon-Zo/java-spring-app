@@ -1,6 +1,6 @@
 import React  from 'react';
 import axios from 'axios';
-import {setProducts, setProduct, isOpenProd, setType, setIsSold} from '../reducer/product'
+import {setProducts, setProduct, isOpenProd, setType, setIsSold, setChartData} from '../reducer/product'
 import {decodeJwt} from "../static/auth";
 
 /**
@@ -101,4 +101,13 @@ let parserParam = (param) => {
     let temp = {}
     keys.filter(f => f !== 'store' && f != 'create_at').map(m => temp[m] = param[m])
     return temp
+}
+
+
+export function $httpProductChart(dispatch) {
+
+    axios.get(`/manager/product/chart`)
+        .then((res) => dispatch(setChartData(res.data)))
+        .catch(err => console.log(err))
+
 }

@@ -1,23 +1,32 @@
 import React, {useEffect} from "react";
-import {$deleteByProd, $httpProduct, $isOpen, $setIsSold, $setMethod, $setProduct} from '../modules/api/product'
+import {
+    $deleteByProd,
+    $httpProduct,
+    $httpProductChart,
+    $isOpen,
+    $setIsSold,
+    $setMethod,
+    $setProduct
+} from '../modules/api/product'
 import {useDispatch, useSelector} from "react-redux";
 import { ProductEditor} from "../components/app/AppModal";
 import Pagination from "../components/app/Pagination";
 import Table from "../components/app/Table";
-import RadarChart from "../components/chart/RadarChart";
 import PieChart from "../components/chart/PieChart";
 import BubbleChart from "../components/chart/BubbleChart";
 import {_bindData} from "../modules/static/support";
+import LineChart from "../components/chart/LineChart";
 
 export default () => {
 
     let dispatch = useDispatch();
     let initProd = useSelector(state => state.productReducer, []);
 
+
     useEffect(() => {
         $httpProduct(dispatch, initProd);
+        $httpProductChart(dispatch);
     }, []);
-
     let _onReFresh = (val) =>{
         initProd.page = val
         $httpProduct(dispatch, initProd);
@@ -50,6 +59,29 @@ export default () => {
         $deleteByProd(dispatch, initProd , deleteNo)
     };
 
+    let _lineChartData = (payload) =>{
+
+        if(typeof payload == 'undefined') {
+            return undefined;
+        }
+
+        return payload.map(p => {
+            let title = p.title;
+            let val = p.val
+            return {
+                id: p.title,
+                color: "hsl(207, 70%, 50%)",
+                data: [
+                    {
+                        x: title,
+                        Y: val
+                    }
+                ]
+            }
+        })
+
+    }
+
     return (
         <div className="container-main">
 
@@ -67,7 +99,7 @@ export default () => {
                         <span className="main-ft">상품 분석</span>
                     </div>
                     <div className="card-body">
-                        <RadarChart/>
+                        <LineChart data={_lineChartData(initProd.chartData)}/>
                     </div>
                 </div>
                 <div className="card card-dash card-bg">
