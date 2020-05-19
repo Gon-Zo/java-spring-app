@@ -95,27 +95,4 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
 
     }
 
-    public void test(){
-
-        List<Expressions> select = new ArrayList<>();
-
-        NumberExpression<Long> reivewCnt = QReview.review.seq.count();
-
-        NumberExpression<Long> baseketCnt = QBasket.basket.seq.count();
-
-        NumberExpression<Long> likeCnt = QLike.like.seq.count();
-
-        jpaQueryFactory.select()
-                .from(product)
-                .leftJoin(QReview.review)
-                .on(QReview.review.product.seq.eq(product.seq))
-                .leftJoin(QLike.like)
-                .on(QLike.like.num.eq(product.seq))
-                .leftJoin(QBasket.basket)
-                .on(QBasket.basket.product.seq.eq(product.seq))
-                .fetchAll();
-
-    }
-
-
 }
