@@ -2,16 +2,20 @@ package com.app.api.domain.product.support;
 
 import com.app.api.domain.basket.QBasket;
 import com.app.api.domain.like.QLike;
+import com.app.api.domain.order.QOrder;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.review.QReview;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.DateTemplate;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
+import com.querydsl.core.types.dsl.StringTemplate;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
@@ -92,6 +96,48 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
         List<Product> result = results.getResults();
 
         return new PageImpl<>(result, pageable, total);
+
+    }
+
+    public void test(){
+
+        List<Expressions> select = new ArrayList<>();
+
+        NumberExpression<Long> reivewCnt = QReview.review.seq.count();
+
+        NumberExpression<Long> baseketCnt = QBasket.basket.seq.count();
+
+        NumberExpression<Long> likeCnt = QLike.like.seq.count();
+
+
+        jpaQueryFactory.select()
+                .from(product)
+                .leftJoin(QReview.review)
+                .on(QReview.review.product.seq.eq(product.seq))
+                .leftJoin(QLike.like)
+                .on(QLike.like.num.eq(product.seq))
+                .leftJoin(QBasket.basket)
+                .on(QBasket.basket.product.seq.eq(product.seq))
+                .fetchAll();
+
+    }
+
+    @Override
+    public List<Tuple> findGroupByTitle(){
+
+        StringTemplate title = Expressions.stringTemplate("{0}", product.title);
+
+        DateTemplate<LocalDate> createdAt = Expressions.dateTemplate(LocalDate.class, "{0}", QOrder.order.createdAt);
+
+        NumberExpression<Integer> num = QOrder.order.cnt.multiply(product.price).sum();
+
+        return jpaQueryFactory
+                .select(title, createdAt , num)
+                .from(product)
+                .leftJoin(QOrder.order)
+                .on(QOrder.order.product.seq.eq(product.seq))
+                .groupBy(title , createdAt)
+                .fetch();
 
     }
 
