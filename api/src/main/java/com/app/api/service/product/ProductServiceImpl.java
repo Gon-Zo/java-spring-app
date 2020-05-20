@@ -5,22 +5,18 @@ import com.app.api.domain.product.ProductRepository;
 import com.app.api.domain.product.support.ProductSupport;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
+import com.app.api.web.dto.ChartData;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import com.querydsl.core.Tuple;
 import lombok.AllArgsConstructor;
-import org.springframework.aop.scope.ScopedObject;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -30,42 +26,36 @@ public class ProductServiceImpl implements ProductService {
     private final ProductSupport support;
 
     @Override
-    public List<Map<String, Object>> getChartData() {
+    public List<ChartData> getChartData() {
 
         List<Tuple> list = support.findGroupByTitle();
 
         Map<Object, List<Map<String, Object>>> collect = list.stream().map(f -> {
             Map<String, Object> m = new HashMap<>();
-            String title = f.get(0, String.class);
-            LocalDate createAt = f.get(1, LocalDate.class);
-            Integer val = f.get(2, Integer.class);
-            m.put("title", title);
-            m.put("createAt", createAt);
-            m.put("val", val);
+            m.put("title", f.get(0, String.class));
+            m.put("createAt", f.get(1, LocalDate.class));
+            m.put("val", f.get(2, Integer.class));
             return m;
-        }).collect(Collectors.groupingBy(g -> g.get("createAt")));
+        }).collect(Collectors.groupingBy(g -> g.get("title")));
 
         Iterator<Object> keys = collect.keySet().iterator();
+        
+        List<ChartData> chartData = new ArrayList<>();
 
         while (keys.hasNext()){
 
-            List<Map<String, Object>> temp = collect.get(keys);
+            Object o = keys.next();
 
-            temp.stream().map(m ->{
+            List<Map<String, Object>> temp = collect.get(o);
 
-                m.get("title");
-
-                m.get("createAt");
-
-                m.get("val");
-
-            });
-
+            chartData.add(ChartData.builder()
+                    .id(String.valueOf(o))
+                    .data(temp)
+                    .build());
 
         }
 
-         return null;
-
+        return chartData;
     }
 
     @Override

@@ -109,7 +109,6 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
 
         NumberExpression<Long> likeCnt = QLike.like.seq.count();
 
-
         jpaQueryFactory.select()
                 .from(product)
                 .leftJoin(QReview.review)

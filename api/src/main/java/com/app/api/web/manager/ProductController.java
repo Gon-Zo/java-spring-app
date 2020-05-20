@@ -2,6 +2,7 @@ package com.app.api.web.manager;
 
 import com.app.api.domain.product.Product;
 import com.app.api.service.product.ProductService;
+import com.app.api.web.dto.ChartData;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,7 @@ public class ProductController {
     }
 
     @GetMapping("/chart")
-    public List<Map<String, Object>> showChartData() {
+    public List<ChartData> showChartData() {
         return service.getChartData();
     }
 
