@@ -1,6 +1,7 @@
 package com.app.api.service.product;
 
 import com.app.api.domain.product.Product;
+import com.app.api.web.dto.ChartData;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public interface ProductService {
 
-    List<Map< String , Object >> getChartData();
+    List<ChartData> getChartData();
 
     void removeProduct(long seq);
 
