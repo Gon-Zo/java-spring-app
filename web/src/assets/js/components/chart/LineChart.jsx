@@ -301,7 +301,7 @@ function SetLienChart(props) {
     return(
         <ResponsiveLine
             data={data}
-            margin={{ top: 10, right: 110, bottom: 50, left: 60 }}
+            margin={{ top: 10, right: 130, bottom: 50, left: 130 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
             axisTop={null}
