@@ -20,24 +20,13 @@ export default () => {
         $httpOrders(dispatch)
     }, [])
 
-    // let useForceUpdate = () => {
-    //     const [, setTick] = useState(0);
-    //     const update = useCallback(() => {
-    //         setTick(tick => tick + 1);
-    //     }, [])
-    //     return update;
-    // }
-
-
     function RenderContent() {
 
         if (typeof init.orders == 'undefined') {
             return null;
         }
 
-        // element.scrollTop = init.scrollTop;
-
-        let _OnScroll = () =>{
+        let _onScroll = () =>{
 
             let element = document.getElementById("test1");
 
@@ -45,11 +34,6 @@ export default () => {
             let clientHeight = element.clientHeight;
             let scrollTop = element.scrollTop;
             let height = scrollHeight - clientHeight;
-
-            console.log('height', height)
-            console.log('scrollTop', scrollTop)
-
-            // element.scrollTop = height - 1
 
             if(height == scrollTop){
                 $setOffset(dispatch, init.offset + 10)
@@ -62,7 +46,7 @@ export default () => {
         let key = Object.keys(init.list[0])
 
         return(
-            <div id="test1" className="tableFixHead mt-3" onScroll={() => _OnScroll()}>
+            <div id="test1" className="tableFixHead mt-3" onScroll={() => _onScroll()}>
 
                 <Table id="rowHeight" striped bordered hover variant={theme ? "light" : "dark"}>
                     <thead>
@@ -119,9 +103,7 @@ export default () => {
                         onDayChange={day => setDay(dispatch, {type: 'T', day: day})}
                     ></DayPickerInput>
                 </div>
-
                 <RenderContent/>
-
             </div>
         </div>
     )
