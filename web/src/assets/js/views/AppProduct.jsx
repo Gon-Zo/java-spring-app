@@ -16,6 +16,7 @@ import PieChart from "../components/chart/PieChart";
 import BubbleChart from "../components/chart/BubbleChart";
 import {_bindData} from "../modules/static/support";
 import LineChart from "../components/chart/LineChart";
+import _ from 'lodash'
 
 export default () => {
 
@@ -65,18 +66,18 @@ export default () => {
             return undefined;
         }
 
-        return payload.map(p => {
-            let title = p.title;
-            let val = p.val
+        return payload.map(m => {
+
+            let data = _.sortBy(m.data.map(d => {
+                return {
+                    "x": d.createAt,
+                    "y": d.val
+                }
+            }), "x");
+
             return {
-                id: p.title,
-                color: "hsl(207, 70%, 50%)",
-                data: [
-                    {
-                        x: title,
-                        Y: val
-                    }
-                ]
+                id: m.id,
+                data: data
             }
         })
 
@@ -96,12 +97,13 @@ export default () => {
             <div className="card-group">
                 <div className="card card-dash card-bg">
                     <div className="card-title ml-2 mt-1">
-                        <span className="main-ft">상품 분석</span>
+                        <span className="main-ft">상품 추이</span>
                     </div>
                     <div className="card-body">
                         <LineChart data={_lineChartData(initProd.chartData)}/>
                     </div>
                 </div>
+
                 <div className="card card-dash card-bg">
                     <div className="card-title ml-2 mt-1">
                         <span className="main-ft">상품 추이</span>
@@ -110,14 +112,16 @@ export default () => {
                         <PieChart/>
                     </div>
                 </div>
-                <div className="card card-dash card-bg">
-                    <div className="card-title ml-2 mt-1">
-                        <span className="main-ft">상품 분석</span>
-                    </div>
-                    <div className="card-body">
-                        <BubbleChart/>
-                    </div>
-                </div>
+
+                {/*<div className="card card-dash card-bg">*/}
+                {/*    <div className="card-title ml-2 mt-1">*/}
+                {/*        <span className="main-ft">상품 분석</span>*/}
+                {/*    </div>*/}
+                {/*    <div className="card-body">*/}
+                {/*        <BubbleChart/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
             </div>
 
             <div className="mt-4">
