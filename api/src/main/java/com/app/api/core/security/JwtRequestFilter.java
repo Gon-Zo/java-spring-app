@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import static com.app.api.utils.ApiDomainUtils.notStartWith;
+import static com.app.api.utils.ApiDomainUtils.isNotContains;
 import static com.app.api.utils.ApiDomainUtils.isNotTrue;
 
 @Slf4j
@@ -56,7 +57,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String jwtToken = null;
 
-        if (notStartWith(url, "/login") && notStartWith(url, "/sign")) {
+        if (checkingToUrl(url)) {
 
             if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
                 jwtToken = requestTokenHeader.substring(7);
@@ -75,7 +76,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                // ======= User Info
+                // user info
                 UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
                 if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
@@ -90,7 +91,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 }
 
             } else {
-                // ========== Jwt not init subject
+                // jwt not init subject
                 throw new BusinessException(ErrorCode.USERNAME_NOT_FOUND);
             }
 
@@ -115,6 +116,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         chain.doFilter(request, response);
+    }
+
+    private boolean checkingToUrl(String url) {
+        return notStartWith(url, "/login") &&
+                notStartWith(url, "/sign") &&
+                isNotContains(url, "/client");
     }
 
 }
