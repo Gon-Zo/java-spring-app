@@ -11,8 +11,10 @@ public interface ReviewService {
 
     void createReview(ReviewResponseDto dto);
 
-    void removeReview(long seq);
+    void deleteBy(long seq);
 
-    void updateReivew(ReviewResponseDto dto);
+    void modifyReview( long seq , ReviewResponseDto dto);
+
+    Review getReview(long seq);
 
 }

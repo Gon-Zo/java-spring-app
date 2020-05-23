@@ -8,5 +8,5 @@ import org.springframework.data.domain.Page;
 public interface ReviewSupport {
     Page<Review> findByReview(PageableDto dto);
 
-    void update(ReviewResponseDto dto);
+    void update( long seq , ReviewResponseDto dto);
 }
