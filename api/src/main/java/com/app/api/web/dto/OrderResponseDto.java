@@ -1,5 +1,6 @@
 package com.app.api.web.dto;
 
+import com.app.api.domain.order.Order;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.user.User;
 import lombok.*;
@@ -13,16 +14,20 @@ public class OrderResponseDto {
 
     private long productSeq;
 
+    private int cnt;
+
     @Setter
     private User user;
 
     @Setter
     private Product product;
 
-    @Builder
-    public OrderResponseDto(long userSeq, long productSeq) {
-        this.userSeq = userSeq;
-        this.productSeq = productSeq;
+    public Order toEntity() {
+        return Order.builder()
+                .product(this.product)
+                .user(this.user)
+                .cnt(this.cnt)
+                .build();
     }
-    
+
 }

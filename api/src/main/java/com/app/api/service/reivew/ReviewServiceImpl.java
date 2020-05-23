@@ -10,7 +10,7 @@ import com.app.api.domain.review.ReviewRepository;
 import com.app.api.domain.review.Support.ReviewSupport;
 import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
-import com.app.api.enums.ImageType;
+import com.app.api.enums.Types;
 import com.app.api.web.dto.ImageResponseDto;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ReviewResponseDto;
@@ -67,7 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
                                     ImageResponseDto.builder()
                                             .dataId(seq)
                                             .photo(f)
-                                            .type(ImageType.R.getValue())
+                                            .type(Types.review.getValue())
                                             .build()
                                             .toEntity()
                             )

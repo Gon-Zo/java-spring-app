@@ -3,6 +3,7 @@ package com.app.api.domain.order;
 import com.app.api.domain.product.Product;
 import com.app.api.domain.user.User;
 import com.app.api.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,5 +26,12 @@ public class Order extends BaseEntity {
 
     @Column(name = "cnt")
     private Integer cnt;
+
+    @Builder
+    public Order(Product product  , User user  , Integer cnt) {
+        this.product = product;
+        this.user  = user;
+        this.cnt = cnt;
+    }
 
 }

@@ -1,13 +1,14 @@
 package com.app.api.enums;
 
-public enum ImageType {
+public enum Types {
 
-    R("review"),
-    Q("question");
+    review("R"),
+    question("Q"),
+    product("P");
 
     private String value ;
 
-    ImageType(String value ){
+    Types(String value ){
         this.value = value;
     }
 

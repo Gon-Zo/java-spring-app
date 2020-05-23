@@ -7,7 +7,7 @@ import com.app.api.domain.question.Question;
 import com.app.api.domain.question.QuestionRepository;
 import com.app.api.domain.question.support.QuestionSupport;
 import com.app.api.domain.user.UserRepository;
-import com.app.api.enums.ImageType;
+import com.app.api.enums.Types;
 import com.app.api.web.dto.ImageResponseDto;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.QustionResponseDto;
@@ -67,7 +67,7 @@ public class QuestionServiceImpl implements QuestionService{
                             ImageResponseDto.builder()
                                     .photo(f)
                                     .dataId(seq)
-                                    .type(ImageType.Q.getValue())
+                                    .type(Types.question.getValue())
                                     .build()
                                     .toEntity()
                     ));
