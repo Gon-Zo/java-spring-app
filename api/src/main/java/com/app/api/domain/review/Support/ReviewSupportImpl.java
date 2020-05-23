@@ -17,6 +17,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -62,7 +63,8 @@ public class ReviewSupportImpl extends QuerydslRepositorySupport implements Revi
     }
 
     @Override
-    public void update(ReviewResponseDto dto) {
+    @Transactional
+    public void update(long seq, ReviewResponseDto dto) {
 
         UpdateClause<JPAUpdateClause> updateQuery = update(review);
 
@@ -73,6 +75,8 @@ public class ReviewSupportImpl extends QuerydslRepositorySupport implements Revi
         if(isNotEmpty(dto.getContent())){
             updateQuery.set(review.content, dto.getContent());
         }
+
+        updateQuery.where(review.seq.eq(seq));
 
         updateQuery.execute();
 

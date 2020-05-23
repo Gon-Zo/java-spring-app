@@ -56,7 +56,9 @@ public enum ErrorCode {
 
     AUTHURL_NOT_FOUND(500 , "A001" , "AuthUrl Not Found"),
 
-    INIT_ROLE_ERROR( 500 , "I001" , "inti to Role Error") ,
+    INIT_ROLE_ERROR( 500 , "I001" , "init to Role Error") ,
+
+    REVIEW_NOT_FOUND(500 , "R001" , "Review Not Found")
 
     ;
 

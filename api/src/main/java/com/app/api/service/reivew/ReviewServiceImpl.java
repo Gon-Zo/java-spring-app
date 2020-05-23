@@ -79,14 +79,18 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public void removeReview(long seq) {
+    public void deleteBy(long seq) {
         repository.deleteById(seq);
     }
 
     @Override
-    @Transactional
-    public void updateReivew(ReviewResponseDto dto) {
+    public void modifyReview(long seq, ReviewResponseDto dto) {
+        support.update(seq, dto);
+    }
 
+    @Override
+    public Review getReview(long seq) {
+        return repository.findById(seq).orElseThrow(() -> new BusinessException(ErrorCode.REVIEW_NOT_FOUND));
     }
 
 }
