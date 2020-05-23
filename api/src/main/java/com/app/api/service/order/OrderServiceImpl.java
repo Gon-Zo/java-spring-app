@@ -69,4 +69,22 @@ public class OrderServiceImpl implements OrderService {
         return support.findByPage(dto);
     }
 
+    @Override
+    public void saveBy(OrderResponseDto dto) {
+
+        dto.setUser(userRepository.findById(dto.getUserSeq())
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND)));
+
+        dto.setProduct(productRepository.findById(dto.getProductSeq())
+                .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_NOT_FOUND)));
+
+        repository.save(dto.toEntity());
+
+    }
+
+    @Override
+    public void removeBy(long seq) {
+        repository.deleteById(seq);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.app.api.domain.like;
 
 import com.app.api.domain.user.User;
 import com.app.api.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,5 +23,12 @@ public class Like extends BaseEntity {
 
     @Column(name = "num")
     private Long num;
+
+    @Builder
+    public Like(User user  , String type , Long num) {
+       this.user = user;
+       this.type = type;
+       this.num = num;
+    }
 
 }

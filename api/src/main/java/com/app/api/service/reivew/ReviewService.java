@@ -15,5 +15,4 @@ public interface ReviewService {
 
     void updateReivew(ReviewResponseDto dto);
 
-
 }

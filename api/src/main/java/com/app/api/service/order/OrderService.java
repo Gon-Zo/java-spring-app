@@ -15,4 +15,8 @@ public interface OrderService {
 
     Page<Order> getPages(PageableDto dto);
 
+    void saveBy(OrderResponseDto dto);
+
+    void removeBy(long seq);
+
 }
