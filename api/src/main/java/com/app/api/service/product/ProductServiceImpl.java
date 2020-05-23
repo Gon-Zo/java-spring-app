@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -39,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
         }).collect(Collectors.groupingBy(g -> g.get("title")));
 
         Iterator<Object> keys = collect.keySet().iterator();
-        
+
         List<ChartData> chartData = new ArrayList<>();
 
         while (keys.hasNext()){

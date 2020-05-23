@@ -47,8 +47,26 @@ public class ApiDomainUtils {
 
     public static boolean isNotEmpty(List<?> list){ return ! Collections.isEmpty(list); }
 
+    /**
+     * Not start string
+     *
+     * @param str
+     * @param str2
+     * @return
+     */
     public static boolean notStartWith(String str , String str2){
         return !str.startsWith(str2);
+    }
+
+    /**
+     * str1 not contains str2
+     *
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public static boolean isNotContains(String str1, String str2) {
+        return !str1.contains(str2);
     }
 
     public static boolean isNotTrue(Boolean b){
