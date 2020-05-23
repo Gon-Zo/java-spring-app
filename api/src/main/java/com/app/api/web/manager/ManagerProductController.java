@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/manager/product")
 @AllArgsConstructor
-public class ProductController {
+public class ManagerProductController {
 
     private ProductService service;
 
