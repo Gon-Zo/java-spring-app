@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/manager/order")
 @AllArgsConstructor
-public class OrderController {
+public class ManagerOrderController {
 
     private final OrderService service;
 

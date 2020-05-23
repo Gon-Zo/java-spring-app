@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/manager/review")
-public class ReviewController {
+public class ManagerReviewController {
 
     private final ReviewService service;
 
