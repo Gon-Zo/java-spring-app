@@ -10,7 +10,13 @@ export function setDay(dispatch , payload) {
 }
 
 export function $httpOrders(dispatch) {
-    axios.get(`/manager/order/`)
+    axios.get(`/manager/order`, {
+        params: {
+            page: 0,
+            size: 10,
+            sort: '',
+        }
+    })
         .then(res => dispatch(setOrders(res.data)))
         .catch(err => console.log(err))
 }

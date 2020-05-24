@@ -20,67 +20,6 @@ export default () => {
         $httpOrders(dispatch)
     }, [])
 
-    function RenderContent() {
-
-        if (typeof init.orders == 'undefined') {
-            return null;
-        }
-
-        let _onScroll = () =>{
-
-            let element = document.getElementById("test1");
-
-            let scrollHeight =  element.scrollHeight;
-            let clientHeight = element.clientHeight;
-            let scrollTop = element.scrollTop;
-            let height = scrollHeight - clientHeight;
-
-            if(height == scrollTop){
-                $setOffset(dispatch, init.offset + 10)
-                $setList(dispatch, init.orders.slice(0, init.offset))
-
-            }
-
-        }
-
-        let key = Object.keys(init.list[0])
-
-        return(
-            <div id="test1" className="tableFixHead mt-3" onScroll={() => _onScroll()}>
-
-                <Table id="rowHeight" striped bordered hover variant={theme ? "light" : "dark"}>
-                    <thead>
-                    <tr>
-                        <th className="table-hd-bg">#</th>
-                        {
-                            key.map((k, i) => (
-                                <th className="table-hd-bg" key={i}>{k}</th>
-                            ))
-                        }
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        init.list.map(( k , z ) => (
-                            <tr key={z}>
-                                <td>{z + 1}</td>
-                                {
-                                    key.map((d , i) =>(
-                                        <td key={i}>
-                                            { k[`${d}`]}
-                                        </td>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                    </tbody>
-                </Table>
-
-            </div>
-        )
-    }
-
     return (
         <div className="container-main">
 
@@ -103,7 +42,7 @@ export default () => {
                         onDayChange={day => setDay(dispatch, {type: 'T', day: day})}
                     ></DayPickerInput>
                 </div>
-                <RenderContent/>
+
             </div>
         </div>
     )
