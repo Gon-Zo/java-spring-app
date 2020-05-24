@@ -66,7 +66,7 @@ public class QuestionSupportImpl extends QuerydslRepositorySupport implements Qu
     }
 
     @Override
-    public void update(QustionResponseDto dto) {
+    public void update(long seq, QustionResponseDto dto) {
 
         UpdateClause<JPAUpdateClause> updateQuery = update(question);
 
@@ -81,6 +81,8 @@ public class QuestionSupportImpl extends QuerydslRepositorySupport implements Qu
         if (isNotEmpty(dto.getIsLock())){
             updateQuery.set(question.isLock , dto.getIsLock());
         }
+
+        updateQuery.where(question.seq.eq(seq));
 
         updateQuery.execute();
 

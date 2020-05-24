@@ -58,7 +58,9 @@ public enum ErrorCode {
 
     INIT_ROLE_ERROR( 500 , "I001" , "init to Role Error") ,
 
-    REVIEW_NOT_FOUND(500 , "R001" , "Review Not Found")
+    REVIEW_NOT_FOUND(500 , "R001" , "Review Not Found"),
+
+    QUESTION_NOT_FOUND(500 , "Q001" , "Question Not Found")
 
     ;
 

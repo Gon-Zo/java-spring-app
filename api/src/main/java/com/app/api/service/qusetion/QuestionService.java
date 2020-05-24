@@ -11,8 +11,10 @@ public interface QuestionService {
 
     void removeQuestion(long seq);
 
-    void updateQuestion(QustionResponseDto dto);
+    void updateQuestion(long seq, QustionResponseDto dto);
 
     void createQuestion(QustionResponseDto dto);
+
+    Question getQuestion(long seq);
 
 }
