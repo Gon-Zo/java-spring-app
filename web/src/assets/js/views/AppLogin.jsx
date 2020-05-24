@@ -124,10 +124,11 @@ function MyVerticallyCenteredModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-               <Form>
+               <Form >
                    <Form.Group>
                        <Form.Label>Email address</Form.Label>
-                       <Form.Control type="email" placeholder="Enter email"
+                       <Form.Control type="email" placeholder="Enter email"A
+                                     autoComplete="nope"
                                      ref={input => setEmail(input)}
                        />
                    </Form.Group>
