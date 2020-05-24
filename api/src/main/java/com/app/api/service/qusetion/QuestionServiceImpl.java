@@ -43,8 +43,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     @Transactional
-    public void updateQuestion(QustionResponseDto dto) {
-        support.update(dto);
+    public void updateQuestion(long seq, QustionResponseDto dto) {
+        support.update(seq , dto);
     }
 
     @Override
@@ -75,6 +75,12 @@ public class QuestionServiceImpl implements QuestionService{
 
         }
 
+    }
+
+    @Override
+    public Question getQuestion(long seq) {
+        return repository.findById(seq)
+                .orElseThrow(() -> new BusinessException(ErrorCode.QUESTION_NOT_FOUND));
     }
 
 }

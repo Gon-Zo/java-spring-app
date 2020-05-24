@@ -9,6 +9,6 @@ public interface QuestionSupport {
 
     Page<Question> findByPage(PageableDto dto);
 
-    void update(QustionResponseDto dto);
+    void update(long seq, QustionResponseDto dto);
 
 }
