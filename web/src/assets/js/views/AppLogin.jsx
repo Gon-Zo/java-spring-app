@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
 import {Container, Form, Button, Row, Col} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {$httpLogin} from "../modules/api/user";
+import {$httpLogin, $signUpUser} from "../modules/api/user";
 import { useHistory } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
-import axios from 'axios';
 
 export default () => {
 
@@ -13,17 +12,13 @@ export default () => {
     let [modalShow, setModalShow] = React.useState(false);
 
     const history = useHistory();
-
-    let idInput;
-    let pwdInput;
-
     let dispatch = useDispatch();
 
-    const loginUser = () => {
-        $httpLogin(dispatch, {"email": id, "password": pwd}, history)
+    let loginUser = () => {
+        $httpLogin(dispatch, {"email": id.value, "password": pwd.value}, history)
     };
 
-    const _keyDown = (event) => {
+    let _keyDown = (event) => {
         if(event.key === 'Enter'){
            loginUser()
         }
@@ -46,11 +41,7 @@ export default () => {
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control type="email" placeholder="Enter email"
-                                                  ref={input => idInput = input}
-                                                  onChange={() => {
-                                                      let val = idInput.value
-                                                      setId(val)
-                                                  }}
+                                                  ref={input => setId(input)}
                                                   onKeyPress={_keyDown}
                                     />
                                 </Form.Group>
@@ -58,11 +49,7 @@ export default () => {
                                 <Form.Group controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" placeholder="Password"
-                                                  ref={input => pwdInput = input}
-                                                  onChange={() => {
-                                                      let val = pwdInput.value
-                                                      setPwd(val)
-                                                  }}
+                                                  ref={input => setPwd(input)}
                                                   onKeyPress={_keyDown}
                                     />
                                 </Form.Group>
@@ -80,6 +67,7 @@ export default () => {
                             </Form>
 
                             <MyVerticallyCenteredModal
+                                dispatch={dispatch}
                                 show={modalShow}
                                 onHide={() => setModalShow(false)}
                             />
@@ -98,13 +86,30 @@ export default () => {
 
 function MyVerticallyCenteredModal(props) {
 
-    let [ email , setEmail ] = useState("");
+    let dispatch = props.dispatch
 
-    let [passworad, setPasswoorad] = useState("");
+    let [email, setEmail] = useState("");
 
-    let [address , setAddress ] = useState("");
+    let [pwd, setPwd] = useState("");
+
+    let [address, setAddress] = useState("");
 
     let [birthDate, setBirthDate] = useState("");
+
+    let _onClickOk = () => {
+
+        $signUpUser(dispatch, {
+            "email": email.value,
+            "password": pwd.value,
+            "address": address.value,
+            "birthDate": birthDate.value,
+            "img": "default.jpg",
+            "isUse": true
+        })
+            .then((res) => props.onHide)
+            .catch(err => console.log(err))
+
+    }
 
     return (
         <Modal
@@ -129,7 +134,7 @@ function MyVerticallyCenteredModal(props) {
                    <Form.Group>
                        <Form.Label>Password</Form.Label>
                        <Form.Control type="password" placeholder="Password"
-                                     ref={input => setPasswoorad(input)}
+                                     ref={input => setPwd(input)}
                        />
                    </Form.Group>
                    <Form.Group>
@@ -149,21 +154,7 @@ function MyVerticallyCenteredModal(props) {
                </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={()=>{
-                    let param = {
-                        "email" : email.value ,
-                        "password" : passworad.value ,
-                        "address" : address.value ,
-                        "birthDate" : birthDate.value ,
-                        "img" : "default.jpg" ,
-                        "isUse" : true
-                    }
-
-                    axios.post(`/sign?roles=M`, param)
-                        .then((res) => props.onHide)
-                        .catch(err => alert("ERROR"))
-
-                }}>Ok</Button>
+                <Button onClick={()=> _onClickOk}>Ok</Button>
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>

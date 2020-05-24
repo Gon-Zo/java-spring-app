@@ -97,3 +97,6 @@ export const $pushSortData = (dispatch , data) => {
     dispatch(putSort(data))
 }
 
+export const $signUpUser = (dispatch, payload) => {
+    return axios.post(`/sign?roles=M`, payload)
+}
