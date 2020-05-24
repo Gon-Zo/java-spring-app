@@ -32,7 +32,7 @@ public class ManagerReviewController {
 
     @DeleteMapping("/{seq}")
     public void removeReview(@PathVariable long seq){
-        service.removeReview(seq);
+        service.deleteBy(seq);
     }
 
 }
