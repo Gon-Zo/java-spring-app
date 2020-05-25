@@ -51,12 +51,8 @@ export const $updateUser = (dispatch, payload) => {
 };
 
 export const $deleteUser = (dispatch, payload) => {
-    let idx = payload.idx
-    let data = payload.data
-    axios.delete(`/admin/user/${idx}`)
-        .then(res => {
-          $fetchUsers(dispatch , data)
-        })
+    axios.delete(`/admin/user/${payload}`)
+        .then(res => {})
         .catch(err => console.log(err))
 }
 
@@ -97,6 +93,10 @@ export const $pushSortData = (dispatch , data) => {
     dispatch(putSort(data))
 }
 
-export const $signUpUser = (dispatch, payload) => {
+export const $signUpManager = (dispatch, payload) => {
     return axios.post(`/sign?roles=M`, payload)
+}
+
+export const $signUpUser = (dispatch, payload) => {
+    return axios.post(`/sign?roles=U`, payload)
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Container, Form, Button, Row, Col} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {$httpLogin, $signUpUser} from "../modules/api/user";
+import {$httpLogin, $signUpManager } from "../modules/api/user";
 import { useHistory } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 
@@ -98,7 +98,7 @@ function MyVerticallyCenteredModal(props) {
 
     let _onClickOk = () => {
 
-        $signUpUser(dispatch, {
+        $signUpManager(dispatch, {
             "email": email.value,
             "password": pwd.value,
             "address": address.value,
