@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/url")
-public class UrlController {
+public class AdminUrlController {
 
     private final UrlService urlService;
 
-    public UrlController(UrlService urlService) {
+    public AdminUrlController(UrlService urlService) {
         this.urlService = urlService;
     }
 
