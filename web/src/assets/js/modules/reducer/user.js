@@ -65,9 +65,6 @@ const userReducer = (state = initUser, action) => {
             if (typeof temp == 'undefined') {
                 data = `${data}:DESC`
             } else {
-                // let idxOf = state.sort.indexOf(temp)
-                // state.sort.remove(idxOf)
-
                 let tempArray = temp.split(":")
                 let sortting = tempArray[1]
                 sortting = sortting == 'ASC' ? 'DESC' : 'ASC'
