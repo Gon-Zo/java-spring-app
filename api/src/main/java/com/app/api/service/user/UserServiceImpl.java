@@ -3,7 +3,7 @@ package com.app.api.service.user;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.role.RoleRepository;
 import com.app.api.domain.role.UserRole;
-import com.app.api.domain.role.support.UserRoleRepository;
+import com.app.api.domain.role.UserRoleRepository;
 import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import com.app.api.domain.user.support.UserSupport;
@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -63,7 +64,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteByUser(long seq) {
+//        userRoleRepository.deleteById();
         userRepository.deleteById(seq);
     }
 

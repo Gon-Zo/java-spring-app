@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin/role")
-public class RoleController {
+public class AdminRoleController {
 
     private final RoleService roleService;
 
-    public RoleController(RoleService roleService) {
+    public AdminRoleController(RoleService roleService) {
         this.roleService = roleService;
     }
 

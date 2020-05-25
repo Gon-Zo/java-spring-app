@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/menu")
-public class MenuController {
+public class AdminMenuController {
 
     private final MenuService menuService;
 
-    public MenuController(MenuService menuService) {
+    public AdminMenuController(MenuService menuService) {
         this.menuService = menuService;
     }
 
