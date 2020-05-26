@@ -29,7 +29,7 @@ function ProductEditor(props) {
         if (method === 'I') {
             createProduct(dispatch, data)
         } else {
-            updateProduct(dispatch, data)
+            // updateProduct(dispatch, data)
         }
     };
 

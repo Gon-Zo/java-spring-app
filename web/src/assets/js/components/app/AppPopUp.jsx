@@ -27,6 +27,8 @@ export default (props) =>{
                return "email"
            case "password":
                return "password"
+           case "number":
+               return "number"
            default:
                return "text"
        }
