@@ -1,7 +1,6 @@
 import React  from 'react';
 import axios from 'axios';
 import {setProducts, setProduct, isOpenProd, setType, setIsSold, setChartData} from '../reducer/product'
-import {decodeJwt} from "../static/auth";
 
 /**
  * 상품 리스트 호출
