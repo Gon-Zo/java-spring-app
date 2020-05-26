@@ -66,8 +66,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteByUser(long seq) {
-//        userRoleRepository.deleteById();
-        userRepository.deleteById(seq);
+        userRoleRepository.deleteByUserSeq(seq);
     }
 
     @Override
