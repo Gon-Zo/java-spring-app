@@ -30,12 +30,8 @@ export function $httpProduct(dispatch , payload ) {
  * @returns {Promise<void>}
  */
 export function createProduct(dispatch, payload) {
-    payload['user_no'] = decodeJwt().seq
-    axios.post(`/admin/product`, payload)
-        .then(res =>{
-            $httpProduct(dispatch)
-            dispatch(isOpenProd())
-        })
+    return axios.post(`/manager/product`, payload)
+        .then(res => {})
         .catch(error => console.log(error))
 }
 
@@ -46,7 +42,7 @@ export function createProduct(dispatch, payload) {
  * @returns {Promise<void>}
  */
 export function getProduct(dispatch, seq) {
-    axios.get(`/admin/product/${seq}`)
+    axios.get(`/manager/product/${seq}`)
         .then(res => dispatch(setProduct(res.data)))
         .catch(error => console.log(error))
 }
@@ -58,7 +54,8 @@ export function getProduct(dispatch, seq) {
  * @returns {Promise<void>}
  */
 export function updateProduct(dispatch, payload) {
-    axios.put(`/admin/product/${payload.seq}`, parserParam(payload))
+    console.log('update', JSON.stringify(payload))
+    return axios.put(`/manager/product/${payload.seq}`, parserParam(payload))
         .catch(err=>console.log(err))
 }
 
@@ -68,9 +65,9 @@ export function updateProduct(dispatch, payload) {
  * @param seq
  * @returns {Promise<void>}
  */
-export function $deleteByProd(dispatch, payload , seq) {
-    axios.delete(`/admin/product/${seq}`)
-        .then(res => $httpProduct(dispatch , payload))
+export function $deleteByProd(dispatch , seq) {
+    axios.delete(`/manager/product/${seq}`)
+        .then(res => {} )
         .catch(err => console.log(err))
 }
 

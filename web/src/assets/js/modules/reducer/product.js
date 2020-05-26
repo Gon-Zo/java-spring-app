@@ -44,7 +44,7 @@ let productReducer = (state = initProduct, action) => {
             state.methodType = action.data;
             break;
         case ISSOLD :
-            state.products.data[action.idx].is_sold = action.flag
+            state.products.content[action.idx].isSold = action.flag
             break;
         case SETCHART :
             state.chartData = action.data

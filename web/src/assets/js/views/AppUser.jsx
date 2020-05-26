@@ -27,7 +27,7 @@ export default () => {
 
     let [isOpen , setIsOpen] = useState(false)
 
-    let [ userInfo , setUserInfo ] = useState(undefined)
+    let [userInfo, setUserInfo] = useState(undefined)
 
     useEffect(() => {
         $fetchUsers(dispatch, initUser)
