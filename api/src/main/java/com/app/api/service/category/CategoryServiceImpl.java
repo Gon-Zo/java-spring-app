@@ -6,6 +6,8 @@ import com.app.api.domain.category.support.CategorySupport;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.web.dto.CategoryResponseDto;
+import com.app.api.web.dto.PageableDto;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -49,6 +51,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> getCategories() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<Category> getPages(PageableDto dto) {
+        return support.findByPage(dto);
     }
 
 }

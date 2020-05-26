@@ -4,7 +4,9 @@ import com.app.api.domain.category.Category;
 import com.app.api.service.category.CategoryService;
 import com.app.api.web.dto.CategoryResponseDto;
 //import org.springframework.stereotype.Component;
+import com.app.api.web.dto.PageableDto;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class ManagerCategoryController {
        service.updateCategory(seq , dto);
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Category> showCategories(){
        return service.getCategories();
     }
@@ -39,6 +41,11 @@ public class ManagerCategoryController {
     @GetMapping("/{seq}")
     public Category showCategory(@PathVariable long seq) {
         return service.getCategory(seq);
+    }
+
+    @GetMapping("")
+    public Page<Category> showPages(PageableDto dto) {
+        return service.getPages(dto);
     }
 
 }
