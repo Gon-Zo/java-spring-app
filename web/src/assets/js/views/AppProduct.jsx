@@ -3,9 +3,7 @@ import {
     $deleteByProd,
     $httpProduct,
     $httpProductChart,
-    $isOpen,
     $setIsSold,
-    $setMethod,
     $setProduct, createProduct, updateProduct
 } from '../modules/api/product'
 import {useDispatch, useSelector} from "react-redux";
