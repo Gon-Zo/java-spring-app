@@ -23,12 +23,12 @@ public class ManagerProductController {
     private ProductService service;
 
     @PostMapping("")
-    public void makeProduct(ProductResponseDto dto){
+    public void makeProduct(@RequestBody ProductResponseDto dto) {
         service.createProduct(dto);
     }
 
-    @PutMapping("")
-    public void updateInfo(long seq , ProductResponseDto dto){
+    @PutMapping("/{seq}")
+    public void updateInfo(@PathVariable long seq , @RequestBody ProductResponseDto dto){
         service.updateProduct(seq, dto);
     }
 

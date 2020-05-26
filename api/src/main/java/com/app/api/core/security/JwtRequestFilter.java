@@ -10,6 +10,7 @@ import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.role.support.RoleSupport;
+import com.app.api.domain.url.Url;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +21,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.app.api.utils.ApiDomainUtils.notStartWith;
 import static com.app.api.utils.ApiDomainUtils.isNotContains;
