@@ -70,19 +70,6 @@ export function $deleteByProd(dispatch , seq) {
         .catch(err => console.log(err))
 }
 
-/**
- * 모달 오픈
- * @param dispatch
- * @returns {Promise<void>}
- */
-export function $isOpen(dispatch) {
-    dispatch(isOpenProd())
-}
-
-export function $setMethod(dispatch , payload) {
-    dispatch(setType(payload))
-}
-
 export function $setProduct(dispatch, payload) {
     dispatch(setProduct(payload))
 }
