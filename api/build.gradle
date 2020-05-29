@@ -5,6 +5,7 @@ plugins {
     id "com.ewerk.gradle.plugins.querydsl" version "${QuerydslVersion}"
     id 'java'
     id 'com.bmuschko.docker-remote-api' version "${DockerRemoteApiVersion}"
+    id "base"
 }
 
 import com.bmuschko.gradle.docker.tasks.container.*
@@ -61,7 +62,7 @@ repositories {
 }
 
 dependencies {
-    
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.2.4.RELEASE'
