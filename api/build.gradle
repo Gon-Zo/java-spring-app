@@ -5,7 +5,7 @@ plugins {
     id "com.ewerk.gradle.plugins.querydsl" version "${QuerydslVersion}"
     id 'java'
     id 'com.bmuschko.docker-remote-api' version "${DockerRemoteApiVersion}"
-    id "base"
+//    id "base"
 }
 
 import com.bmuschko.gradle.docker.tasks.container.*
@@ -44,7 +44,7 @@ bootJar {
 
 group = 'com.app'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '8'
+sourceCompatibility = '1.8'
 
 configurations {
     developmentOnly
