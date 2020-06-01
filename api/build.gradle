@@ -132,4 +132,3 @@ clean {
     delete file(querydslSrcDir)
 }
 
-mainClassName = 'api'
