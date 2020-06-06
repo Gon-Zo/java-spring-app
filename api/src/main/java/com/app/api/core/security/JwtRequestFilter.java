@@ -124,6 +124,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private boolean checkingToUrl(String url) {
         return notStartWith(url, "/login") &&
                 notStartWith(url, "/sign") &&
+                notStartWith(url, "/health") &&
                 isNotContains(url, "/client");
     }
 
