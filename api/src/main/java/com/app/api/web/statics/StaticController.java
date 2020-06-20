@@ -29,8 +29,7 @@ import java.util.List;
 public class StaticController {
 
     private final UserService userService;
-
-    private final AuthenticationManager authenticationManager;
+private final AuthenticationManager authenticationManager;
 
     private final JwtTokenUtil jwtTokenUtil;
 

@@ -10,7 +10,6 @@ import com.app.api.core.auth.JwtUserDetailsService;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.domain.role.support.RoleSupport;
-import com.app.api.domain.url.Url;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,9 +18,13 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.web.util.ContentCachingRequestWrapper;
+import org.springframework.web.util.ContentCachingResponseWrapper;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,7 +37,9 @@ import static com.app.api.utils.ApiDomainUtils.isNotTrue;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private JwtUserDetailsService jwtUserDetailsService;
+
     private JwtTokenUtil jwtTokenUtil;
+
     private RoleSupport roleSupport;
 
     public JwtRequestFilter(JwtUserDetailsService jwtUserDetailsService,
@@ -46,7 +51,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
         log.info("======== {} ========", "JwtRequestFilter");
 
@@ -59,6 +64,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
 
         String jwtToken = null;
+
+//        if(url.startsWith("/test/login")){
+////            String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+//            List<String> test = request.getReader().lines().collect(Collectors.toList());
+//            String test1 = "";
+//        }
 
         if (checkingToUrl(url)) {
 
