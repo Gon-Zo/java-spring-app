@@ -5,7 +5,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-3-34-48-181.ap-northeast-2.compute.amazonaws.com:2345/kt_dev</jdbc-url>
+      <jdbc-url>jdbc:postgresql://ec2-3-34-48-181.ap-northeast-2.compute.amazonaws.com:2345/java_dev</jdbc-url>
     </data-source>
   </component>
 </project>

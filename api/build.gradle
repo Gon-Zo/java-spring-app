@@ -15,7 +15,7 @@ task createDockerfile(type: Dockerfile) {
     from 'java:8'
     addFile("demo.jar" , "./demo.jar")
     entryPoint('java')
-    defaultCommand('-XX:MaxMetaspaceSize=512m', '-XX:MetaspaceSize=256m', '-jar', 'demo.jar')
+    defaultCommand('-XX:MaxMetaspaceSize=512m', '-XX:MetaspaceSize=256m', '-jar', '-Djasypt.encryptor.password=jkpark1234', '-Dspring.profiles.active=dev', 'demo.jar')
 }
 
 task buildImage(type: DockerBuildImage) {
@@ -27,9 +27,12 @@ task pushImage(type: DockerPushImage) {
     dependsOn buildImage
     images.set(buildImage.images)
     registryCredentials {
-        username = dockerUser
-        password = dockerPassword
-        email = dockerEmail
+
+        // todo : Not Commit
+//        username = dockerUser
+//        password = dockerPassword
+//        email = dockerEmail
+
     }
 }
 
@@ -61,8 +64,7 @@ repositories {
 }
 
 dependencies {
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.2.4.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-web'
