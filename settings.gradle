@@ -1,3 +1,4 @@
 rootProject.name = 'java-spring-boot'
 
-include('api')
+include 'api'
+include 'web'
