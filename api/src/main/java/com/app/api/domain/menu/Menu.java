@@ -30,13 +30,17 @@ public class Menu extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Url> authUrl;
 
+    @Column(name = "is_use")
+    private Boolean isUse;
+
     @Builder
-    public Menu(String title  , String url , String icon , Long menuOrder , List<Url> authUrl) {
+    public Menu(String title  , String url , String icon , Long menuOrder , List<Url> authUrl , Boolean isUse) {
         this.title = title;
         this.url = url;
         this.icon = icon;
         this.menuOrder = menuOrder;
         this.authUrl = authUrl;
+        this.isUse = isUse;
     }
 
 }

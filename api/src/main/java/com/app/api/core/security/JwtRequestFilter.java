@@ -65,12 +65,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String jwtToken = null;
 
-//        if(url.startsWith("/test/login")){
-////            String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-//            List<String> test = request.getReader().lines().collect(Collectors.toList());
-//            String test1 = "";
-//        }
-
         if (checkingToUrl(url)) {
 
             if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
