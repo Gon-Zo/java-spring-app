@@ -45,16 +45,6 @@ export default () => {
     );
 }
 
-// let menuList = [
-//     {url: '/home', icon: i.faHome, title: "Home"},
-//     {url: '/dashboard', icon: i.faChartBar, title: "Dashboard"},
-//     {url: '/user', icon: i.faUsers, title: "users"},
-//     {url: '/product', icon: i.faShoppingCart, title: "product"},
-//     {url: '/category', icon: i.faClipboardList, title: "category"},
-//     {url: '/order', icon: i.faListAlt, title: "order"},
-//     {url: '/setting', icon: i.faCog, title: "setting"},
-// ]
-
 function MenuItem(props) {
 
     let url = props.url
