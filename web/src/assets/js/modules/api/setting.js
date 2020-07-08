@@ -23,8 +23,6 @@ export function $updateStore(dispatch, payload) {
     let temp = payload
     delete temp.user
     axios.put(`/manager/store/1`, temp)
-        .then(res => {
-            $getStore(dispatch, payload)
-        })
+        .then(res => $getStore(dispatch, payload))
         .catch((error) => console.log(error))
 }
