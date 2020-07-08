@@ -86,7 +86,7 @@ export default () => {
 
 function MyVerticallyCenteredModal(props) {
 
-    let dispatch = props.dispatch
+    const dispatch = props.dispatch
 
     let [email, setEmail] = useState("");
 
@@ -96,7 +96,7 @@ function MyVerticallyCenteredModal(props) {
 
     let [birthDate, setBirthDate] = useState("");
 
-    let _onClickOk = () => {
+    const _onClickOk = () => {
 
         $signUpManager(dispatch, {
             "email": email.value,

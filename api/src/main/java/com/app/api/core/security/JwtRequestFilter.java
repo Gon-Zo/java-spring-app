@@ -18,15 +18,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.springframework.web.util.ContentCachingRequestWrapper;
-import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.app.api.utils.ApiDomainUtils.notStartWith;
 import static com.app.api.utils.ApiDomainUtils.isNotContains;
@@ -88,7 +83,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
                 if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 

@@ -40,7 +40,7 @@ public class MenuServiceImpl implements MenuService {
                 .map(m -> roleSupport.findByTitle(m))
                 .map(v -> v.getMenus())
                 .flatMap(Collection::parallelStream)
-                .filter( m -> m.getIsUse())
+                .filter( m -> m.getIsUse() == Boolean.TRUE)
                 .sorted(Comparator.comparing(Menu::getMenuOrder))
                 .collect(Collectors.toList());
     }
