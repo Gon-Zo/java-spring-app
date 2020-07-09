@@ -9,9 +9,11 @@ import com.app.api.domain.user.UserRepository;
 import com.app.api.web.dto.NoticeResponseDto;
 import com.app.api.web.dto.PageableDto;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@Service
 public class NoticeServiceImpl implements NoticeService {
 
     private final NoticeRepository noticeRepository;
