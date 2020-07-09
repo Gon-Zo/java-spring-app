@@ -43,8 +43,7 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
 
     public UserSupportImpl(EntityManager entityManager, JPAQueryFactory jpaQueryFactory) {
         super(User.class);
-        this.entityManager = entityManager;
-        this.jpaQueryFactory = jpaQueryFactory;
+        this.entityManager = entityManager; this.jpaQueryFactory = jpaQueryFactory;
     }
 
     @Override
@@ -71,7 +70,6 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
 
     @Override
     public Page<User> findByUsers( List<String> roleTitles , PageableDto dto) {
-
 
         JPAQuery<User> query = jpaQueryFactory
                 .selectFrom(user)
