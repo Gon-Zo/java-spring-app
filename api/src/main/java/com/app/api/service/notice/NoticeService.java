@@ -6,7 +6,6 @@ import com.app.api.web.dto.PageableDto;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-@Service
 public interface NoticeService {
 
     void createNotice(NoticeResponseDto dto);
