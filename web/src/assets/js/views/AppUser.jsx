@@ -1,13 +1,9 @@
-// todo : fetch to change ...
-
 import React, {useEffect, useState} from "react";
 import Table from "../components/app/Table";
 import {useSelector, useDispatch} from "react-redux";
 import {
     $deleteUser,
     $fetchUsers,
-    $isUserModalOpen,
-    $setUser,
     $isUse,
     $pushSortData,
     $updateUser, $signUpUser
@@ -21,24 +17,24 @@ import {Button} from "react-bootstrap";
 
 export default () => {
 
-    let dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-    let initUser = useSelector(state => state.userReducer, []);
+    const initUser = useSelector(state => state.userReducer, []);
 
-    let [isOpen , setIsOpen] = useState(false)
+    const [isOpen , setIsOpen] = useState(false)
 
-    let [userInfo, setUserInfo] = useState(undefined)
+    const [userInfo, setUserInfo] = useState(undefined)
 
     useEffect(() => {
         $fetchUsers(dispatch, initUser)
     }, []);
 
-    let _onReFresh = (val) => {
+    const _onReFresh = (val) => {
         initUser.page = val
         $fetchUsers(dispatch, initUser)
     }
 
-    let filter = [
+    const filter = [
         {key: 'email', name: "이메일" , type : "email"},
         {key: 'password', name: "비밀번호" , type :"password"},
         {key: 'birthDate', name: "생년월일" , type :"date"},
@@ -47,35 +43,35 @@ export default () => {
         {key: 'createdAt', name: "등록일" , type: "date"}
     ]
 
-    let payload = _bindData(initUser.users , filter);
+    const payload = _bindData(initUser.users , filter);
 
-    let _isUse = (idx, flag) => {
-        let data = initUser.users.content[idx]
+    const  _isUse = (idx, flag) => {
+        const data = initUser.users.content[idx]
         $isUse(dispatch, idx, data, flag)
     }
 
-    let _onEdit = (idx) => {
+    const _onEdit = (idx) => {
         let data = payload.data[idx]
         setUserInfo(data)
         setIsOpen(true)
     }
 
-    let _onDelete = (idx) => {
-        let seq = payload.data[idx].seq;
+    const _onDelete = (idx) => {
+        const seq = payload.data[idx].seq;
         $deleteUser(dispatch, seq)
         $fetchUsers(dispatch, initUser)
     }
 
-    let _sortTable = (idx) => {
-        let key = payload.key[idx]
+    const _sortTable = (idx) => {
+        const key = payload.key[idx]
         $pushSortData(dispatch, key)
     }
 
-    let _onHidden = () =>{
+    const _onHidden = () =>{
        setIsOpen(false)
     }
 
-    let _onUpdate = (data) =>{
+    const _onUpdate = (data) =>{
         if (typeof data.seq == 'undefined' ){
             $signUpUser(dispatch, data)
         }else{
@@ -85,7 +81,7 @@ export default () => {
         $fetchUsers(dispatch, initUser)
     }
 
-    let _onCreate = () => {
+    const _onCreate = () => {
         setIsOpen(true)
         setUserInfo({
             email: '',
