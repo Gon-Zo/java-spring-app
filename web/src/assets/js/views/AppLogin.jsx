@@ -7,18 +7,21 @@ import Modal from "react-bootstrap/Modal";
 
 export default () => {
 
-    let [id, setId] = useState('')
-    let [pwd, setPwd] = useState('')
-    let [modalShow, setModalShow] = React.useState(false);
+    const [id, setId] = useState('')
+
+    const [pwd, setPwd] = useState('')
+
+    const [modalShow, setModalShow] = React.useState(false);
 
     const history = useHistory();
-    let dispatch = useDispatch();
 
-    let loginUser = () => {
+    const dispatch = useDispatch();
+
+    const loginUser = () => {
         $httpLogin(dispatch, {"email": id.value, "password": pwd.value}, history)
     };
 
-    let _keyDown = (event) => {
+    const _keyDown = (event) => {
         if(event.key === 'Enter'){
            loginUser()
         }
@@ -30,9 +33,6 @@ export default () => {
                 <Container>
 
                     <Row className="test">
-                        <p>
-                            Logo Box
-                        </p>
                     </Row>
 
                     <Row className="test">
@@ -44,9 +44,7 @@ export default () => {
                                                   ref={input => setId(input)}
                                                   onKeyPress={_keyDown}
                                     />
-                                </Form.Group>
-                                {/*input end*/}
-                                <Form.Group controlId="formBasicPassword">
+                                </Form.Group> {/*input end*/} <Form.Group controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" placeholder="Password"
                                                   ref={input => setPwd(input)}

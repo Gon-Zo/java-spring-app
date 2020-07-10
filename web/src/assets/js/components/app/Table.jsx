@@ -8,19 +8,19 @@ import Spinner from "react-bootstrap/Spinner";
 
 export default (props) => {
 
-    let payload = props.data
+    const payload = props.data
 
-    let keys = props.keys
+    const keys = props.keys
 
-    let _isChange = props.switch
+    const _isChange = props.switch
 
-    let _isDelete = props.delete
+    const _isDelete = props.delete
 
-    let _isEdit = props.update
+    const _isEdit = props.update
 
-    let theme = useSelector(state => state.userReducer, []).isTheme
+    const theme = useSelector(state => state.userReducer, []).isTheme
 
-    let [sortArray, setSortArray] = useState([])
+    const [sortArray, setSortArray] = useState([])
 
     if (typeof payload == 'undefined' || payload.length == 0) {
 
