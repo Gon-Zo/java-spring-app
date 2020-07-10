@@ -8,13 +8,9 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from './assets/js/modules/reducer';
 import {Provider} from 'react-redux';
 
-// ========= CSS import
-
-import './assets/styles/index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-day-picker/lib/style.css";
-
-// ========= Axios Config
+import './assets/styles/index.scss'
 
 axios.defaults.baseURL = 'http://localhost:8080'
 
@@ -48,16 +44,8 @@ axios.interceptors.response.use(response => {
 
     console.log('code', code)
 
-    // if (err.code === 'E001' || err.code === 'E002' || err.code === 'E003') {
-    //     alert("세션 만료")
-    //     sessionStorage.removeItem("Token")
-    //     window.location.reload(true);
-    // }
-
     return Promise.reject(error);
 });
-
-// ========= HTML Rendering
 
 const store = createStore(rootReducer, composeWithDevTools());
 
