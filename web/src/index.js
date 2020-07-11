@@ -5,7 +5,7 @@ import axios from 'axios'
 import App from "./App";
 import {createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import rootReducer from './assets/js/modules/reducer';
+import rootReducer from './assets/modules/reducer/index';
 import {Provider} from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
