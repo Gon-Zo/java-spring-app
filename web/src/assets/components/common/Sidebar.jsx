@@ -1,17 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as solid from '@fortawesome/free-solid-svg-icons'
 import * as regular from '@fortawesome/free-regular-svg-icons'
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {_setMenus} from "../../modules/action/common";
-import Common from "../../modules/reducer/common";
 import {getNowUrl} from "../../modules/constant/app-function";
+import TEST from '../../img/test.jpg'
 
 let menus = [
-    {title: "유저", icon: "faUser:R", url: "/home", isOn: false},
-    {title: "대쉬보드", icon: "faChartBar:R", url: "/Dashboard", isOn: false},
-    {title: "설정", icon: "faCog:S", url: "/Setting", isOn: false},
+    {title: "홈", icon: "faHome:S", url: "/home", isOn: false},
+    {title: "매니지먼트", icon: "faTasks:S", url: "/management", isOn: false},
+    {title: "대쉬보드", icon: "faChartBar:R", url: "/dashboard", isOn: false},
+    {title: "설정", icon: "faCog:S", url: "/setting", isOn: false},
 ]
 
 export default () => {
@@ -21,29 +22,41 @@ export default () => {
     const initCommon  = useSelector(state => state.Common , [])
 
     useEffect(() => {
-
         const url = getNowUrl()
-
         _setMenus(dispatch , {data : menus , url : url})
     }, [])
 
     return (
         <nav id="sidebar" className="p-5 ">
-
             <div className="sidebar-header">
                 <h5>Doc App</h5>
             </div>
 
             <ul className="list-unstyled components mt-5">
-
                 <MenuGroup
                     dispatch={dispatch}
                     payload={initCommon.menus}/>
-
+                <UserItem/>
             </ul>
-
         </nav>
     )
+}
+
+function UserItem(props) {
+
+    return (
+        <li className="menu-items m-2 ">
+            <Link to={"/"}>
+                <div className={"img-box"}>
+                    <img id={"imgIcon"}  src={TEST}/>
+                </div>
+                <div className="icon-text mt-3">
+                    <span>테스터 1</span>
+                </div>
+            </Link>
+        </li>
+    )
+
 }
 
 function MenuGroup(props) {
