@@ -2,24 +2,25 @@ import {onErrorMenu, onLoadMenu, onSuccessMenu} from "../reducer/common";
 import {getNowUrl} from "../constant/app-function";
 
 export function _setMenus(dispatch, payload) {
+
     dispatch(onLoadMenu())
 
     try {
 
-        // const url = getNowUrl()
+        const url = payload.url
 
-        // const href = window.location.href
-        // console.log(href)
-        // const urlArray = href.split("#")
-        // const url = urlArray[1]
-        //
-        // console.log(url)
-        //
-        // payload.forEach(f => {
-        //     m.isOn = f.url == url
-        // })
+        const data = payload.data
 
-        dispatch(onSuccessMenu(payload))
+        const result = data.map(m => {
+           return {
+               title : m.title ,
+               icon : m.icon ,
+               url : m.url ,
+               isOn : m.url == url
+           }
+        })
+
+        dispatch(onSuccessMenu(result))
 
     } catch (e) {
         dispatch(onErrorMenu(e))
