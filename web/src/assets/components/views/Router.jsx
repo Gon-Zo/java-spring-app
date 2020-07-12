@@ -6,6 +6,7 @@ import Sidebar from "../common/Sidebar";
 import Home from './Home'
 import Dashboard from './Dashboard'
 import Setting from './Setting'
+import Management from './Management'
 
 export default () => {
     return (
@@ -19,8 +20,9 @@ export default () => {
                 <div className="container-fluid">
                     <Switch>
                         <Route exact path="/home" component={Home}/>
-                        <Route path="/Dashboard" component={Dashboard}/>
-                        <Route path="/Setting" component={Setting}/>
+                        <Route path="/management" component={Management}/>
+                        <Route path="/dashboard" component={Dashboard}/>
+                        <Route path="/setting" component={Setting}/>
                     </Switch>
                 </div>
 
