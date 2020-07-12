@@ -3,8 +3,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as solid from '@fortawesome/free-solid-svg-icons'
 import * as regular from '@fortawesome/free-regular-svg-icons'
 import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {_setMenus} from "../../modules/action/common";
+import Common from "../../modules/reducer/common";
+import {getNowUrl} from "../../modules/constant/app-function";
 
 let menus = [
     {title: "유저", icon: "faUser:R", url: "/home", isOn: false},
@@ -16,8 +18,13 @@ export default () => {
 
     const dispatch = useDispatch()
 
+    const initCommon  = useSelector(state => state.Common , [])
+
     useEffect(() => {
-        _setMenus(dispatch , menus)
+
+        const url = getNowUrl()
+
+        _setMenus(dispatch , {data : menus , url : url})
     }, [])
 
     return (
@@ -29,7 +36,9 @@ export default () => {
 
             <ul className="list-unstyled components mt-5">
 
-                <MenuGroup payload={menus}/>
+                <MenuGroup
+                    dispatch={dispatch}
+                    payload={initCommon.menus}/>
 
             </ul>
 
@@ -41,11 +50,13 @@ function MenuGroup(props) {
 
     const payload = props.payload
 
-    const [data , setData] = useState(payload)
+    const dispatch = props.dispatch
 
     if (payload.length == 0) {
         return (<></>)
     }
+
+    const data = payload.data
 
     return (
         data.map((m, i) =>
@@ -60,11 +71,7 @@ function MenuGroup(props) {
                         const element = document.getElementById(m.url)
                         const href = element.getAttribute("href")
                         const url = href.replace("/#" , "")
-                        console.log("URL" , url)
-                        payload.forEach(f => {
-                            f.isOn = url == m.url
-                        })
-                        setData(payload)
+                        _setMenus(dispatch , {data : data , url : url})
                     }}
                 />
             )
