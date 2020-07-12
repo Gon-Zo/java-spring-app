@@ -1,0 +1,11 @@
+.content-wrap{
+  display: grid;
+  background-color: #f00;
+
+  grid-template-columns: 200px 200px 500px;
+
+  grid-template-rows: 200px 200px 500px;
+
+  align-items: stretch;
+
+}

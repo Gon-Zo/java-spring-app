@@ -36,7 +36,9 @@ export default () => {
                 <MenuGroup
                     dispatch={dispatch}
                     payload={initCommon.menus}/>
-                <UserItem/>
+                <UserItem
+                    dispatch={dispatch}
+                    payload={initCommon.menus}/>
             </ul>
         </nav>
     )
@@ -44,9 +46,22 @@ export default () => {
 
 function UserItem(props) {
 
+    const myInfo = "/my-info"
+
+    const payload = props.payload
+
+    const data = payload.data
+
+    const dispatch = props.dispatch
+
     return (
         <li className="menu-items m-2 ">
-            <Link to={"/my-info"}>
+            <Link id={myInfo} to={myInfo} onClick={()=>{
+                const element = document.getElementById(myInfo)
+                const href = element.getAttribute("href")
+                const url = href.replace("/#" , "")
+                _setMenus(dispatch , {data : data , url : url})
+            }}>
                 <div className={"img-box"}>
                     <img id={"imgIcon"}  src={TEST}/>
                 </div>
