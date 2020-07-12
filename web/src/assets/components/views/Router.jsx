@@ -7,6 +7,7 @@ import Home from './Home'
 import Dashboard from './Dashboard'
 import Setting from './Setting'
 import Management from './Management'
+import MyInfo from './MyInfo'
 
 export default () => {
     return (
@@ -23,6 +24,7 @@ export default () => {
                         <Route path="/management" component={Management}/>
                         <Route path="/dashboard" component={Dashboard}/>
                         <Route path="/setting" component={Setting}/>
+                        <Route path="/my-info" component={MyInfo}/>
                     </Switch>
                 </div>
 

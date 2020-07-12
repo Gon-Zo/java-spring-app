@@ -46,7 +46,7 @@ function UserItem(props) {
 
     return (
         <li className="menu-items m-2 ">
-            <Link to={"/"}>
+            <Link to={"/my-info"}>
                 <div className={"img-box"}>
                     <img id={"imgIcon"}  src={TEST}/>
                 </div>
