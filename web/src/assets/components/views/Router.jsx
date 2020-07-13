@@ -10,27 +10,25 @@ import Management from './Management'
 import MyInfo from './MyInfo'
 
 export default () => {
+
     return (
 
         <div className="wrapper">
 
             <Sidebar/>
 
-            <div id="content">
-
-                <div className="container-fluid">
-                    <Switch>
-                        <Route exact path="/home" component={Home}/>
-                        <Route path="/management" component={Management}/>
-                        <Route path="/dashboard" component={Dashboard}/>
-                        <Route path="/setting" component={Setting}/>
-                        <Route path="/my-info" component={MyInfo}/>
-                    </Switch>
-                </div>
-
+            <div className="container-fluid">
+                <Switch>
+                    <Route exact path="/home" component={Home}/>
+                    <Route path="/management" component={Management}/>
+                    <Route path="/dashboard" component={Dashboard}/>
+                    <Route path="/setting" component={Setting}/>
+                    <Route path="/my-info" component={MyInfo}/>
+                </Switch>
             </div>
 
         </div>
 
     )
+
 }
