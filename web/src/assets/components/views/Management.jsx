@@ -7,7 +7,7 @@ export default () => {
     const user_test = ['0','0','0','0','0', '0','0','0','0','0']
 
     return (
-        <div className="content-wrap mt-5">
+        <div className="common-wrap content-wrap mt-5">
 
             <div className="grid-item">
                 <div className="content-card p-3">

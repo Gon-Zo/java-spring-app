@@ -1,6 +1,5 @@
-.content-wrap {
-  display: grid;
-  /* 비율 */
+.common-wrap.content-wrap {
+
   grid-template-columns: 1fr 1fr 1fr  1fr;
   grid-template-rows: 1fr 1fr;
 
@@ -14,9 +13,9 @@
       height: 25em;
       background-color: #fff;
       border-radius: 3em;
-      box-shadow: 5px 5px 10px #d5d5d5, -5px 5px 10px #d5d5d5;
+      box-shadow: 5px 5px 10px transparent, -5px 5px 10px transparent;
       border: .1rem solid #fff;
-      transition: .5s linear;
+      transition: .1s ease;
 
       .content-title {
 
@@ -43,7 +42,7 @@
 
       }
 
-      .content-body{
+      .content-body {
         font-family: "GmarketSansLight";
         font-size: .7rem;
         text-align: center;
@@ -51,8 +50,9 @@
 
     }
 
-    .content-card:hover{
+    .content-card:hover {
       border: .1rem solid #1479ff;
+      box-shadow: 5px 5px 10px #d5d5d5, -5px 5px 10px #d5d5d5;
     }
 
   }
