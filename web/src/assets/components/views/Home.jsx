@@ -12,6 +12,30 @@ export default () => {
 
                    <div className="grid-item-body">
 
+                       <ul>
+
+                           <li className="mt-3">
+                               Today work1
+                           </li>
+
+                           <li className="mt-3 item-active on">
+                               Today work2
+                           </li>
+
+                           {/*<li className="mt-3">*/}
+                           {/*     Test*/}
+                           {/*</li>*/}
+                           {/*<li className="mt-3">*/}
+                           {/*     Test*/}
+                           {/*</li>*/}
+                           {/*<li className="mt-3">*/}
+                           {/*     Test*/}
+                           {/*</li>*/}
+
+
+                       </ul>
+
+
                    </div>
 
 
@@ -25,6 +49,9 @@ export default () => {
             <div className="grid-items m-2">3</div>
             <div className="grid-items m-2">4</div>
             <div className="grid-items m-2">5</div>
+            <div className="grid-items m-2">6</div>
+            <div className="grid-items m-2">7</div>
+            <div className="grid-items m-2">8</div>
         </div>
     )
 }
