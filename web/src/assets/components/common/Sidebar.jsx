@@ -62,6 +62,9 @@ function UserItem(props) {
                 const url = href.replace("/#" , "")
                 _setMenus(dispatch , {data : data , url : url})
             }}>
+
+                {/*<FontAwesomeIcon className="bell-icon" icon={regular['faBell']}/>*/}
+
                 <div className={"img-box"}>
                     <img id={"imgIcon"}  src={TEST}/>
                 </div>
