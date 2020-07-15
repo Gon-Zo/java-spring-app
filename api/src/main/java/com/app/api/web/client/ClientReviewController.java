@@ -5,6 +5,8 @@ import com.app.api.service.reivew.ReviewService;
 import com.app.api.web.dto.ReviewResponseDto;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
+
 @RestController
 @RequestMapping("/client/review")
 public class ClientReviewController {
@@ -21,17 +23,17 @@ public class ClientReviewController {
     }
 
     @PutMapping("/{seq}")
-    public void reviseReview(@PathVariable long seq , ReviewResponseDto dto){
+    public void reviseReview(@PathVariable @NotNull long seq , ReviewResponseDto dto){
        service.modifyReview(seq , dto);
     }
 
     @DeleteMapping("/{seq}")
-    public void removeReview(@PathVariable long seq){
+    public void removeReview(@PathVariable @NotNull long seq){
        service.deleteBy(seq);
     }
 
     @GetMapping("/{seq}")
-    public Review showReview(@PathVariable long seq){
+    public Review showReview(@PathVariable @NotNull long seq){
         return service.getReview(seq);
     }
 
