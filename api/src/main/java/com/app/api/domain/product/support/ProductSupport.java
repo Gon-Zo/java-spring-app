@@ -12,7 +12,7 @@ public interface ProductSupport {
 
     void update(long seq , ProductResponseDto dto);
 
-    Page<Product> findByProducts (PageableDto dto);
+    Page<Product> findByProducts (PageableDto dto , boolean isClient);
 
     List<Tuple> findGroupByTitle();
 

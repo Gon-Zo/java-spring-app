@@ -23,6 +23,6 @@ public interface ProductService {
 
     void createProduct(ProductResponseDto dto);
 
-    Page<Product> getProducts (PageableDto dto);
+    Page<Product> getProducts (PageableDto dto , boolean isClient);
 
 }

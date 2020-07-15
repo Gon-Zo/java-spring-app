@@ -18,7 +18,7 @@ public class ClientProductController {
 
     @GetMapping("")
     public Page<Product> showProduct(PageableDto dto){
-       return service.getProducts(dto);
+       return service.getProducts(dto , Boolean.TRUE);
     }
 
 }

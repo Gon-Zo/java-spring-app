@@ -8,6 +8,7 @@ import com.app.api.domain.review.QReview;
 import com.app.api.utils.ApiDomainUtils;
 import com.app.api.web.dto.PageableDto;
 import com.app.api.web.dto.ProductResponseDto;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.dml.UpdateClause;
@@ -77,7 +78,7 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
     }
 
     @Override
-    public Page<Product> findByProducts(PageableDto dto) {
+    public Page<Product> findByProducts(PageableDto dto , boolean isClient) {
 
         JPAQuery<Product> query = jpaQueryFactory.selectFrom(product);
 
@@ -89,6 +90,8 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
 
         query.limit(pageable.getPageSize()).offset(pageable.getOffset());
 
+        query.where(setWhereQuery(isClient));
+
         QueryResults<Product> results = query.fetchResults();
 
         long total = results.getTotal();
@@ -96,28 +99,6 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
         List<Product> result = results.getResults();
 
         return new PageImpl<>(result, pageable, total);
-
-    }
-
-    public void test(){
-
-        List<Expressions> select = new ArrayList<>();
-
-        NumberExpression<Long> reivewCnt = QReview.review.seq.count();
-
-        NumberExpression<Long> baseketCnt = QBasket.basket.seq.count();
-
-        NumberExpression<Long> likeCnt = QLike.like.seq.count();
-
-        jpaQueryFactory.select()
-                .from(product)
-                .leftJoin(QReview.review)
-                .on(QReview.review.product.seq.eq(product.seq))
-                .leftJoin(QLike.like)
-                .on(QLike.like.num.eq(product.seq))
-                .leftJoin(QBasket.basket)
-                .on(QBasket.basket.product.seq.eq(product.seq))
-                .fetchAll();
 
     }
 
@@ -137,6 +118,18 @@ public class ProductSupportImpl extends QuerydslRepositorySupport  implements Pr
                 .on(QOrder.order.product.seq.eq(product.seq))
                 .groupBy(title , createdAt)
                 .fetch();
+
+    }
+
+    private BooleanBuilder setWhereQuery( boolean isClient) {
+
+        BooleanBuilder whereQuery = new BooleanBuilder();
+
+        if (isClient) {
+            whereQuery.and(product.isSold.eq(Boolean.FALSE));
+        }
+
+        return whereQuery;
 
     }
 

@@ -43,8 +43,8 @@ public class ManagerProductController {
     }
 
     @GetMapping("")
-    public Page<Product> showProds(PageableDto dto){
-        return service.getProducts(dto);
+    public Page<Product> showProds(PageableDto dto) {
+        return service.getProducts(dto, Boolean.FALSE);
     }
 
     @GetMapping("/chart")
