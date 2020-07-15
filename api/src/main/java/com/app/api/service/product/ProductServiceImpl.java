@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository repository;
+
     private final ProductSupport support;
 
     @Override
@@ -57,8 +58,7 @@ public class ProductServiceImpl implements ProductService {
 
         return chartData;
     }
-
-    @Override
+@Override
     @Transactional
     public void removeProduct(long seq) {
         repository.deleteById(seq);
@@ -84,8 +84,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getProducts(PageableDto dto) {
-        return support.findByProducts(dto);
+    public Page<Product> getProducts(PageableDto dto, boolean isClient) {
+        return support.findByProducts(dto , isClient);
     }
 
 }
