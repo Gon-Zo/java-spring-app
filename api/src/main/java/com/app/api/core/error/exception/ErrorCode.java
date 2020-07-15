@@ -60,7 +60,9 @@ public enum ErrorCode {
 
     REVIEW_NOT_FOUND(500 , "R001" , "Review Not Found"),
 
-    QUESTION_NOT_FOUND(500 , "Q001" , "Question Not Found")
+    QUESTION_NOT_FOUND(500 , "Q001" , "Question Not Found"),
+
+    BASKET_NOT_FOUND(500 , "B001" , "Basket Not Found")
 
     ;
 
