@@ -19,25 +19,21 @@ public class ManagerUserController {
 
     private final UserService userService;
 
-    // ===== Update User Info
     @PutMapping("/{seq}")
     public Long modifyInfo(@PathVariable long seq, @RequestBody UserRespoenseDto dto) {
         return userService.updateFrom(seq, dto);
     }
 
-    // ===== Delete User
     @DeleteMapping("/{seq}")
     public void removeUser(@PathVariable long seq) {
         userService.deleteByUser(seq);
     }
 
-    // ==== Users Info
     @GetMapping("/{seq}")
     public User showUser(@PathVariable long seq) {
         return userService.getUser(seq);
     }
 
-    //=== find By Page Users
     @GetMapping("")
     public Page<User> showPageUsers(PageableDto dto){
         return userService.getUsers(Arrays.asList(Roles.U.getValue()), dto);
