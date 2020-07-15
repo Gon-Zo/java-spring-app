@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
@@ -35,13 +36,14 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void updateNotice(NoticeResponseDto dto , long seq) {
+    public void updateNotice(NoticeResponseDto dto , @NotNull long seq) {
         noticeSupport.update(dto , seq);
     }
 
     @Override
-    public Notice getNotice(long seq) {
-        return noticeRepository.findById(seq).orElse(Notice.builder().build());
+    public Notice getNotice(@NotNull long seq) {
+        return noticeRepository.findById(seq)
+                .orElse(Notice.builder().build());
     }
 
     @Override
@@ -51,7 +53,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     @Transactional
-    public void removeNotice(long seq) {
+    public void removeNotice(@NotNull long seq) {
         noticeRepository.deleteById(seq);
     }
 
