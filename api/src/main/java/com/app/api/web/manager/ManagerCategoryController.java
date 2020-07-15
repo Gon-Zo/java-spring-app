@@ -3,12 +3,12 @@ package com.app.api.web.manager;
 import com.app.api.domain.category.Category;
 import com.app.api.service.category.CategoryService;
 import com.app.api.web.dto.CategoryResponseDto;
-//import org.springframework.stereotype.Component;
 import com.app.api.web.dto.PageableDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -24,12 +24,12 @@ public class ManagerCategoryController {
     }
 
     @DeleteMapping("/{seq}")
-    public void removeCategory(@PathVariable long seq){
+    public void removeCategory(@PathVariable @NotNull long seq){
        service.removeCategory(seq);
     }
 
     @PutMapping("/{seq")
-    public void updateCategory(@PathVariable long seq , CategoryResponseDto dto){
+    public void updateCategory(@PathVariable @NotNull long seq , CategoryResponseDto dto){
        service.updateCategory(seq , dto);
     }
 
@@ -39,7 +39,7 @@ public class ManagerCategoryController {
     }
 
     @GetMapping("/{seq}")
-    public Category showCategory(@PathVariable long seq) {
+    public Category showCategory(@PathVariable @NotNull long seq) {
         return service.getCategory(seq);
     }
 
