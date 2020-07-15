@@ -4,6 +4,7 @@ export default () => {
     return (
         <div className="common-wrap home-content mt-5">
             <div className="grid-items m-2">
+
                <div className="grid-item">
 
                    <div className="grid-item-title">
@@ -11,9 +12,7 @@ export default () => {
                    </div>
 
                    <div className="grid-item-body">
-
                        <ul>
-
                            <li className="mt-3">
                                Today work1
                            </li>
@@ -21,25 +20,11 @@ export default () => {
                            <li className="mt-3 item-active on">
                                Today work2
                            </li>
-
-                           {/*<li className="mt-3">*/}
-                           {/*     Test*/}
-                           {/*</li>*/}
-                           {/*<li className="mt-3">*/}
-                           {/*     Test*/}
-                           {/*</li>*/}
-                           {/*<li className="mt-3">*/}
-                           {/*     Test*/}
-                           {/*</li>*/}
-
-
                        </ul>
-
-
                    </div>
 
-
                </div>
+
             </div>
             <div className="grid-items m-2">
                <div className="grid-item">
