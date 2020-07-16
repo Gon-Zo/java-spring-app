@@ -4,9 +4,10 @@ import {Switch, Route , BrowserRouter} from 'react-router-dom';
 import Sidebar from "../common/Sidebar";
 
 import Home from './Home'
-import Dashboard from './Dashboard'
 import Setting from './Setting'
-import Management from './Management'
+import UserManagement from './UserManagement'
+import ProductManagement from "./ProductManagement";
+import CommentManagement from "./CommentManagement";
 import MyInfo from './MyInfo'
 
 export default () => {
@@ -20,10 +21,11 @@ export default () => {
             <div className="container-fluid">
                 <Switch>
                     <Route exact path="/home" component={Home}/>
-                    <Route path="/management" component={Management}/>
-                    <Route path="/dashboard" component={Dashboard}/>
+                    <Route path="/user/management" component={UserManagement}/>
+                    <Route path="/product/management" component={ProductManagement}/>
+                    <Route path="/comment/management" component={CommentManagement}/>
                     <Route path="/setting" component={Setting}/>
-                    <Route path="/my-info" component={MyInfo}/>
+                    <Route path="/myinfo" component={MyInfo}/>
                 </Switch>
             </div>
 
