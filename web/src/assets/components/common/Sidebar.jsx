@@ -10,8 +10,9 @@ import TEST from '../../img/test.jpg'
 
 let menus = [
     {title: "홈", icon: "faHome:S", url: "/home", isOn: false},
-    {title: "매니지먼트", icon: "faTasks:S", url: "/management", isOn: false},
-    {title: "대쉬보드", icon: "faChartBar:R", url: "/dashboard", isOn: false},
+    {title: "유저관리", icon: "faUser:R", url: "/user/management", isOn: false},
+    {title: "상품관리", icon: "faCookieBite:S", url: "/product/management", isOn: false},
+    {title: "커뮤니티관리", icon: "faComments:R", url: "/comment/management", isOn: false},
     {title: "설정", icon: "faCog:S", url: "/setting", isOn: false},
 ]
 
@@ -32,13 +33,15 @@ export default () => {
                 <h5>Doc App</h5>
             </div>
 
-            <ul className="list-unstyled components mt-5">
+            <ul className="list-unstyled components mt-3">
                 <MenuGroup
                     dispatch={dispatch}
                     payload={initCommon.menus}/>
+
                 <UserItem
                     dispatch={dispatch}
                     payload={initCommon.menus}/>
+
             </ul>
         </nav>
     )
@@ -128,7 +131,7 @@ function MenuItems(props) {
     const onClick = props.onClick
 
     return (
-        <li className="menu-items m-2 ">
+        <li className="menu-items">
             <Link id={url} to={url} onClick={onClick}>
                 <div className={isOn ? "icon-box on" : "icon-box"}>
                     <FontAwesomeIcon className="icon" icon={icon[`${iconTxt}`]}/>
