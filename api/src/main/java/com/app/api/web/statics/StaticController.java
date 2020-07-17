@@ -65,6 +65,7 @@ private final AuthenticationManager authenticationManager;
         final User userDetails = (User) userDetailsService.loadUserByUsername(dto.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
+
         return ResponseEntity.ok(new JwtResponse(token));
 
     }
