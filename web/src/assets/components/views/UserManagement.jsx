@@ -6,21 +6,8 @@ export default () => {
 
     return (
 
-        <div id="userManagement" className="container-fluid">
+        <div id="userManagement" className="container-fluid mt-4">
 
-            <div id="userRangBox" className="row">
-                <span>User Rang</span>
-                <div className="col">
-                    <FontAwesomeIcon icon={regular["faComment"]}/>
-                </div>
-                <div className="col">
-                    1
-                </div>
-                <div className="col">
-                    1
-                </div>
-            </div>
-        {/* header   */}
 
         </div>
 
