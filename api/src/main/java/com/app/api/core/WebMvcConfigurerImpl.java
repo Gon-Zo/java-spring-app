@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfigurerImpl implements WebMvcConfigurer {
 
-
     /**
      * crose orgin setting
      *
@@ -18,10 +17,8 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080");
+        registry.addMapping("/**").allowedOrigins("http://localhost:8080");
     }
-
 
 //    private String [] INTERCEPTOR_WHITE_LIST = {
 //            "/signUp/**" ,

@@ -76,11 +76,12 @@ public class GlobalExceptionHandler {
 
         return ErrorDto.builder()
                 .errorCode(ErrorCode.HANDLE_ACCESS_DENIED.getCode())
-                .errorMsg(ErrorCode.HANDLE_ACCESS_DENIED.getMessage())
-                .errorDetail(ExceptionUtils.getStackTrace(e))
-                .build();
+                .errorMsg(ErrorCode.HANDLE_ACCESS_DENIED.getMessage()) .errorDetail(ExceptionUtils.getStackTrace(e)) .build();
     }
 
+    /**
+     * 커스텀 예외 처리
+     */
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -99,6 +100,9 @@ public class GlobalExceptionHandler {
 
     }
 
+    /**
+     * 전체 예외 처리
+     */
     @ExceptionHandler(Exception.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
