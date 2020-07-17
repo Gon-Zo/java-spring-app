@@ -1,5 +1,8 @@
 package com.app.api.core.error.exception;
 
+/**
+ * 커스텀 예외 처리
+ */
 public class BusinessException extends RuntimeException {
 
     private ErrorCode errorCode;
