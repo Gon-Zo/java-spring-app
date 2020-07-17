@@ -8,17 +8,19 @@ export default () => {
 
         <div id="userManagement" className="container-fluid">
 
-            <div className="row">
-
+            <div id="userRangBox" className="row">
+                <span>User Rang</span>
+                <div className="col">
+                    <FontAwesomeIcon icon={regular["faComment"]}/>
+                </div>
                 <div className="col">
                     1
                 </div>
-
                 <div className="col">
-                    2
+                    1
                 </div>
-
             </div>
+        {/* header   */}
 
         </div>
 
