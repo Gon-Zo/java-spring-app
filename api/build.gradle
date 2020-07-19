@@ -95,7 +95,7 @@ implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation "com.querydsl:querydsl-jpa"
     implementation "com.querydsl:querydsl-apt"
     implementation 'org.jetbrains:annotations:15.0'
-    implementation 'org.jetbrains:annotations:15.0'
+
 
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:1.17"
 
