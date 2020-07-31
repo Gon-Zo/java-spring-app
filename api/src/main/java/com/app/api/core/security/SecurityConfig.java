@@ -57,9 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(globalCorsFilter, BasicAuthenticationFilter.class)
                 .addFilterAfter(jwtRequestFilter, GlobalCorsFilter.class);
 
-
     }
-
-
 
 }
