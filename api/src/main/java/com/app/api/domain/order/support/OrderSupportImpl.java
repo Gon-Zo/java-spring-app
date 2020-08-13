@@ -18,13 +18,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import static com.app.api.domain.order.QOrder.order;
-
-
-
 
 @Repository
 public class OrderSupportImpl extends QuerydslRepositorySupport implements OrderSupport {
@@ -37,11 +35,13 @@ public class OrderSupportImpl extends QuerydslRepositorySupport implements Order
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Order> findBy(OrderResponseDto dto) {
         return jpaQueryFactory.selectFrom(order).where(whereQuery(dto)).fetch();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<Order> findByPage(PageableDto dto) {
 
         JPAQuery<Order> query = jpaQueryFactory
@@ -60,12 +60,6 @@ public class OrderSupportImpl extends QuerydslRepositorySupport implements Order
         return new PageImpl<>(results , pageable , total);
     }
 
-    /**
-     * where query
-     *
-     * @param dto
-     * @return
-     */
     private BooleanBuilder whereQuery(OrderResponseDto dto) {
 
         BooleanBuilder bb = new BooleanBuilder();
@@ -79,22 +73,6 @@ public class OrderSupportImpl extends QuerydslRepositorySupport implements Order
         }
 
         return bb;
-
-    }
-
-
-
-    public void test(){
-
-        List<Expressions> select = new ArrayList<>();
-
-        List<Order> list = jpaQueryFactory
-                .select(Projections.fields(Order.class, select.toArray(new Expression[0])))
-                .from(order)
-                .innerJoin(QProduct.product)
-                .on(order.product.seq.eq(QProduct.product.seq))
-                .groupBy(order.createdAt, QProduct.product.title)
-                .fetch();
 
     }
 
