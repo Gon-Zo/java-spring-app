@@ -10,13 +10,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Create by park031517@gmail.com on 2020-08-13, 목
+ * Blog : https://zzz-oficial.tistory.com
+ * Github : https://github.com/Gon-Zo
+ */
 public class ApiDomainUtils {
 
-    /**
-     * Oder By Query
-     * @param orders
-     * @return
-     */
     public static List<OrderSpecifier<?>> getOrder(List<String> orders) {
         return orders.stream().map(m -> {
             String[] orderArray = m.split(":");
@@ -47,24 +47,10 @@ public class ApiDomainUtils {
 
     public static boolean isNotEmpty(List<?> list){ return ! Collections.isEmpty(list); }
 
-    /**
-     * Not start string
-     *
-     * @param str
-     * @param str2
-     * @return
-     */
     public static boolean notStartWith(String str , String str2){
         return !str.startsWith(str2);
     }
-
-    /**
-     * str1 not contains str2
-     *
-     * @param str1
-     * @param str2
-     * @return
-     */
+    
     public static boolean isNotContains(String str1, String str2) {
         return !str1.contains(str2);
     }

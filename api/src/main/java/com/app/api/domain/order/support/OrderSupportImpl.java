@@ -1,14 +1,10 @@
 package com.app.api.domain.order.support;
 
 import com.app.api.domain.order.Order;
-import com.app.api.domain.product.QProduct;
 import com.app.api.web.dto.OrderResponseDto;
 import com.app.api.web.dto.PageableDto;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.apache.commons.lang3.ObjectUtils;
@@ -20,13 +16,17 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import static com.app.api.domain.order.QOrder.order;
 
+/**
+ * Create by park031517@gmail.com on 2020-08-13, 목
+ * Blog : https://zzz-oficial.tistory.com
+ * Github : https://github.com/Gon-Zo
+ */
 @Repository
 public class OrderSupportImpl extends QuerydslRepositorySupport implements OrderSupport {
-
+kkkkkkkkk
     private final JPAQueryFactory jpaQueryFactory;
 
     public OrderSupportImpl(JPAQueryFactory jpaQueryFactory) {
