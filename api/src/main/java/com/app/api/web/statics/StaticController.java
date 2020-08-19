@@ -10,8 +10,8 @@ import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.enums.Roles;
 import com.app.api.service.menu.MenuService;
 import com.app.api.service.user.UserService;
-import com.app.api.web.dto.LoginResponseDto;
-import com.app.api.web.dto.UserRespoenseDto;
+import com.app.api.web.dto.LoginDto;
+import com.app.api.web.dto.UserDto;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
@@ -56,7 +56,7 @@ private final AuthenticationManager authenticationManager;
      * @throws Exception
      */
     @PostMapping("/login")
-    public ResponseEntity<?> userLogin(@RequestBody LoginResponseDto dto) throws Exception{
+    public ResponseEntity<?> userLogin(@RequestBody LoginDto dto) throws Exception{
 
         checkParam(dto);
 
@@ -76,7 +76,7 @@ private final AuthenticationManager authenticationManager;
      * @param dto
      */
     @PostMapping("sign")
-    public void signUpTo(@RequestBody UserRespoenseDto dto , Roles roles) {
+    public void signUpTo(@RequestBody UserDto dto , Roles roles) {
         userService.saveBy(dto , roles);
     }
 
@@ -106,7 +106,7 @@ private final AuthenticationManager authenticationManager;
      *
      * @param dto
      */
-    private void checkParam(LoginResponseDto dto){
+    private void checkParam(LoginDto dto){
 
         if (ObjectUtils.isEmpty(dto.getEmail())) {
             throw new BusinessException(ErrorCode.USER_EMAIL_FAIL);

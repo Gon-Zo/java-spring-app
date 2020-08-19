@@ -8,7 +8,7 @@ import com.app.api.domain.menu.support.MenuSupport;
 import com.app.api.domain.role.RoleRepository;
 import com.app.api.domain.role.support.RoleSupport;
 import com.app.api.domain.url.UrlRepository;
-import com.app.api.web.dto.MenuResponseDto;
+import com.app.api.web.dto.MenuDto;
 import com.app.api.web.dto.PageableDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void createMenu(MenuResponseDto dto) {
+    public void createMenu(MenuDto dto) {
 
         dto.setAuthUrl(
                 dto.getUrlSeq().stream()
@@ -61,7 +61,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public void modifyMenu(long seq, MenuResponseDto dto) {
+    public void modifyMenu(long seq, MenuDto dto) {
         menuSupport.update(seq, dto);
     }
 

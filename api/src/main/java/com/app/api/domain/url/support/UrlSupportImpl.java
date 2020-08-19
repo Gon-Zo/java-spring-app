@@ -2,7 +2,7 @@ package com.app.api.domain.url.support;
 
 import com.app.api.domain.url.Url;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.UrlResponseDto;
+import com.app.api.web.dto.UrlDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -32,7 +32,7 @@ public class UrlSupportImpl implements UrlSupport {
 
     @Override
     @Transactional
-    public void update(long seq, UrlResponseDto dto) {
+    public void update(long seq, UrlDto dto) {
         jpaQueryFactory.update(url)
                 .set(url.title , dto.getTitle())
                 .where(url.seq.eq(seq))

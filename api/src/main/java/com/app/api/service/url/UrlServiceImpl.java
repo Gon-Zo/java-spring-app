@@ -4,7 +4,7 @@ import com.app.api.domain.url.Url;
 import com.app.api.domain.url.UrlRepository;
 import com.app.api.domain.url.support.UrlSupport;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.UrlResponseDto;
+import com.app.api.web.dto.UrlDto;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +23,12 @@ public class UrlServiceImpl implements UrlService {
     }
 
     @Override
-    public void createUrl(UrlResponseDto dto) {
+    public void createUrl(UrlDto dto) {
         urlRepository.save(dto.toEntity());
     }
 
     @Override
-    public void updateUrl(long seq, UrlResponseDto dto) {
+    public void updateUrl(long seq, UrlDto dto) {
         urlSupport.update(seq, dto);
     }
 

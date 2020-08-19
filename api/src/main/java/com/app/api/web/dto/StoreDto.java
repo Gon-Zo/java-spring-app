@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class StoreRepoenseDto {
+public class StoreDto {
 
     private String title;
 

@@ -3,7 +3,7 @@ package com.app.api.web.admin;
 import com.app.api.domain.user.User;
 import com.app.api.service.user.UserService;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.UserRespoenseDto;
+import com.app.api.web.dto.UserDto;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class AdminUserController {
     }
 
     @PutMapping("/{seq}")
-    public void updateUser(@PathVariable long seq, UserRespoenseDto dto) {
+    public void updateUser(@PathVariable long seq, UserDto dto) {
         userService.updateFrom(seq, dto);
     }
 

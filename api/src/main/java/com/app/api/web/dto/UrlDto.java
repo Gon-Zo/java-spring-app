@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class UrlResponseDto {
+public class UrlDto {
 
     private String title;
 
