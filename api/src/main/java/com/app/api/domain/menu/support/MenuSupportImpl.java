@@ -1,7 +1,7 @@
 package com.app.api.domain.menu.support;
 
 import com.app.api.domain.menu.Menu;
-import com.app.api.web.dto.MenuResponseDto;
+import com.app.api.web.dto.MenuDto;
 import com.app.api.web.dto.PageableDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.dml.UpdateClause;
@@ -58,7 +58,7 @@ public class MenuSupportImpl extends QuerydslRepositorySupport implements MenuSu
 
     @Override
     @Transactional
-    public void update(long seq, MenuResponseDto dto) {
+    public void update(long seq, MenuDto dto) {
         UpdateClause<JPAUpdateClause> updateCase = update(menu);
 
         if (isNotEmpty(dto.getTitle())) {

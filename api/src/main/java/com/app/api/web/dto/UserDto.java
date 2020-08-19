@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @ToString
 @NoArgsConstructor
-public class  UserRespoenseDto {
+public class UserDto {
 
     private long seq;
     private String email;
@@ -21,7 +21,7 @@ public class  UserRespoenseDto {
     private Boolean isUse;
 
     @Builder
-    public UserRespoenseDto( long seq , String email, String password) {
+    public UserDto(long seq , String email, String password) {
         this.seq = seq;
         this.email = email;
         this.password = password;

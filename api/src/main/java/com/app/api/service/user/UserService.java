@@ -3,16 +3,16 @@ package com.app.api.service.user;
 import com.app.api.domain.user.User;
 import com.app.api.enums.Roles;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.UserRespoenseDto;
+import com.app.api.web.dto.UserDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface UserService {
 
-    void saveBy(UserRespoenseDto dto , Roles roleType);
+    void saveBy(UserDto dto , Roles roleType);
 
-    Long updateFrom(long seq, UserRespoenseDto dto);
+    Long updateFrom(long seq, UserDto dto);
 
     void deleteByUser(long seq);
 

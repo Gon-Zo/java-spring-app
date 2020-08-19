@@ -8,7 +8,7 @@ import com.app.api.domain.role.RoleRepository;
 import com.app.api.domain.role.support.RoleSupport;
 import com.app.api.domain.url.UrlRepository;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.RoleResponseDto;
+import com.app.api.web.dto.RoleDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void createRole(RoleResponseDto dto) {
+    public void createRole(RoleDto dto) {
 
         dto.getMenuSeq()
                 .stream()
@@ -46,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void modifyRole( long seq , RoleResponseDto dto) {
+    public void modifyRole( long seq , RoleDto dto) {
         roleSupport.update(seq , dto);
     }
 

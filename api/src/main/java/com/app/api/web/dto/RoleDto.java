@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 @Getter
 @NoArgsConstructor
-public class RoleResponseDto {
+public class RoleDto {
 
     private String title;
 

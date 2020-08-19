@@ -4,7 +4,7 @@ import com.app.api.domain.role.QUserRole;
 import com.app.api.domain.role.Role;
 import com.app.api.domain.user.QUser;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.RoleResponseDto;
+import com.app.api.web.dto.RoleDto;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.core.types.OrderSpecifier;
@@ -64,7 +64,7 @@ public class RoleSupportImpl extends QuerydslRepositorySupport implements RoleSu
 
     @Override
     @Transactional
-    public void update( long seq , RoleResponseDto dto) {
+    public void update( long seq , RoleDto dto) {
 
         UpdateClause<JPAUpdateClause> updateCase = update(role);
 

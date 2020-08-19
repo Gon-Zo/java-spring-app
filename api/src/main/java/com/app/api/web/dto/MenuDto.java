@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 @Getter
 @NoArgsConstructor
-public class MenuResponseDto {
+public class MenuDto {
 
     private String title;
 

@@ -11,7 +11,7 @@ import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
 import com.app.api.enums.Roles;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.UserRespoenseDto;
+import com.app.api.web.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
 
     @Override
-    public void saveBy(UserRespoenseDto dto , Roles roleType) {
+    public void saveBy(UserDto dto , Roles roleType) {
 
         if(checkByEmail(dto.getEmail())){
             throw new BusinessException(ErrorCode.SAME_USER);
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long updateFrom(long seq, UserRespoenseDto dto) {
+    public Long updateFrom(long seq, UserDto dto) {
         return userSupport
                 .update(seq, dto)
                 .orElseThrow(() ->

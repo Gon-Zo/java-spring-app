@@ -1,7 +1,7 @@
 package com.app.api.domain.store.support;
 
 import com.app.api.domain.store.Store;
-import com.app.api.web.dto.StoreRepoenseDto;
+import com.app.api.web.dto.StoreDto;
 
 import com.querydsl.core.dml.UpdateClause;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -29,7 +29,7 @@ public class StoreSupportImpl extends QuerydslRepositorySupport implements Store
         }
 
         @Override
-        public void update(long seq, StoreRepoenseDto dto) {
+        public void update(long seq, StoreDto dto) {
 
                 UpdateClause<JPAUpdateClause> update = update(store);
 

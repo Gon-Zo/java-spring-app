@@ -7,7 +7,7 @@ import com.app.api.domain.user.User;
 import com.app.api.domain.user.UserRepository;
 import com.app.api.core.error.exception.BusinessException;
 import com.app.api.core.error.exception.ErrorCode;
-import com.app.api.web.dto.StoreRepoenseDto;
+import com.app.api.web.dto.StoreDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class StoreServiceImpl implements StoreService{
     private final UserRepository userRepository;
 
     @Override
-    public void createStore(StoreRepoenseDto dto) {
+    public void createStore(StoreDto dto) {
 
         User user =
                 userRepository.findById(dto.getUserSeq())
@@ -44,7 +44,7 @@ public class StoreServiceImpl implements StoreService{
 
     @Override
     @Transactional
-    public void updateInfo(long seq, StoreRepoenseDto dto) {
+    public void updateInfo(long seq, StoreDto dto) {
         support.update(seq, dto);
     }
 

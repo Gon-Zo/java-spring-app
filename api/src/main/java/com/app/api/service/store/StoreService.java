@@ -1,7 +1,7 @@
 package com.app.api.service.store;
 
 import com.app.api.domain.store.Store;
-import com.app.api.web.dto.StoreRepoenseDto;
+import com.app.api.web.dto.StoreDto;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface StoreService {
      *
      * @param dto
      */
-    void createStore(StoreRepoenseDto dto);
+    void createStore(StoreDto dto);
 
     /**
      * get Store List
@@ -27,7 +27,7 @@ public interface StoreService {
      * @param seq
      * @param dto
      */
-    void updateInfo(long seq , StoreRepoenseDto dto);
+    void updateInfo(long seq , StoreDto dto);
 
     /**
      * Store Delete

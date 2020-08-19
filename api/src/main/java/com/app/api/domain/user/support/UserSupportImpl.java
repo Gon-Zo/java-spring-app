@@ -2,21 +2,14 @@ package com.app.api.domain.user.support;
 
 import com.app.api.domain.role.QRole;
 import com.app.api.domain.role.QUserRole;
-import com.app.api.domain.role.Role;
 import com.app.api.domain.user.User;
-import com.app.api.enums.Roles;
-import com.app.api.utils.ApiDomainUtils;
-import com.app.api.web.dto.LoginResponseDto;
+import com.app.api.web.dto.LoginDto;
 import com.app.api.web.dto.PageableDto;
-import com.app.api.web.dto.UserRespoenseDto;
+import com.app.api.web.dto.UserDto;
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.Tuple;
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.jpa.impl.JPAUpdateClause;
-import com.querydsl.jpa.sql.JPASQLQuery;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -26,8 +19,6 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.app.api.domain.user.QUser.user;
 
@@ -48,14 +39,14 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
 
     @Override
     @Transactional
-    public Optional<Long> update(long seq, UserRespoenseDto dto) {
+    public Optional<Long> update(long seq, UserDto dto) {
         return Optional.ofNullable(updateQuery(jpaQueryFactory.update(user), dto)
                 .where(user.seq.eq(seq))
                 .execute());
     }
 
     @Override
-    public Optional<User> findByUser(LoginResponseDto dto) {
+    public Optional<User> findByUser(LoginDto dto) {
         return Optional
                 .ofNullable(
                         jpaQueryFactory
@@ -111,7 +102,7 @@ public class UserSupportImpl extends QuerydslRepositorySupport implements UserSu
      * @param dto
      * @return
      */
-    private JPAUpdateClause updateQuery(JPAUpdateClause update, UserRespoenseDto dto) {
+    private JPAUpdateClause updateQuery(JPAUpdateClause update, UserDto dto) {
 
         if (isNotEmpty(dto.getEmail())) {
             update.set(user.email, dto.getEmail());
