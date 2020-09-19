@@ -33,25 +33,6 @@ public class StoreSupportImpl extends QuerydslRepositorySupport implements Store
 
                 UpdateClause<JPAUpdateClause> update = update(store);
 
-                String title = dto.getTitle();
-                if(ObjectUtils.isNotEmpty(title)){
-                        update.set(store.title , title);
-                }
-
-                String address = dto.getAddress();
-                if (ObjectUtils.isNotEmpty(address)) {
-                        update.set(store.address, address);
-                }
-
-                String img = dto.getImg();
-                if(ObjectUtils.isNotEmpty(img)){
-                        update.set(store.img , img );
-                }
-
-                String phone = dto.getPhone();
-                if (ObjectUtils.isNotEmpty(phone)) {
-                        update.set(store.phone, phone);
-                }
 
                 update.where(store.seq.eq(seq)).execute();
 
