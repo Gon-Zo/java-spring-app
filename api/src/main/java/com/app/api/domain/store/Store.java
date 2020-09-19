@@ -8,34 +8,31 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Create by park031517@gmail.com on 2020-08-19, 수
+ * Blog : https://zzz-oficial.tistory.com
+ * Github : https://github.com/Gon-Zo
+ */
 @Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "STORES")
 public class Store extends BaseEntity {
 
-    @Column(name = "title" , nullable = false)
-    private String title;
+    @Column(name = "name" , nullable = false)
+    private String name;
 
-    @Column(name = "phone" , nullable = false)
-    private String phone;
-
-    @Column(name = "address" , nullable = false , columnDefinition = "TEXT")
-    private String address;
-
-    @Column(name = "img"  , nullable = false , columnDefinition = "TEXT")
-    private String img;
+    @Column(name = "account_number")
+    private String accountNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_seq")
     private User user;
 
     @Builder
-    public Store(String title, String phone, String address, String img , User user) {
-        this.title = title;
-        this.phone = phone;
-        this.address = address;
-        this.img = img;
+    public Store(String name , String accountNumber ,  User user) {
+        this.name = name;
+        this.accountNumber = accountNumber;
         this.user = user;
     }
 

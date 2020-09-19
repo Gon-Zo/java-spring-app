@@ -7,34 +7,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Create by park031517@gmail.com on 2020-08-19, 수
+ * Blog : https://zzz-oficial.tistory.com
+ * Github : https://github.com/Gon-Zo
+ */
 @Getter
 @ToString
 @NoArgsConstructor
 public class StoreDto {
 
-    private String title;
+    String name;
 
-    private String phone;
-
-    private String address;
-
-    private String img;
+    String accountNumber;
 
     private long userSeq;
 
     @Setter
     private User user;
 
-    public Store toEntity(){
-
-        return Store.builder()
-                .title(title)
-                .phone(phone)
-                .address(address)
-                .img(img)
-                .user(user)
-                .build();
-
-    }
 
 }
