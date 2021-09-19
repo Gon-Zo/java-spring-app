@@ -26,5 +26,7 @@ public class StoreDto {
     @Setter
     private User user;
 
-
+    public Store toEntity() {
+        return Store.builder().build();
+    }
 }
