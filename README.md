@@ -1,4 +1,4 @@
-# Msa Project
+# Msa App
 
 ## MSA (Mobile Service API)
 > Mobile API(Application Programming Interface,응용 프로그래밍 인터페이스는) <br/>
