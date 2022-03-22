@@ -47,12 +47,6 @@
 
 ## Runbook
 
-* clone
-
-```
-git clone --recurse-submodules https://github.com/Gon-Zo/java-spring-app.git
-```
-
 * JVM option
 
 ```
